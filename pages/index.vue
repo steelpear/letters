@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Banner />
     <v-container>
       <v-row align="center" justify="center">
         <v-chip
@@ -18,7 +19,11 @@
 </template>
 
 <script>
+import Banner from '~/components/Banner.vue'
 export default {
+  components: {
+    Banner
+  },
   data () {
     return {
       //

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row align="center" justify="center">
-      <img src="message.png" transition width="250">
+      <img src="message.png" width="250">
       <svg
         id="svg8"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -89,7 +89,7 @@
           >Письма</tspan></tspan></text>
         </g>
       </svg>
-      <img src="message.png" transition width="250" style="transform: scale(-1, 1);">
+      <img src="message.png" width="250" style="transform: scale(-1, 1);">
     </v-row>
   </div>
 </template>

@@ -7,6 +7,13 @@
     "_name": "_a045c17c"
   },
   {
+    "name": "letter",
+    "path": "/letter",
+    "component": "D:\\\\letters\\\\pages\\\\letter.vue",
+    "chunkName": "pages/letter",
+    "_name": "_44406fc1"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "D:\\\\letters\\\\pages\\\\index.vue",

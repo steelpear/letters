@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-container>
     vvv
-  </v-row>
+  </v-container>
 </template>

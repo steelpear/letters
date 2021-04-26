@@ -7,7 +7,15 @@
         dark
         elevation="0"
         color="transparent"
+        style="position: relative"
       >
+        <v-img
+          v-if="$route.path !='/'"
+          max-height="100"
+          max-width="220"
+          src="letters-white.svg"
+          class="mt-10 ml-12"
+        />
         <v-spacer />
         <v-btn
           to="/"
@@ -55,24 +63,22 @@
         </v-btn>
       </v-app-bar>
       <v-main>
-        <Banner />
-        <v-container>
-          <v-fade-transition>
-            <nuxt />
-          </v-fade-transition>
-        </v-container>
+        <v-fade-transition>
+          <nuxt />
+        </v-fade-transition>
       </v-main>
       <v-footer
         app
         dark
         color="#2c3b42"
         class="py-10 px-16"
+        style="position: relative"
       >
         <v-row justify="center">
           <v-col>
             <p>&copy; {{ new Date().getFullYear() }} письма.ру</p>
             <p>
-              <nuxt-link to="/rules">
+              <nuxt-link to="/rules" class="text-decoration-underline">
                 Правила размещения писем
               </nuxt-link>
             </p>
@@ -98,7 +104,7 @@
               </ShareNetwork>
             </p>
             <p>
-              <nuxt-link to="/policy">
+              <nuxt-link to="/policy" class="text-decoration-underline">
                 Использование файлов cookie и политика конфиденциальности
               </nuxt-link>
             </p>
@@ -110,11 +116,7 @@
 </template>
 
 <script>
-import Banner from '~/components/Banner.vue'
 export default {
-  components: {
-    Banner
-  },
   data () {
     return {
       sharing: {
