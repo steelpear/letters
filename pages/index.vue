@@ -21,16 +21,12 @@
 export default {
   data () {
     return {
-      categories: [
-        'Для всех',
-        'Любимым',
-        'Родным',
-        'Коллегам',
-        'Поздравления',
-        'Благодарности',
-        'Ищу тебя',
-        'Просьба о помощи'
-      ]
+      //
+    }
+  },
+  computed: {
+    categories () {
+      return this.$store.getters.get_categories
     }
   }
 }
