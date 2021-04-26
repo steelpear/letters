@@ -1,7 +1,5 @@
 import { wrapFunctional } from './utils'
 
-export { default as Logo } from '../..\\components\\Logo.vue'
-export { default as VuetifyLogo } from '../..\\components\\VuetifyLogo.vue'
+export { default as Banner } from '../..\\components\\Banner.vue'
 
-export const LazyLogo = import('../..\\components\\Logo.vue' /* webpackChunkName: "components/logo" */).then(c => wrapFunctional(c.default || c))
-export const LazyVuetifyLogo = import('../..\\components\\VuetifyLogo.vue' /* webpackChunkName: "components/vuetify-logo" */).then(c => wrapFunctional(c.default || c))
+export const LazyBanner = import('../..\\components\\Banner.vue' /* webpackChunkName: "components/banner" */).then(c => wrapFunctional(c.default || c))
