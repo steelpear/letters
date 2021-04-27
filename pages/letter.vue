@@ -86,6 +86,9 @@
           @verify="recaptchaOk"
         />
       </v-col>
+      <v-col class="text-center">
+        <img src="letter.png" width="200">
+      </v-col>
       <v-col class="text-right">
         <v-btn
           dark
