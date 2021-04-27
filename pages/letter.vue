@@ -77,11 +77,43 @@
         />
       </v-col>
     </v-row>
+    <v-row align="center">
+      <v-col>
+        <vue-recaptcha
+          sitekey="6LeM07oUAAAAAE7iDSN3QcTC-knepiStbZ7-GN90"
+          :load-recaptcha-script="true"
+          size="normal"
+          @verify="recaptchaOk"
+        />
+      </v-col>
+      <v-col class="text-right">
+        <v-btn
+          dark
+          color="teal darken-3"
+          elevation="2"
+          x-large
+          class="send_letter_btn"
+        >
+          Отправить письмо
+          <v-icon
+            right
+            large
+            class="ml-6"
+          >
+            mdi-email-multiple-outline
+          </v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import VueRecaptcha from 'vue-recaptcha'
 export default {
+  components: {
+    VueRecaptcha
+  },
   data () {
     return {
       autorName: '',
@@ -95,6 +127,11 @@ export default {
     categories () {
       return this.$store.getters.get_categories
     }
+  },
+  methods: {
+    recaptchaOk () {
+      alert('ddd')
+    }
   }
 }
 </script>
@@ -106,6 +143,10 @@ export default {
     .letter_title {
       font-family: 'Neucha';
       font-size: 3rem;
+    }
+    .send_letter_btn {
+      font-family: 'Neucha';
+      font-size: 22px;
     }
   }
 </style>

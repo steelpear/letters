@@ -38,9 +38,12 @@ export default {
     '@nuxtjs/vuetify'
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
+  // modules: [
+  //   '@nuxtjs/axios',
+  //   'vue-social-sharing/nuxt'
+  // ],
+
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'vue-social-sharing/nuxt'
   ],
