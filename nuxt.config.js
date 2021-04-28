@@ -45,7 +45,8 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    'vue-social-sharing/nuxt'
+    'vue-social-sharing/nuxt',
+    ['cookie-universal-nuxt', { parseJSON: false }]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

@@ -110,6 +110,29 @@
             </p>
           </v-col>
         </v-row>
+        <v-bottom-sheet
+          v-model="cookiePolicy"
+          hide-overlay
+          persistent
+        >
+          <v-card class="py-10">
+            <v-row align="center" justify="center">
+              <v-row align="center" justify="center" class="px-8">
+                <v-icon large class="ml-3 mr-1 hidden-sm-and-down">
+                  info
+                </v-icon>
+                <v-col :class="$vuetify.breakpoint.smAndDown ? 'text-justify' : 'text-center'" style="max-width: fit-content;">
+                  На этом сайте используются файлы <span class="font-weight-bold">cookie</span>. Продолжая использовать его, Вы соглашаетесь с этим. Чтобы узнать больше <nuxt-link to="/policy" class="indigo--text font-weight-bold">
+                    нажмите здесь
+                  </nuxt-link>.
+                </v-col>
+              </v-row>
+              <v-btn outlined color="indigo" class="mr-12" @click="cookieOk">
+                Понятно
+              </v-btn>
+            </v-row>
+          </v-card>
+        </v-bottom-sheet>
       </v-footer>
     </section>
   </v-app>
@@ -119,6 +142,7 @@
 export default {
   data () {
     return {
+      cookiePolicy: true,
       sharing: {
         url: 'https://news.vuejs.org/issues/180',
         title: 'Say hi to Vite! A brand new, extremely fast development setup for Vue.',
@@ -136,6 +160,20 @@ export default {
         { network: 'whatsapp', icon: 'mdi-whatsapp' },
         { network: 'pinterest', icon: 'mdi-pinterest' }
       ]
+    }
+  },
+  mounted () {
+    if (this.$cookies.get('cookie_assent')) {
+      this.cookiePolicy = false
+    }
+  },
+  methods: {
+    cookieOk () {
+      this.cookiePolicy = false
+      this.$cookies.set('cookie_assent', 'cookie_session', {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      })
     }
   }
 }

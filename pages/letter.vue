@@ -22,6 +22,7 @@
           outlined
           clearable
           hide-details
+          :rules="[rules.required]"
         />
       </v-col>
       <v-col>
@@ -34,6 +35,7 @@
           outlined
           clearable
           hide-details
+          :rules="[rules.email]"
         />
       </v-col>
     </v-row>
@@ -72,8 +74,9 @@
           v-model="text"
           outlined
           clearable
-          counter
+          counter="500"
           label="Текст"
+          :rules="[rules.required, rules.length]"
         />
       </v-col>
     </v-row>
@@ -123,7 +126,12 @@ export default {
       autorEmail: '',
       title: '',
       category: '',
-      text: ''
+      text: '',
+      rules: {
+        email: v => !!(v || '').match(/@/) || 'Некорректный адрес электронной почты.',
+        length: len => v => (v || '').length >= len || `Не более ${len} символов.`,
+        required: v => !!v || 'Это поле не должно быть пустым.'
+      }
     }
   },
   computed: {
