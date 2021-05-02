@@ -2,6 +2,9 @@
   <v-row align="center" justify="center" class="white--text">
     <v-col cols="12" md="12" xs="12" class="text-center">
       <v-col cols="12" md="12" xs="12" class="text-center">
+        <img src="letters-white.svg" width="250">
+      </v-col>
+      <v-col cols="12" md="12" xs="12" class="text-center">
         <h1 class="text-xs-center display-4 font-weight-bold">
           404
         </h1>
