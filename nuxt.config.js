@@ -16,14 +16,13 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Neucha:400,700' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Neucha:400,700' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css ' }
     ]
   },
   loading: { color: 'white' },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
-
+  css: ['~/assets/main.css'],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuelidate.js', ssr: true }

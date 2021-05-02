@@ -2,13 +2,13 @@
   <v-container class="letter_wrap py-12 px-16 mt-6 elevation-12">
     <v-row align="center" justify="center">
       <v-col class="text-center">
-        <img src="letter.png" width="200">
+        <img src="letter.png" width="200" class="animate__animated animate__fadeInLeft">
       </v-col>
-      <v-col class="text-center letter_title">
+      <v-col class="text-center letter_title animate__animated animate__fadeIn">
         Напишите письмо
       </v-col>
       <v-col class="text-center">
-        <img src="letter.png" width="200" style="transform: scale(-1, 1);">
+        <img src="letter.png" width="200" class="animate__animated animate__fadeInRight" style="transform: scale(-1, 1);">
       </v-col>
     </v-row>
     <form>
@@ -99,7 +99,11 @@
         />
       </v-col>
       <v-col class="text-center">
-        <img :class="$v.$invalid ? 'send_img_50' : 'send_img_100'" src="letter.png" width="200">
+        <img
+          :class="sendImgClass"
+          src="letter.png"
+          width="200"
+        >
       </v-col>
       <v-col class="text-right">
         <client-only>
@@ -138,7 +142,6 @@
 
         <v-card-actions>
           <v-spacer />
-
           <v-btn
             color="red"
             plain
@@ -175,8 +178,9 @@ export default {
       title: '',
       category: 'Для всех',
       text: '',
-      recaptcha: false,
-      errorDialog: false
+      recaptcha: true,
+      errorDialog: false,
+      sended: false
     }
   },
   computed: {
@@ -206,6 +210,17 @@ export default {
       if (!this.$v.title.$dirty) { return errors }
       !this.$v.title.maxLength && errors.push('Не более 40 символов.')
       return errors
+    },
+    sendImgClass () {
+      let cl = ''
+      if (!this.$v.$invalid) {
+        cl = 'send_img_100'
+      } else if (this.sended) {
+        cl = 'send_img_100 animate__animated animate__fadeOutTopRight'
+      } else {
+        cl = 'send_img_50 animate__animated animate__slideInDown'
+      }
+      return cl
     }
   },
   methods: {
@@ -216,9 +231,13 @@ export default {
       if (!this.recaptcha) {
         this.errorDialog = true
       } else {
+        this.sended = true
         this.clearForm()
-        this.recaptcha = false
+        // this.recaptcha = false
         this.$refs.recaptcha.reset()
+        setTimeout(() => {
+          this.sended = false
+        }, 1500)
       }
     },
     clearForm () {
