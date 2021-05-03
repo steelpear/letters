@@ -178,7 +178,7 @@ export default {
       title: '',
       category: 'Для всех',
       text: '',
-      recaptcha: true,
+      recaptcha: false,
       errorDialog: false,
       sended: false
     }
