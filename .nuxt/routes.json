@@ -14,6 +14,20 @@
     "_name": "_44406fc1"
   },
   {
+    "name": "message",
+    "path": "/message",
+    "component": "D:\\\\letters\\\\pages\\\\message\\\\index.vue",
+    "chunkName": "pages/message/index",
+    "_name": "_3796f586"
+  },
+  {
+    "name": "message-id",
+    "path": "/message/:id",
+    "component": "D:\\\\letters\\\\pages\\\\message\\\\_id.vue",
+    "chunkName": "pages/message/_id",
+    "_name": "_1950a16e"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "D:\\\\letters\\\\pages\\\\index.vue",

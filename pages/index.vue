@@ -48,7 +48,7 @@
                 </v-chip>
               </v-row>
               <p class="headline font-weight-bold blue-grey--text text--darken-3 mt-2">
-                {{ letter.letterTitle }}
+                <a href="#" @click.prevent="openLetter(letter.letterId)">{{ letter.letterTitle }}</a>
               </p>
               <div class="text--primary">
                 {{ letter.letterText }}
@@ -109,6 +109,9 @@ export default {
             console.log(error)
           })
       }, this.timeOut)
+    },
+    openLetter (id) {
+      this.$router.push('/message/' + id)
     }
   }
 }
