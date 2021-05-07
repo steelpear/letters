@@ -157,6 +157,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 import VueRecaptcha from 'vue-recaptcha'
@@ -227,17 +228,38 @@ export default {
     recaptchaOk () {
       this.recaptcha = true
     },
+    getRandomInt (min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    },
     sendLetter () {
-      if (!this.recaptcha) {
-        this.errorDialog = true
+      const obj = this
+      const id = 'letter' + obj.getRandomInt(100000, 999999)
+      if (!obj.recaptcha) {
+        obj.errorDialog = true
       } else {
-        this.sended = true
-        this.clearForm()
-        // this.recaptcha = false
-        this.$refs.recaptcha.reset()
+        obj.sended = true
         setTimeout(() => {
-          this.sended = false
+          obj.sended = false
         }, 1500)
+        axios.post(process.env.VUE_APP_SERVER + '/api/records', {
+          letterId: id,
+          letterName: obj.name,
+          letterEmail: obj.email,
+          letterTitle: obj.title,
+          letterCategory: obj.category,
+          letterText: obj.text,
+          letterDate: new Date(),
+          letterPublic: false
+        })
+          .then((response) => {
+            obj.clearForm()
+            obj.recaptcha = false
+            obj.$refs.recaptcha.reset()
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log(error)
+          })
       }
     },
     clearForm () {

@@ -3,21 +3,18 @@
     "name": "about",
     "path": "/about",
     "component": "D:\\\\letters\\\\pages\\\\about.vue",
-    "chunkName": "pages/about",
-    "_name": "_a045c17c"
+    "chunkName": "pages/about"
   },
   {
     "name": "letter",
     "path": "/letter",
     "component": "D:\\\\letters\\\\pages\\\\letter.vue",
-    "chunkName": "pages/letter",
-    "_name": "_44406fc1"
+    "chunkName": "pages/letter"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\letters\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_60d60bf2"
+    "chunkName": "pages/index"
   }
 ]

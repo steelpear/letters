@@ -25,8 +25,14 @@ export default {
   css: ['~/assets/main.css'],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/vuelidate.js', ssr: true }
+    { src: '~/plugins/vuelidate.js', ssr: true },
+    { src: '~/plugins/vue-masonry.js', ssr: false }
   ],
+
+  env: {
+    VUE_APP_URL: process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : 'https://letters.ru',
+    VUE_APP_SERVER: process.env.NODE_ENV !== 'production' ? 'http://localhost:3001' : 'https://letters.ru:3001'
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
