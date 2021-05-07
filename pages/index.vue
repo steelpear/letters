@@ -35,11 +35,19 @@
           <v-card elevation="4">
             <v-card-text>
               <v-row align="center" justify="center" class="pa-4">
-                {{ letter.letterName }}
+                <v-avatar v-if="letter.letterAvatar" left class="mr-4">
+                  <v-img :src="letter.letterAvatar" />
+                </v-avatar>
+                <span>{{ letter.letterName }}</span>
                 <v-spacer />
-                <v-chip>{{ letter.letterCategory }}</v-chip>
+                <v-chip
+                  color="teal"
+                  text-color="white"
+                >
+                  {{ letter.letterCategory }}
+                </v-chip>
               </v-row>
-              <p class="display-1 text--primary">
+              <p class="headline font-weight-bold blue-grey--text text--darken-3 mt-2">
                 {{ letter.letterTitle }}
               </p>
               <div class="text--primary">
@@ -48,12 +56,6 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
-              <v-btn
-                text
-                color="deep-purple accent-4"
-              >
-                Прочитать письмо
-              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>

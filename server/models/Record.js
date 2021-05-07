@@ -7,6 +7,7 @@ const Record = new Schema({
   letterTitle: String,
   letterCategory: String,
   letterText: String,
+  letterAvatar: String,
   letterDate: Date,
   letterPublic: Boolean
 })

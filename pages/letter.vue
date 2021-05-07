@@ -27,11 +27,31 @@
             clearable
             @input="$v.name.$touch()"
             @blur="$v.name.$touch()"
-          />
+          >
+            <template #append-outer>
+              <div v-if="!avatar">
+                <v-tooltip
+                  bottom
+                >
+                  <template #activator="{ on }">
+                    <v-icon x-large style="margin-top: -8px;cursor: pointer;" v-on="on" @click="avatarDialog = true">
+                      mdi-account-circle
+                    </v-icon>
+                  </template>
+                  Ссылка на аватар
+                </v-tooltip>
+              </div>
+              <div v-else>
+                <v-avatar style="margin-top: -14px; cursor: pointer;" @click="avatarDialog = true">
+                  <v-img :src="avatar" />
+                </v-avatar>
+              </div>
+            </template>
+          </v-text-field>
         </v-col>
         <v-col>
           <div class="title font-weight-regular mb-1">
-            Ваш E-mail
+            Ваш E-mail <span class="body-2">(по желанию)</span>
           </div>
           <v-text-field
             v-model="email"
@@ -56,6 +76,7 @@
             outlined
             clearable
             @input="$v.title.$touch()"
+            @blur="$v.title.$touch()"
           />
         </v-col>
         <v-col>
@@ -78,7 +99,7 @@
           <v-textarea
             v-model="text"
             :error-messages="textErrors"
-            :counter="500"
+            :counter="1000"
             outlined
             clearable
             label="Текст"
@@ -153,6 +174,42 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-dialog
+      v-model="avatarDialog"
+      transition="dialog-top-transition"
+      max-width="490"
+    >
+      <v-card class="pa-4">
+        <v-text-field
+          v-model="avatar"
+          label="Ссылка на аватар"
+          hint="Например: https://cdn.vuetifyjs.com/images/john.png"
+          persistent-hint
+          outlined
+          clearable
+        />
+        <v-card-actions>
+          <v-btn
+            color="red"
+            plain
+            text
+            @click="clearAvatar"
+          >
+            Отмена
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="green"
+            plain
+            text
+            @click="avatarDialog = false"
+          >
+            Применить
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -168,9 +225,9 @@ export default {
   mixins: [validationMixin],
   validations: {
     name: { required, maxLength: maxLength(40) },
-    text: { required, maxLength: maxLength(500) },
+    text: { required, maxLength: maxLength(1000) },
     email: { email },
-    title: { maxLength: maxLength(40) }
+    title: { required, maxLength: maxLength(40) }
   },
   data () {
     return {
@@ -179,9 +236,11 @@ export default {
       title: '',
       category: 'Для всех',
       text: '',
+      avatar: '',
       recaptcha: false,
       errorDialog: false,
-      sended: false
+      sended: false,
+      avatarDialog: false
     }
   },
   computed: {
@@ -189,27 +248,28 @@ export default {
     nameErrors () {
       const errors = []
       if (!this.$v.name.$dirty) { return errors }
-      !this.$v.name.maxLength && errors.push('Не более 40 символов.')
-      !this.$v.name.required && errors.push('Обязательное поле.')
+      !this.$v.name.maxLength && errors.push('Не более 40 символов')
+      !this.$v.name.required && errors.push('Обязательное поле')
       return errors
     },
     textErrors () {
       const errors = []
       if (!this.$v.text.$dirty) { return errors }
-      !this.$v.text.maxLength && errors.push('Не более 500 символов.')
-      !this.$v.text.required && errors.push('Обязательное поле.')
+      !this.$v.text.maxLength && errors.push('Не более 1000 символов')
+      !this.$v.text.required && errors.push('Обязательное поле')
       return errors
     },
     emailErrors () {
       const errors = []
       if (!this.$v.email.$dirty) { return errors }
-      !this.$v.email.email && errors.push('Введите правильный email.')
+      !this.$v.email.email && errors.push('Введите правильный email')
       return errors
     },
     titleErrors () {
       const errors = []
       if (!this.$v.title.$dirty) { return errors }
-      !this.$v.title.maxLength && errors.push('Не более 40 символов.')
+      !this.$v.title.maxLength && errors.push('Не более 40 символов')
+      !this.$v.text.required && errors.push('Обязательное поле')
       return errors
     },
     sendImgClass () {
@@ -227,6 +287,10 @@ export default {
   methods: {
     recaptchaOk () {
       this.recaptcha = true
+    },
+    clearAvatar () {
+      this.avatarDialog = false
+      this.avatar = ''
     },
     getRandomInt (min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min)
@@ -248,6 +312,7 @@ export default {
           letterTitle: obj.title,
           letterCategory: obj.category,
           letterText: obj.text,
+          letterAvatar: obj.avatar,
           letterDate: new Date(),
           letterPublic: false
         })
@@ -269,6 +334,7 @@ export default {
       this.title = ''
       this.category = 'Для всех'
       this.text = ''
+      this.avatar = ''
     }
   }
 }
