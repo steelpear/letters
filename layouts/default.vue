@@ -2,7 +2,6 @@
   <v-app>
     <section class="main_section">
       <v-app-bar
-        fixed
         app
         dark
         elevation="0"
@@ -159,10 +158,7 @@ export default {
       offsetTop: 0
     }
   },
-  mounted () {
-    if (this.$cookies.get('cookie_assent')) {
-      this.cookiePolicy = false
-    }
+  beforeMount () {
     window.addEventListener('scroll', (e) => {
       requestAnimationFrame(() => {
         const scrollPos = window.scrollY
@@ -172,6 +168,14 @@ export default {
         this.offsetTop = perc
       })
     })
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll')
+  },
+  mounted () {
+    if (this.$cookies.get('cookie_assent')) {
+      this.cookiePolicy = false
+    }
   },
   methods: {
     cookieOk () {

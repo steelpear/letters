@@ -51,6 +51,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'vue-social-sharing/nuxt',
+    'nuxt-clipboard',
     ['cookie-universal-nuxt', { parseJSON: false }]
   ],
 

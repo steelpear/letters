@@ -54,8 +54,15 @@
                 {{ letter.letterText }}
               </div>
             </v-card-text>
-            <v-card-actions>
-              <p><share /></p>
+            <v-card-actions class="pb-4">
+              <share />
+              <v-btn
+                v-clipboard:copy="$route.path"
+                v-clipboard:success="onCopy"
+                icon
+              >
+                <v-icon>mdi-content-copy</v-icon>
+              </v-btn>
               <v-spacer />
             </v-card-actions>
           </v-card>
@@ -78,6 +85,7 @@ export default {
     return {
       letters: [],
       timeOut: 0,
+      copied: false,
       routeProps: {
         limit: 50,
         skip: 0
@@ -115,6 +123,9 @@ export default {
     },
     openLetter (id) {
       this.$router.push('/message/' + id)
+    },
+    onCopy () {
+      this.copied = true
     }
   }
 }

@@ -188,6 +188,7 @@
           persistent-hint
           outlined
           clearable
+          prepend-inner-icon="mdi-link-variant"
         />
         <v-card-actions>
           <v-btn

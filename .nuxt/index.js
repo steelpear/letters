@@ -16,6 +16,7 @@ import { createStore } from './store.js'
 import nuxt_plugin_plugin_90042af0 from 'nuxt_plugin_plugin_90042af0' // Source: .\\components\\plugin.js (mode: 'all')
 import nuxt_plugin_plugin_4da5c328 from 'nuxt_plugin_plugin_4da5c328' // Source: .\\vuetify\\plugin.js (mode: 'all')
 import nuxt_plugin_cookieuniversalnuxt_e510575a from 'nuxt_plugin_cookieuniversalnuxt_e510575a' // Source: .\\cookie-universal-nuxt.js (mode: 'all')
+import nuxt_plugin_clipboard_5396feea from 'nuxt_plugin_clipboard_5396feea' // Source: .\\clipboard.js (mode: 'client')
 import nuxt_plugin_vuesocialsharingplugin_59332224 from 'nuxt_plugin_vuesocialsharingplugin_59332224' // Source: .\\vue-social-sharing-plugin.js (mode: 'all')
 import nuxt_plugin_axios_661aeaab from 'nuxt_plugin_axios_661aeaab' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_vuelidate_4be431c8 from 'nuxt_plugin_vuelidate_4be431c8' // Source: ..\\plugins\\vuelidate.js (mode: 'all')
@@ -226,6 +227,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_cookieuniversalnuxt_e510575a === 'function') {
     await nuxt_plugin_cookieuniversalnuxt_e510575a(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_clipboard_5396feea === 'function') {
+    await nuxt_plugin_clipboard_5396feea(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vuesocialsharingplugin_59332224 === 'function') {
