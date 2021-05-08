@@ -1,5 +1,8 @@
 {
   "Banner": {
     "description": "Auto imported from components/Banner.vue"
+  },
+  "Share": {
+    "description": "Auto imported from components/Share.vue"
   }
 }

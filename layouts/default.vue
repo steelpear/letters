@@ -86,22 +86,13 @@
           </v-col>
           <v-spacer />
           <v-col>
-            <p>
-              <span class="mr-1">Поделиться</span>
-              <ShareNetwork
-                v-for="network in networks"
-                :key="network.network"
-                :network="network.network"
-                :url="sharing.url"
-                :title="sharing.title"
-                :description="sharing.description"
-                :quote="sharing.quote"
-                :hashtags="sharing.hashtags"
-                :twitter-user="sharing.twitterUser"
-                class="mx-1"
-              >
-                <v-icon>{{ network.icon }}</v-icon>
-              </ShareNetwork>
+            <p class="mb-7 ml-3">
+              <v-row align="center">
+                <div class="mr-2">
+                  Поделиться
+                </div>
+                <share />
+              </v-row>
             </p>
             <p>
               <nuxt-link to="/policy" class="text-decoration-underline">
@@ -134,38 +125,53 @@
           </v-card>
         </v-bottom-sheet>
       </v-footer>
+      <v-fab-transition>
+        <v-btn
+          v-show="offsetTop > 25"
+          color="white"
+          fab
+          icon
+          outlined
+          plain
+          fixed
+          bottom
+          right
+          @click="$vuetify.goTo(0)"
+        >
+          <v-icon>
+            mdi-arrow-up
+          </v-icon>
+        </v-btn>
+      </v-fab-transition>
     </section>
   </v-app>
 </template>
 
 <script>
+import Share from '~/components/Share.vue'
 export default {
+  components: {
+    Share
+  },
   data () {
     return {
       cookiePolicy: true,
-      sharing: {
-        url: 'https://news.vuejs.org/issues/180',
-        title: 'Say hi to Vite! A brand new, extremely fast development setup for Vue.',
-        description: 'This week, I’d like to introduce you to "Vite", which means "Fast". It’s a brand new development setup created by Evan You.',
-        quote: 'The hot reload is so fast it\'s near instant. - Evan You',
-        hashtags: 'vuejs,vite,javascript',
-        twitterUser: 'youyuxi'
-      },
-      networks: [
-        { network: 'twitter', icon: 'mdi-twitter' },
-        { network: 'telegram', icon: 'mdi-telegram' },
-        { network: 'facebook', icon: 'mdi-facebook' },
-        { network: 'vk', icon: 'mdi-vk' },
-        { network: 'odnoklassniki', icon: 'mdi-odnoklassniki' },
-        { network: 'whatsapp', icon: 'mdi-whatsapp' },
-        { network: 'pinterest', icon: 'mdi-pinterest' }
-      ]
+      offsetTop: 0
     }
   },
   mounted () {
     if (this.$cookies.get('cookie_assent')) {
       this.cookiePolicy = false
     }
+    window.addEventListener('scroll', (e) => {
+      requestAnimationFrame(() => {
+        const scrollPos = window.scrollY
+        const winHeight = window.innerHeight
+        const docHeight = document.documentElement.scrollHeight
+        const perc = (100 * scrollPos) / (docHeight - winHeight)
+        this.offsetTop = perc
+      })
+    })
   },
   methods: {
     cookieOk () {

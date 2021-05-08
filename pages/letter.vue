@@ -269,7 +269,7 @@ export default {
       const errors = []
       if (!this.$v.title.$dirty) { return errors }
       !this.$v.title.maxLength && errors.push('Не более 40 символов')
-      !this.$v.text.required && errors.push('Обязательное поле')
+      !this.$v.title.required && errors.push('Обязательное поле')
       return errors
     },
     sendImgClass () {

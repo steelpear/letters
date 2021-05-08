@@ -55,6 +55,7 @@
               </div>
             </v-card-text>
             <v-card-actions>
+              <p><share /></p>
               <v-spacer />
             </v-card-actions>
           </v-card>
@@ -67,9 +68,11 @@
 <script>
 import axios from 'axios'
 import Banner from '~/components/Banner.vue'
+import Share from '~/components/Share.vue'
 export default {
   components: {
-    Banner
+    Banner,
+    Share
   },
   data () {
     return {
