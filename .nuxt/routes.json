@@ -14,18 +14,18 @@
     "_name": "_44406fc1"
   },
   {
-    "name": "message",
-    "path": "/message",
-    "component": "D:\\\\letters\\\\pages\\\\message\\\\index.vue",
-    "chunkName": "pages/message/index",
-    "_name": "_3796f586"
+    "name": "letters",
+    "path": "/letters",
+    "component": "D:\\\\letters\\\\pages\\\\letters\\\\index.vue",
+    "chunkName": "pages/letters/index",
+    "_name": "_3d7c5680"
   },
   {
-    "name": "message-id",
-    "path": "/message/:id",
-    "component": "D:\\\\letters\\\\pages\\\\message\\\\_id.vue",
-    "chunkName": "pages/message/_id",
-    "_name": "_1950a16e"
+    "name": "letters-id",
+    "path": "/letters/:id",
+    "component": "D:\\\\letters\\\\pages\\\\letters\\\\_id.vue",
+    "chunkName": "pages/letters/_id",
+    "_name": "_2e83f1b0"
   },
   {
     "name": "index",

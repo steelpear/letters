@@ -10,6 +10,7 @@
           link
           outlined
           color="white"
+          @click="selectCategory(category)"
         >
           {{ category }}
         </v-chip>
@@ -48,7 +49,17 @@
                 </v-chip>
               </v-row>
               <p class="headline font-weight-bold blue-grey--text text--darken-3 mt-2">
-                <a href="#" @click.prevent="openLetter(letter.letterId)">{{ letter.letterTitle }}</a>
+                <v-hover
+                  v-slot="{ hover }"
+                >
+                  <span
+                    style="cursor: pointer;"
+                    :class="{ 'orange--text text--darken-3': hover }"
+                    @click.prevent="openLetter(letter.letterId)"
+                  >
+                    {{ letter.letterTitle }}
+                  </span>
+                </v-hover>
               </p>
               <div class="text--primary">
                 {{ letter.letterText }}
@@ -69,6 +80,23 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar
+      v-model="copied"
+      multi-line
+      timeout="2500"
+      bottom
+      dark
+    >
+      Ссылка скопирована в буфер обмена
+      <v-btn
+        dark
+        icon
+        @click="copied = false"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      </v-spacer>
+    </v-snackbar>
   </div>
 </template>
 
@@ -84,6 +112,7 @@ export default {
   data () {
     return {
       letters: [],
+      filteredLetters: [],
       timeOut: 0,
       copied: false,
       routeProps: {
@@ -102,7 +131,7 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData (done) {
+    fetchData () {
       setTimeout(() => {
         axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip, {
         })
@@ -112,7 +141,6 @@ export default {
               this.letters = this.letters.concat(array)
               this.routeProps.skip = this.routeProps.skip + this.routeProps.limit
               this.timeOut = 1000
-              done()
             }
           })
           .catch((error) => {
@@ -122,10 +150,14 @@ export default {
       }, this.timeOut)
     },
     openLetter (id) {
-      this.$router.push('/message/' + id)
+      this.$router.push('/letters/' + id)
     },
     onCopy () {
       this.copied = true
+    },
+    selectCategory (category) {
+      // this.fetchData()
+      this.letters = this.letters.filter(item => category.includes(item.letterCategory))
     }
   }
 }
