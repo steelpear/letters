@@ -8,6 +8,10 @@ router.get('/', async (req, res) => {
   res.json(await Record.find().sort({ qrDate: -1 }))
 })
 
+router.get('/count', async (req, res) => {
+  res.json(await Record.countDocuments())
+})
+
 router.get('/limit/:limit/:skip', async (req, res) => {
   res.json(await Record.find().sort({ letterDate: -1 }).limit(Number(req.params.limit)).skip(Number(req.params.skip)))
 })
@@ -42,6 +46,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 router.post('/mailer', (req, res) => {
   fs.readFile('configmail.config', 'utf8', (err, data) => {
+    // eslint-disable-next-line no-console
     if (err) { console.log(err) }
     const mailConfig = JSON.parse(data)
     const transporter = nodemailer.createTransport({
@@ -59,8 +64,10 @@ router.post('/mailer', (req, res) => {
     }
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        // eslint-disable-next-line no-console
         return console.log(error.message)
       }
+      // eslint-disable-next-line no-console
       console.log('Message sent: %s', info.messageId)
     })
   })

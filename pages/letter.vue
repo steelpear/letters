@@ -241,7 +241,8 @@ export default {
       recaptcha: false,
       errorDialog: false,
       sended: false,
-      avatarDialog: false
+      avatarDialog: false,
+      countLetters: null
     }
   },
   computed: {
@@ -293,34 +294,36 @@ export default {
       this.avatarDialog = false
       this.avatar = ''
     },
-    getRandomInt (min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min)
-    },
     sendLetter () {
-      const obj = this
-      const id = 'letter' + obj.getRandomInt(100000, 999999)
-      if (!obj.recaptcha) {
-        obj.errorDialog = true
+      if (!this.recaptcha) {
+        this.errorDialog = true
       } else {
-        obj.sended = true
+        this.sended = true
         setTimeout(() => {
-          obj.sended = false
+          this.sended = false
         }, 1500)
-        axios.post(process.env.VUE_APP_SERVER + '/api/records', {
-          letterId: id,
-          letterName: obj.name,
-          letterEmail: obj.email,
-          letterTitle: obj.title,
-          letterCategory: obj.category,
-          letterText: obj.text,
-          letterAvatar: obj.avatar,
-          letterDate: new Date(),
-          letterPublic: false
-        })
+        axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
           .then((response) => {
-            obj.clearForm()
-            obj.recaptcha = false
-            obj.$refs.recaptcha.reset()
+            axios.post(process.env.VUE_APP_SERVER + '/api/records', {
+              letterId: response.data + 1,
+              letterName: this.name,
+              letterEmail: this.email,
+              letterTitle: this.title,
+              letterCategory: this.category,
+              letterText: this.text,
+              letterAvatar: this.avatar,
+              letterDate: new Date(),
+              letterPublic: false
+            })
+              .then((response) => {
+                this.clearForm()
+                this.recaptcha = false
+                this.$refs.recaptcha.reset()
+              })
+              .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error)
+              })
           })
           .catch((error) => {
             // eslint-disable-next-line no-console
@@ -336,6 +339,7 @@ export default {
       this.category = 'Для всех'
       this.text = ''
       this.avatar = ''
+      // this.countLetters = null
     }
   }
 }
