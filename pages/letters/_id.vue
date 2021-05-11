@@ -55,9 +55,9 @@ export default {
   components: {
     Share
   },
-  // validate ({ params }) {
-  //   return /^\d+$/.test(params.id)
-  // },
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   async asyncData ({ $axios, params }) {
     const letter = await $axios.$get(process.env.VUE_APP_SERVER + '/api/records/find/' + params.id)
     return { letter }

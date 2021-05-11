@@ -12,8 +12,12 @@ router.get('/count', async (req, res) => {
   res.json(await Record.countDocuments())
 })
 
+router.get('/last', async (req, res) => {
+  res.json(await Record.find().limit(1).sort({ $natural: -1 }))
+})
+
 router.get('/limit/:limit/:skip', async (req, res) => {
-  res.json(await Record.find().sort({ letterDate: -1 }).limit(Number(req.params.limit)).skip(Number(req.params.skip)))
+  res.json(await Record.find().sort({ letterDate: -1 }).limit(+req.params.limit).skip(+req.params.skip))
 })
 
 router.get('/:id', async (req, res) => {
@@ -25,7 +29,7 @@ router.get('/find/:letterid', async (req, res) => {
 })
 
 router.get('/random/:num', async (req, res) => {
-  res.json(await Record.aggregate([{ $sample: { size: Number(req.params.num) } }]))
+  res.json(await Record.aggregate([{ $sample: { size: +req.params.num } }]))
 })
 
 router.post('/', async (req, res) => {

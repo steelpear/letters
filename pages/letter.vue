@@ -241,8 +241,7 @@ export default {
       recaptcha: false,
       errorDialog: false,
       sended: false,
-      avatarDialog: false,
-      countLetters: null
+      avatarDialog: false
     }
   },
   computed: {
@@ -294,7 +293,7 @@ export default {
       this.avatarDialog = false
       this.avatar = ''
     },
-    sendLetter () {
+    async sendLetter () {
       if (!this.recaptcha) {
         this.errorDialog = true
       } else {
@@ -302,10 +301,10 @@ export default {
         setTimeout(() => {
           this.sended = false
         }, 1500)
-        axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
+        await axios.get(process.env.VUE_APP_SERVER + '/api/records/last')
           .then((response) => {
             axios.post(process.env.VUE_APP_SERVER + '/api/records', {
-              letterId: response.data + 1,
+              letterId: +response.data[0].letterId + 1,
               letterName: this.name,
               letterEmail: this.email,
               letterTitle: this.title,
@@ -339,7 +338,6 @@ export default {
       this.category = 'Для всех'
       this.text = ''
       this.avatar = ''
-      // this.countLetters = null
     }
   }
 }

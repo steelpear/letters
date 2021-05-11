@@ -12,7 +12,7 @@
           v-if="$route.path !='/'"
           max-height="100"
           max-width="220"
-          src="letters-white.svg"
+          :src="mimeTypeUrl()"
           class="mt-10 ml-12"
         />
         <v-spacer />
@@ -170,7 +170,7 @@ export default {
     })
   },
   beforeDestroy () {
-    window.removeEventListener('scroll')
+    window.removeEventListener('scroll', (e) => {})
   },
   mounted () {
     if (this.$cookies.get('cookie_assent')) {
@@ -184,6 +184,9 @@ export default {
         path: '/',
         maxAge: 60 * 60 * 24 * 7
       })
+    },
+    mimeTypeUrl () {
+      return require('~/static/letters-white.svg')
     }
   }
 }

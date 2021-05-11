@@ -131,23 +131,21 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData () {
-      setTimeout(() => {
-        axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip, {
+    async fetchData () {
+      await axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip, {
+      })
+        .then((response) => {
+          const array = response.data
+          if (array.length > 0) {
+            this.letters = this.letters.concat(array)
+            this.routeProps.skip = this.routeProps.skip + this.routeProps.limit
+            this.timeOut = 1000
+          }
         })
-          .then((response) => {
-            const array = response.data
-            if (array.length > 0) {
-              this.letters = this.letters.concat(array)
-              this.routeProps.skip = this.routeProps.skip + this.routeProps.limit
-              this.timeOut = 1000
-            }
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.log(error)
-          })
-      }, this.timeOut)
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        })
     },
     openLetter (id) {
       this.$router.push('/letters/' + id)
