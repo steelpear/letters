@@ -2,7 +2,7 @@
   <v-row align="center" justify="center" class="white--text">
     <v-col cols="12" md="12" xs="12" class="text-center">
       <v-col cols="12" md="12" xs="12" class="text-center">
-        <img src="letters-white.svg" width="250">
+        <img :src="mimeTypeUrl()" width="250">
       </v-col>
       <v-col cols="12" md="12" xs="12" class="text-center">
         <h1 class="text-xs-center display-4 font-weight-bold">
@@ -47,6 +47,11 @@ export default {
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError
     return {
       title
+    }
+  },
+  methods: {
+    mimeTypeUrl () {
+      return require('~/static/letters-white.svg')
     }
   }
 }

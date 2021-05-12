@@ -68,7 +68,7 @@
             <v-card-actions class="pb-4">
               <share />
               <v-btn
-                v-clipboard:copy="$route.path"
+                v-clipboard:copy="url + '/letters/' + letter.letterId"
                 v-clipboard:success="onCopy"
                 icon
               >
@@ -130,7 +130,8 @@ export default {
       return this.letters.filter(function (elem) {
         if (cat === 'Для всех') { return true } else { return elem.letterCategory.includes(cat) }
       })
-    }
+    },
+    url () { return process.env.VUE_APP_URL }
   },
   mounted () {
     this.routeProps.skip = 0

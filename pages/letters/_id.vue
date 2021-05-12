@@ -20,7 +20,7 @@
         <v-card-actions>
           <share />
           <v-btn
-            v-clipboard:copy="$route.path"
+            v-clipboard:copy="url + $route.path"
             v-clipboard:success="onCopy"
             icon
           >
@@ -66,6 +66,9 @@ export default {
     return {
       copied: false
     }
+  },
+  computed: {
+    url () { return process.env.VUE_APP_URL }
   },
   mounted () {
     this.$vuetify.goTo(0)

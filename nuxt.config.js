@@ -30,7 +30,7 @@ export default {
   ],
 
   env: {
-    VUE_APP_URL: process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : 'https://letters.ru',
+    VUE_APP_URL: process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://letters.ru',
     VUE_APP_SERVER: process.env.NODE_ENV !== 'production' ? 'http://localhost:3001' : 'https://letters.ru:3001'
   },
 

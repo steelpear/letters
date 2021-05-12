@@ -211,6 +211,37 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog
+      v-model="sendedDialog"
+      transition="dialog-top-transition"
+      max-width="490"
+    >
+      <v-card class="pa-4">
+        <div class="headline text-center">
+          Письмо опубликовано
+        </div>
+        <div class="text-center my-6">
+          <a :href="url + '/letters/' + id" target="_blank">{{ url + '/letters/' + id }}</a>
+        </div>
+        <v-card-actions>
+          <v-btn
+            color="indigo"
+            text
+            @click="sendedDialog = false"
+          >
+            Посмотреть
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="indigo"
+            text
+            @click="sendedDialog = false"
+          >
+            Новое письмо
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -241,11 +272,14 @@ export default {
       recaptcha: false,
       errorDialog: false,
       sended: false,
-      avatarDialog: false
+      avatarDialog: false,
+      sendedDialog: false,
+      id: ''
     }
   },
   computed: {
     categories () { return this.$store.getters.get_categories },
+    url () { return process.env.VUE_APP_URL },
     nameErrors () {
       const errors = []
       if (!this.$v.name.$dirty) { return errors }
@@ -293,7 +327,7 @@ export default {
       this.avatarDialog = false
       this.avatar = ''
     },
-    async sendLetter () {
+    sendLetter () {
       if (!this.recaptcha) {
         this.errorDialog = true
       } else {
@@ -301,8 +335,9 @@ export default {
         setTimeout(() => {
           this.sended = false
         }, 1500)
-        await axios.get(process.env.VUE_APP_SERVER + '/api/records/last')
+        axios.get(process.env.VUE_APP_SERVER + '/api/records/last')
           .then((response) => {
+            this.id = +response.data[0].letterId + 1
             axios.post(process.env.VUE_APP_SERVER + '/api/records', {
               letterId: +response.data[0].letterId + 1,
               letterName: this.name,
@@ -318,6 +353,7 @@ export default {
                 this.clearForm()
                 this.recaptcha = false
                 this.$refs.recaptcha.reset()
+                this.sendedDialog = true
               })
               .catch((error) => {
                 // eslint-disable-next-line no-console

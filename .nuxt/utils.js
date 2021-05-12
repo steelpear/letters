@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"VUE_APP_URL":"http://localhost:8080","VUE_APP_SERVER":"http://localhost:3001"}
+      env: {"VUE_APP_URL":"http://localhost:3000","VUE_APP_SERVER":"http://localhost:3001"}
     }
     // Only set once
 
