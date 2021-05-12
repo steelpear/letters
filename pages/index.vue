@@ -8,7 +8,7 @@
           :key="index"
           class="mx-2"
           link
-          outlined
+          :outlined="selectedCategory != category"
           color="white"
           @click="selectCategory(category)"
         >
@@ -24,7 +24,7 @@
         class="mt-16"
       >
         <v-col
-          v-for="(letter, index) in letters"
+          v-for="(letter, index) in filteredLetters"
           :key="index"
           v-masonry-tile
           class="letter"
@@ -112,9 +112,9 @@ export default {
   data () {
     return {
       letters: [],
-      filteredLetters: [],
       timeOut: 0,
       copied: false,
+      selectedCategory: 'Для всех',
       routeProps: {
         limit: 50,
         skip: 0
@@ -124,6 +124,12 @@ export default {
   computed: {
     categories () {
       return this.$store.getters.get_categories
+    },
+    filteredLetters () {
+      const cat = this.selectedCategory
+      return this.letters.filter(function (elem) {
+        if (cat === 'Для всех') { return true } else { return elem.letterCategory.includes(cat) }
+      })
     }
   },
   mounted () {
@@ -154,8 +160,7 @@ export default {
       this.copied = true
     },
     selectCategory (category) {
-      // this.fetchData()
-      this.letters = this.letters.filter(item => category.includes(item.letterCategory))
+      this.selectedCategory = category
     }
   }
 }
