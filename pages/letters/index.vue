@@ -8,8 +8,8 @@
 
 <script>
 export default {
-  created () {
-    this.$router.push('/')
+  middleware ({ redirect }) {
+    return redirect('/')
   }
 }
 </script>

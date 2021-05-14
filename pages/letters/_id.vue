@@ -26,6 +26,11 @@
           >
             <v-icon>mdi-content-copy</v-icon>
           </v-btn>
+          <v-btn
+            icon
+          >
+            <v-icon>mdi-qrcode-scan</v-icon>
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-container>

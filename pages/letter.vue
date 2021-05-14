@@ -209,7 +209,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog
+    <!-- <v-dialog
       v-model="sendedDialog"
       transition="dialog-top-transition"
       max-width="490"
@@ -228,6 +228,52 @@
             @click="openLetter(id)"
           >
             Посмотреть
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="indigo"
+            text
+            @click="newLetter()"
+          >
+            Новое письмо
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog> -->
+    <v-dialog
+      v-model="sendedDialog"
+      transition="dialog-top-transition"
+      max-width="490"
+    >
+      <v-card class="pa-6" img="background.jpg">
+        <div class="display-1 text-center mb-2 red--text" style="font-family: 'Neucha' !important;">
+          Спасибо за письмо!
+        </div>
+        <div class="body-1 text-center teal--text text--darken-4">
+          После модерации оно будет опубликовано по адресу:
+        </div>
+        <div class="text-center my-3">
+          <a :href="url + '/letters/' + id" target="_blank">{{ url + '/letters/' + id }}</a>
+        </div>
+        <div class="subtitle-2 text--secondary">
+          <v-icon class="mr-2">
+            mdi-email-multiple-outline
+          </v-icon>
+          Уведомление о публикации либо от отказе в публикации придёт на электронную почту, если Вы её указывали.
+        </div>
+        <nuxt-link to="/rules">
+          <div class="caption text-center">
+            Правила размещения писем
+          </div>
+        </nuxt-link>
+
+        <v-card-actions>
+          <v-btn
+            color="indigo"
+            text
+            @click="sendedDialog = false"
+          >
+            Закрыть
           </v-btn>
           <v-spacer />
           <v-btn
@@ -358,7 +404,9 @@ export default {
                 this.clearForm()
                 this.recaptcha = false
                 this.$refs.recaptcha.reset()
-                this.sendedDialog = true
+                setTimeout(() => {
+                  this.sendedDialog = true
+                }, 2500)
               })
               .catch((error) => {
                 // eslint-disable-next-line no-console
