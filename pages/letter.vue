@@ -51,7 +51,7 @@
         </v-col>
         <v-col>
           <div class="title font-weight-regular mb-1">
-            Ваш E-mail <span class="body-2">(по желанию)</span>
+            Ваш E-mail <span class="caption">(Для уведомления о публикации. По желанию)</span>
           </div>
           <v-text-field
             v-model="email"

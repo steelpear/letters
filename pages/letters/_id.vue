@@ -28,12 +28,18 @@
           </v-btn>
           <v-btn
             icon
+            @click="openQr = true"
           >
             <v-icon>mdi-qrcode-scan</v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-container>
+    <v-dialog v-model="openQr" max-width="310">
+      <v-card class="text-center">
+        <qr-code :value="url + $route.path" />
+      </v-card>
+    </v-dialog>
     <v-snackbar
       v-model="copied"
       multi-line
@@ -56,9 +62,11 @@
 
 <script>
 import Share from '~/components/Share.vue'
+import QrCode from '~/components/QrCode.vue'
 export default {
   components: {
-    Share
+    Share,
+    QrCode
   },
   validate ({ params }) {
     return /^\d+$/.test(params.id)
@@ -73,7 +81,8 @@ export default {
   },
   data () {
     return {
-      copied: false
+      copied: false,
+      openQr: false
     }
   },
   computed: {

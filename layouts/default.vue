@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <section class="main_section">
+    <section v-cloak class="main_section">
       <v-app-bar
         app
         dark
@@ -193,6 +193,7 @@ export default {
 </script>
 
 <style lang="scss">
+  [v-cloak] { display:none; }
   .main_section {
     background: linear-gradient(71.88deg,#66a29c,#04817c);
     // background: linear-gradient(to right, #93F9B9, #1D976C);

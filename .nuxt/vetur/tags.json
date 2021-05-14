@@ -2,6 +2,9 @@
   "Banner": {
     "description": "Auto imported from components/Banner.vue"
   },
+  "QrCode": {
+    "description": "Auto imported from components/QrCode.vue"
+  },
   "Share": {
     "description": "Auto imported from components/Share.vue"
   }

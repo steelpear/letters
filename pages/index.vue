@@ -4,6 +4,15 @@
     <v-container>
       <v-row align="center" justify="center">
         <v-chip
+          class="mx-2"
+          link
+          :outlined="selectedCategory != 'Все'"
+          color="white"
+          @click="selectCategory('Все')"
+        >
+          Все письма
+        </v-chip>
+        <v-chip
           v-for="(category, index) in categories"
           :key="index"
           class="mx-2"
@@ -76,6 +85,7 @@
               </v-btn>
               <v-btn
                 icon
+                @click="qrCode(letter)"
               >
                 <v-icon>mdi-qrcode-scan</v-icon>
               </v-btn>
@@ -85,6 +95,14 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-dialog v-model="openQr" max-width="310">
+      <v-card tile class="text-center">
+        <div class="small-title caption text--primary">
+          {{ currentTitle }}
+        </div>
+        <qr-code :value="url + '/letters/' + currentId" />
+      </v-card>
+    </v-dialog>
     <v-snackbar
       v-model="copied"
       multi-line
@@ -109,17 +127,22 @@
 import axios from 'axios'
 import Banner from '~/components/Banner.vue'
 import Share from '~/components/Share.vue'
+import QrCode from '~/components/QrCode.vue'
 export default {
   components: {
     Banner,
-    Share
+    Share,
+    QrCode
   },
   data () {
     return {
       letters: [],
       timeOut: 0,
       copied: false,
-      selectedCategory: 'Для всех',
+      openQr: false,
+      currentId: '',
+      currentTitle: '',
+      selectedCategory: 'Все',
       routeProps: {
         limit: 50,
         skip: 0
@@ -133,7 +156,7 @@ export default {
     filteredLetters () {
       const cat = this.selectedCategory
       return this.letters.filter(function (elem) {
-        if (cat === 'Для всех') { return true } else { return elem.letterCategory.includes(cat) }
+        if (cat === 'Все') { return true } else { return elem.letterCategory.includes(cat) }
       })
     },
     url () { return process.env.VUE_APP_URL }
@@ -167,7 +190,21 @@ export default {
     },
     selectCategory (category) {
       this.selectedCategory = category
+    },
+    qrCode (letter) {
+      this.currentId = letter.letterId
+      this.currentTitle = letter.letterTitle
+      this.openQr = true
     }
   }
 }
 </script>
+
+<style lang="scss">
+.small-title {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 10px;
+}
+</style>
