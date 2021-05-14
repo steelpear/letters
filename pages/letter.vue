@@ -193,7 +193,6 @@
         <v-card-actions>
           <v-btn
             color="red"
-            plain
             text
             @click="clearAvatar"
           >
@@ -201,8 +200,7 @@
           </v-btn>
           <v-spacer />
           <v-btn
-            color="green"
-            plain
+            color="indigo"
             text
             @click="avatarDialog = false"
           >
@@ -227,7 +225,7 @@
           <v-btn
             color="indigo"
             text
-            @click="sendedDialog = false"
+            @click="openLetter(id)"
           >
             Посмотреть
           </v-btn>
@@ -235,7 +233,7 @@
           <v-btn
             color="indigo"
             text
-            @click="sendedDialog = false"
+            @click="newLetter()"
           >
             Новое письмо
           </v-btn>
@@ -323,6 +321,13 @@ export default {
     recaptchaOk () {
       this.recaptcha = true
     },
+    openLetter (id) {
+      this.$router.push('/letters/' + id)
+    },
+    newLetter () {
+      this.sendedDialog = false
+      this.$vuetify.goTo(0)
+    },
     clearAvatar () {
       this.avatarDialog = false
       this.avatar = ''
@@ -335,11 +340,11 @@ export default {
         setTimeout(() => {
           this.sended = false
         }, 1500)
-        axios.get(process.env.VUE_APP_SERVER + '/api/records/last')
+        axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
           .then((response) => {
-            this.id = +response.data[0].letterId + 1
+            this.id = response.data + 200
             axios.post(process.env.VUE_APP_SERVER + '/api/records', {
-              letterId: +response.data[0].letterId + 1,
+              letterId: this.id,
               letterName: this.name,
               letterEmail: this.email,
               letterTitle: this.title,

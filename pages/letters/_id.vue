@@ -32,7 +32,7 @@
     <v-snackbar
       v-model="copied"
       multi-line
-      timeout="2500"
+      timeout="2000"
       bottom
       dark
     >
@@ -58,9 +58,13 @@ export default {
   validate ({ params }) {
     return /^\d+$/.test(params.id)
   },
-  async asyncData ({ $axios, params }) {
-    const letter = await $axios.$get(process.env.VUE_APP_SERVER + '/api/records/find/' + params.id)
-    return { letter }
+  async asyncData ({ $axios, params, error }) {
+    try {
+      const letter = await $axios.$get(process.env.VUE_APP_SERVER + '/api/records/find/' + params.id)
+      if (letter.length !== 0) { return { letter } } else { return error }
+    } catch (e) {
+      error({ statusCode: 404, message: 'Letter not found' })
+    }
   },
   data () {
     return {
