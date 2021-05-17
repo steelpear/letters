@@ -5,8 +5,10 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _a045c17c = () => interopDefault(import('..\\pages\\about.vue' /* webpackChunkName: "pages/about" */))
+const _01044e04 = () => interopDefault(import('..\\pages\\admin.vue' /* webpackChunkName: "pages/admin" */))
 const _44406fc1 = () => interopDefault(import('..\\pages\\letter.vue' /* webpackChunkName: "pages/letter" */))
 const _3d7c5680 = () => interopDefault(import('..\\pages\\letters\\index.vue' /* webpackChunkName: "pages/letters/index" */))
+const _cd86c5c4 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
 const _2e83f1b0 = () => interopDefault(import('..\\pages\\letters\\_id.vue' /* webpackChunkName: "pages/letters/_id" */))
 const _60d60bf2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -26,6 +28,10 @@ export const routerOptions = {
     component: _a045c17c,
     name: "about"
   }, {
+    path: "/admin",
+    component: _01044e04,
+    name: "admin"
+  }, {
     path: "/letter",
     component: _44406fc1,
     name: "letter"
@@ -33,6 +39,10 @@ export const routerOptions = {
     path: "/letters",
     component: _3d7c5680,
     name: "letters"
+  }, {
+    path: "/login",
+    component: _cd86c5c4,
+    name: "login"
   }, {
     path: "/letters/:id",
     component: _2e83f1b0,

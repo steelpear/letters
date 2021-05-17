@@ -8,9 +8,10 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-  await Login.update({
+  await Login.updateMany({
     login: req.body.login,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+    role: req.body.role
   })
   res.json({ state: 'updated' })
 })

@@ -1,7 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
-
 export const state = () => ({
   categories: [
     'Поздравления',
@@ -12,13 +8,21 @@ export const state = () => ({
     'Ищу тебя',
     'Просьбы о помощи',
     'Для всех'
-  ]
+  ],
+  token: ''
 })
 
 export const getters = {
-  get_categories: state => state.categories
+  get_categories: state => state.categories,
+  hasToken: state => !!state.token
 }
 
 export const mutations = {
+  setToken (state, payload) { state.token = payload },
+  clearToken (state) { state.token = null }
+}
 
+export const actions = {
+  login ({ commit }) { commit('setToken', 'truetoken') },
+  logout ({ commit }) { commit('clearToken') }
 }

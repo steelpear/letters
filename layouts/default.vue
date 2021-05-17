@@ -62,9 +62,7 @@
         </v-btn>
       </v-app-bar>
       <v-main>
-        <v-fade-transition>
-          <nuxt />
-        </v-fade-transition>
+        <nuxt />
       </v-main>
       <v-footer
         app

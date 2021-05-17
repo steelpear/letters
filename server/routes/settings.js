@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-  await Settings.update(req.body)
+  await Settings.updateMany(req.body)
   res.json({ state: 'updated' })
 })
 

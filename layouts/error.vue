@@ -50,9 +50,7 @@ export default {
     }
   },
   methods: {
-    mimeTypeUrl () {
-      return require('~/static/letters-white.svg')
-    }
+    mimeTypeUrl () { return require('~/static/letters-white.svg') }
   }
 }
 </script>

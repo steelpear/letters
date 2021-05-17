@@ -7,6 +7,13 @@
     "_name": "_a045c17c"
   },
   {
+    "name": "admin",
+    "path": "/admin",
+    "component": "D:\\\\letters\\\\pages\\\\admin.vue",
+    "chunkName": "pages/admin",
+    "_name": "_01044e04"
+  },
+  {
     "name": "letter",
     "path": "/letter",
     "component": "D:\\\\letters\\\\pages\\\\letter.vue",
@@ -19,6 +26,13 @@
     "component": "D:\\\\letters\\\\pages\\\\letters\\\\index.vue",
     "chunkName": "pages/letters/index",
     "_name": "_3d7c5680"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "D:\\\\letters\\\\pages\\\\login.vue",
+    "chunkName": "pages/login",
+    "_name": "_cd86c5c4"
   },
   {
     "name": "letters-id",
