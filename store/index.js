@@ -1,24 +1,13 @@
 export const state = () => ({
-  categories: [
-    'Поздравления',
-    'Благодарности',
-    'Коллегам',
-    'Любимым',
-    'Родным',
-    'Ищу тебя',
-    'Просьбы о помощи',
-    'Для всех'
-  ],
-  token: ''
+  token: null
 })
 
 export const getters = {
-  get_categories: state => state.categories,
   hasToken: state => !!state.token
 }
 
 export const mutations = {
-  setToken (state, payload) { state.token = payload },
+  setToken (state, token) { state.token = token },
   clearToken (state) { state.token = null }
 }
 

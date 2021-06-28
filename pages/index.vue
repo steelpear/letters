@@ -124,7 +124,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Banner from '~/components/Banner.vue'
 import Share from '~/components/Share.vue'
 import QrCode from '~/components/QrCode.vue'
@@ -146,13 +145,20 @@ export default {
       routeProps: {
         limit: 50,
         skip: 0
-      }
+      },
+      categories: [
+        'Поздравления',
+        'Благодарности',
+        'Коллегам',
+        'Любимым',
+        'Родным',
+        'Ищу тебя',
+        'Просьбы о помощи',
+        'Для всех'
+      ]
     }
   },
   computed: {
-    categories () {
-      return this.$store.getters.get_categories
-    },
     filteredLetters () {
       const cat = this.selectedCategory
       return this.letters.filter(function (elem) {
@@ -167,7 +173,7 @@ export default {
   },
   methods: {
     async fetchData () {
-      await axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip, {
+      await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip, {
       })
         .then((response) => {
           const array = response.data

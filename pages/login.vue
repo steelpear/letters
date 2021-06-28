@@ -23,7 +23,7 @@
         />
         <v-card-actions>
           <v-btn text color="indigo" @click="clear">
-            Очистить
+            Сбросить
           </v-btn>
           <v-spacer />
           <v-btn text color="indigo" @click="submit">
@@ -73,7 +73,9 @@ export default {
     submit () {
       this.$v.$touch()
       this.$store.dispatch('login')
-      // this.$router.push('/admin')
+      setTimeout(() => {
+        this.$router.push('/admin')
+      }, 1000)
     },
     clear () {
       this.$v.$reset()
