@@ -6,6 +6,12 @@
     "chunkName": "pages/about"
   },
   {
+    "name": "accounts",
+    "path": "/accounts",
+    "component": "D:\\\\letters\\\\pages\\\\accounts.vue",
+    "chunkName": "pages/accounts"
+  },
+  {
     "name": "admin",
     "path": "/admin",
     "component": "D:\\\\letters\\\\pages\\\\admin.vue",

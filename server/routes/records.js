@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer')
 const Record = require('../models/Record')
 
 router.get('/', async (req, res) => {
-  res.json(await Record.find().sort({ qrDate: -1 }))
+  res.json(await Record.find().sort({ letterDate: -1 }))
 })
 
 router.get('/count', async (req, res) => {
@@ -16,8 +16,8 @@ router.get('/last', async (req, res) => {
   res.json(await Record.find().limit(1).sort({ $natural: -1 }))
 })
 
-router.get('/limit/:limit/:skip', async (req, res) => {
-  res.json(await Record.find().sort({ letterDate: -1 }).limit(+req.params.limit).skip(+req.params.skip))
+router.get('/limit/:limit/:skip/:public', async (req, res) => {
+  res.json(await Record.find({ letterPublic: req.params.public }).sort({ letterDate: -1 }).limit(+req.params.limit).skip(+req.params.skip))
 })
 
 router.get('/:id', async (req, res) => {
