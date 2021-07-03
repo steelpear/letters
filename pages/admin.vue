@@ -8,15 +8,32 @@
       :headers="headers"
       :items="letters"
       :search="search"
+      :footer-props="{
+        itemsPerPageOptions: [15,25,50,-1],
+        itemsPerPageText: 'Строк на страницу',
+        itemsPerPageAllText: 'Все'
+      }"
     >
       <template #top>
-        <v-row align="center" class="px-5">
+        <v-row
+          align="center"
+          class="px-5"
+        >
           <v-switch
             v-model="publicSelect"
             :label="publicSelect ? 'Опубликованные' : 'Не опубликованные'"
             class="pa-3"
             @change="getLetters"
           />
+          <v-spacer />
+          <v-btn
+            icon
+            large
+            :disabled="selected == ''"
+            :color="selected ? 'red' : ''"
+          >
+            <v-icon>mdi-trash-can-outline</v-icon>
+          </v-btn>
           <v-spacer />
           <v-text-field
             v-model="search"
@@ -27,6 +44,9 @@
           />
         </v-row>
       </template>
+    </v-data-table>
+  </v-container>
+</template>
     </v-data-table>
   </v-container>
 </template>
