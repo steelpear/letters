@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
@@ -27,5 +28,5 @@ app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
 app.use('/api/records', require('./routes/records'))
 // app.use('/api/settings', require('./routes/settings'))
-// app.use('/api/login', require('./routes/login'))
+app.use('/api/login', require('./routes/login'))
 app.use('/', express.static(path.join(__dirname, '../dist')))

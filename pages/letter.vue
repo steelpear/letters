@@ -290,7 +290,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 import VueRecaptcha from 'vue-recaptcha'
@@ -386,10 +385,10 @@ export default {
         setTimeout(() => {
           this.sended = false
         }, 1500)
-        axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
+        this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
           .then((response) => {
             this.id = response.data + 200
-            axios.post(process.env.VUE_APP_SERVER + '/api/records', {
+            this.$axios.post(process.env.VUE_APP_SERVER + '/api/records', {
               letterId: this.id,
               letterName: this.name,
               letterEmail: this.email,

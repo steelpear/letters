@@ -3,8 +3,8 @@
     <v-data-table
       v-model="selected"
       item-key="letterId"
-      show-select
       dense
+      show-select
       :headers="headers"
       :items="letters"
       :search="search"
@@ -13,6 +13,7 @@
         itemsPerPageText: 'Строк на страницу',
         itemsPerPageAllText: 'Все'
       }"
+      @click:row="rowClick"
     >
       <template #top>
         <v-row
@@ -31,6 +32,7 @@
             large
             :disabled="selected == ''"
             :color="selected ? 'red' : ''"
+            @click="deleteMany"
           >
             <v-icon>mdi-trash-can-outline</v-icon>
           </v-btn>
@@ -44,10 +46,113 @@
           />
         </v-row>
       </template>
+      <template
+        #item.letterDate="{ item }"
+      >
+        {{ new Date(item.letterDate).toLocaleString("ru", {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric'
+        }) }}
+      </template>
     </v-data-table>
-  </v-container>
-</template>
-    </v-data-table>
+    <v-dialog
+      v-model="letterDialog"
+      max-width="700"
+    >
+      <v-card>
+        <v-card-title>
+          {{ letter.letterId }}
+          <v-spacer />
+          <v-chip
+            class="ma-2"
+            color="primary"
+          >
+            {{ letter.letterCategory }}
+          </v-chip>
+          <v-spacer />
+          <v-avatar v-if="letter.letterAvatar" left class="mr-4">
+            <v-img :src="letter.letterAvatar" />
+          </v-avatar>
+          {{ letter.letterName }}
+        </v-card-title>
+        <v-card-text>
+          <div v-if="letter.letterEmail" class="text-right text--primary">
+            {{ letter.letterEmail }}
+          </div>
+          <div v-else class="text-right text--primary">
+            Почта не указана
+          </div>
+          <div class="text-center text-h5 font-weight-medium mb-3">
+            {{ letter.letterTitle }}
+          </div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div class="text--primary body-1" v-html="letter.letterText" />
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="letterDialog = false"
+          >
+            Отмена
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="red darken-1"
+            text
+            @click="deleteLetterConfirm"
+          >
+            Удалить
+          </v-btn>
+          <v-btn
+            v-if="!letter.letterPublic"
+            color="indigo darken-1"
+            text
+            @click="publicLetter(true)"
+          >
+            Опубликовать
+          </v-btn>
+          <v-btn
+            v-else
+            color="indigo darken-1"
+            text
+            @click="publicLetter(false)"
+          >
+            Снять с публикации
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="deleteDialog"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title>
+          <div class="text-center" style="width: 100%">
+            Уверены?
+          </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="deleteDialog = false"
+          >
+            Нет
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="red darken-1"
+            text
+            @click="deleteLetter"
+          >
+            Да
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -59,23 +164,26 @@ export default {
     return {
       search: '',
       publicSelect: false,
+      letterDialog: false,
+      deleteDialog: false,
       selected: [],
       letters: [],
+      letter: {},
       routeProps: {
         limit: 50,
         skip: 0
       },
       headers: [
         {
-          text: 'ID',
+          text: '№ письма',
           align: 'start',
           sortable: false,
           value: 'letterId'
         },
-        { text: 'Name', value: 'letterName' },
-        { text: 'Title', value: 'letterTitle' },
-        { text: 'Category', value: 'letterCategory' },
-        { text: 'Date', value: 'letterDate' }
+        { text: 'От кого', value: 'letterName' },
+        { text: 'Заголовок', value: 'letterTitle' },
+        { text: 'Категория', value: 'letterCategory' },
+        { text: 'Дата', value: 'letterDate' }
       ]
     }
   },
@@ -88,7 +196,47 @@ export default {
       }).then((response) => {
         this.letters = response.data
       })
+    },
+    rowClick (item, row) {
+      this.letter = item
+      row.select(true)
+      this.letterDialog = true
+    },
+    publicLetter (val) {
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/public/' + this.letter._id + '/' + val, {
+      }).then((response) => {
+        this.letterDialog = false
+        this.selected = []
+        this.getLetters()
+      })
+    },
+    deleteLetterConfirm () {
+      this.letterDialog = false
+      this.deleteDialog = true
+    },
+    deleteLetter () {
+      this.$axios.delete(process.env.VUE_APP_SERVER + '/api/records/delete/' + this.letter._id, {
+      }).then((response) => {
+        this.deleteDialog = false
+        this.selected = []
+        this.getLetters()
+      })
+    },
+    deleteMany () {
+      const sel = this.selected
+      const ids = []
+      sel.forEach(function (item, i, sel) { ids.push(item._id) })
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/delmany', {
+        ids
+      }).then((response) => {
+        this.selected = []
+        this.getLetters()
+      })
     }
   }
 }
 </script>
+
+<style>
+  .v-data-table__wrapper table tbody tr {cursor: pointer}
+</style>

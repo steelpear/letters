@@ -19,6 +19,9 @@
           label="Пароль"
           required
           clearable
+          :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPass ? 'text' : 'password'"
+          @click:append="showPass = !showPass"
           @blur="$v.password.$touch()"
         />
         <v-card-actions>
@@ -32,6 +35,28 @@
         </v-card-actions>
       </form>
     </v-card>
+    <v-snackbar
+      v-model="errorAlert"
+      timeout="2500"
+      top
+      dark
+      color="red"
+    >
+      <v-row align="center" justify="space-around">
+        <v-spacer />
+        <div class="subtitle-1">
+          Логин или пароль неверны!
+        </div>
+        <v-spacer />
+        <v-btn
+          dark
+          icon
+          @click="numberAlert = false"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-row>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -51,7 +76,9 @@ export default {
 
   data: () => ({
     login: '',
-    password: ''
+    password: '',
+    errorAlert: false,
+    showPass: false
   }),
 
   computed: {
@@ -71,11 +98,22 @@ export default {
 
   methods: {
     submit () {
-      this.$v.$touch()
-      this.$store.dispatch('login')
-      setTimeout(() => {
-        this.$router.push('/admin')
-      }, 1000)
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/login', {
+        login: this.login,
+        password: this.password
+      })
+        .then((response) => {
+          if (!response.data.state) {
+            this.errorAlert = true
+            this.clear()
+          } else {
+            this.$v.$touch()
+            this.$store.dispatch('login')
+            setTimeout(() => {
+              this.$router.push('/admin')
+            }, 1000)
+          }
+        })
     },
     clear () {
       this.$v.$reset()

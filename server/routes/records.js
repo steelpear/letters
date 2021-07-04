@@ -38,10 +38,15 @@ router.post('/', async (req, res) => {
   res.json({ state: 'success' })
 })
 
-// router.put('/:id', async (req, res) => {
-//   await Record.findByIdAndUpdate(req.params.id, req.body)
-//   res.json({ state: 'updated' })
-// })
+router.post('/public/:id/:value', async (req, res) => {
+  await Record.findByIdAndUpdate(req.params.id, { $set: { letterPublic: req.params.value } })
+  res.json({ state: 'updated' })
+})
+
+router.post('/delmany', async (req, res) => {
+  await Record.deleteMany({ _id: req.body.ids })
+  res.json({ state: 'Записи удалены' })
+})
 
 router.delete('/delete/:id', async (req, res) => {
   await Record.findByIdAndRemove(req.params.id)
