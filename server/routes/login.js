@@ -26,6 +26,25 @@ router.put('/', async (req, res) => {
   res.json({ state: 'updated' })
 })
 
+router.delete('/delete/:id', async (req, res) => {
+  await Login.findByIdAndRemove(req.params.id)
+  res.json({ state: 'Аккаунт удалён' })
+})
+
+router.post('/update', async (req, res) => {
+  const dat = req.body.data
+  let data = null
+  if (dat.password && dat.role) {
+    data = { password: bcrypt.hashSync(dat.password, 8), role: dat.role }
+  } else if (dat.password && !dat.role) {
+    data = { password: bcrypt.hashSync(dat.password, 8) }
+  } else if (!dat.password && dat.role) {
+    data = { role: dat.role }
+  } else { return res.json({ state: 'Ошибка!' }) }
+  await Login.findByIdAndUpdate(req.body.id, data)
+  res.json({ state: 'Аккаунт изменён' })
+})
+
 router.post('/', async (req, res) => {
   let passwordIsValid = false
   const logindata = await Login.find()

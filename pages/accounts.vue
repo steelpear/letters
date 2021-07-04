@@ -14,21 +14,7 @@
         </v-btn>
       </v-card-title>
       <v-card-text>
-        <!-- <v-simple-table>
-          <template #default>
-            <tbody>
-              <tr
-                v-for="(account, i) in accounts"
-                :key="i"
-              >
-                <td>{{ i + 1 }}</td>
-                <td>{{ account.login }}</td>
-                <td>{{ account.role }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table> -->
-        <v-expansion-panels focusable>
+        <v-expansion-panels v-model="openedPanel" focusable tile>
           <v-expansion-panel
             v-for="(account, i) in accounts"
             :key="i"
@@ -70,6 +56,8 @@
                     color="indigo"
                     tile
                     outlined
+                    :disabled="!newpassword && !newrole"
+                    @click="updateAccount(account._id)"
                   >
                     Сохранить изменения
                   </v-btn>
@@ -79,6 +67,7 @@
                     color="red"
                     tile
                     outlined
+                    @click="deleteAccount(account._id)"
                   >
                     Удалить аккаунт
                   </v-btn>
@@ -159,7 +148,8 @@ export default {
       newrole: '',
       roles: ['Администратор', 'Модератор', 'Гость'],
       accounts: [],
-      showPass: false
+      showPass: false,
+      openedPanel: null
     }
   },
   fetch () {
@@ -183,6 +173,34 @@ export default {
           this.addDialog = false
           this.getAccounts()
         })
+    },
+    deleteAccount (id) {
+      this.$axios.delete(process.env.VUE_APP_SERVER + '/api/login/delete/' + id, {
+      }).then((response) => {
+        this.getAccounts()
+      })
+    },
+    updateAccount (id) {
+      let data = null
+      if (this.newpassword && this.newrole) {
+        data = { password: this.newpassword, role: this.newrole }
+      } else if (this.newpassword && !this.newrole) {
+        data = { password: this.newpassword }
+      } else if (!this.newpassword && this.newrole) {
+        data = { role: this.newrole }
+      } else { return false }
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/login/update', {
+        id,
+        data
+      }).then((response) => {
+        this.newpassword = ''
+        this.newrole = ''
+        this.openedPanel = null
+        this.getAccounts()
+      }).catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      })
     }
   }
 }
