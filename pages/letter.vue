@@ -1,5 +1,5 @@
 <template>
-  <v-container class="letter_wrap py-12 px-16 mt-6 elevation-12">
+  <v-container class="letter_wrap py-12 px-16 my-12 elevation-12">
     <v-row align="center" justify="center">
       <v-col class="text-center">
         <img src="letter.png" width="200" class="animate__animated animate__fadeInLeft">

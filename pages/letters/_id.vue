@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container class="py-16">
       <v-card elevation="4" max-width="800" class="mx-auto pa-8 animate__animated animate__fadeIn">
         <v-card-text>
           <v-row align="center" justify="center" class="pa-4">

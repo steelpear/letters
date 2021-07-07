@@ -6,6 +6,7 @@
         <v-btn
           icon
           large
+          :disabled="currentRole !== 'Администратор'"
           @click.stop="addDialog = true"
         >
           <v-icon large>
@@ -19,7 +20,7 @@
             v-for="(account, i) in accounts"
             :key="i"
           >
-            <v-expansion-panel-header>
+            <v-expansion-panel-header ripple>
               <v-row>
                 <v-col cols="12" md="1">
                   {{ i + 1 }}
@@ -29,7 +30,11 @@
               </v-row>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <v-row align="center" justify="space-between" class="py-3">
+              <v-row
+                align="center"
+                justify="space-between"
+                class="py-3"
+              >
                 <v-col>
                   <v-text-field
                     v-model="newpassword"
@@ -37,6 +42,7 @@
                     hide-details
                     outlined
                     dense
+                    :disabled="currentRole !== 'Администратор'"
                   />
                 </v-col>
                 <v-col>
@@ -49,6 +55,7 @@
                     outlined
                     single-line
                     dense
+                    :disabled="currentRole !== 'Администратор'"
                   />
                 </v-col>
                 <v-col>
@@ -67,6 +74,7 @@
                     color="red"
                     tile
                     outlined
+                    :disabled="currentRole !== 'Администратор'"
                     @click="deleteAccount(account._id)"
                   >
                     Удалить аккаунт
@@ -149,11 +157,13 @@ export default {
       roles: ['Администратор', 'Модератор', 'Гость'],
       accounts: [],
       showPass: false,
-      openedPanel: null
+      openedPanel: null,
+      currentRole: ''
     }
   },
   fetch () {
     this.getAccounts()
+    this.currentRole = this.$store.getters.get_role
   },
   methods: {
     getAccounts () {

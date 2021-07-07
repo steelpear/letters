@@ -109,6 +109,7 @@ export default {
           } else {
             this.$v.$touch()
             this.$store.dispatch('login')
+            this.$store.dispatch('set_role', response.data.role)
             setTimeout(() => {
               this.$router.push('/admin')
             }, 1000)

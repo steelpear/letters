@@ -12,6 +12,10 @@ router.get('/count', async (req, res) => {
   res.json(await Record.countDocuments())
 })
 
+router.get('/countpublic', async (req, res) => {
+  res.json(await Record.countDocuments({ letterPublic: true }))
+})
+
 router.get('/last', async (req, res) => {
   res.json(await Record.find().limit(1).sort({ $natural: -1 }))
 })

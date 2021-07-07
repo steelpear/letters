@@ -17,14 +17,14 @@ router.post('/new', async (req, res) => {
   res.json({ state: 'success' })
 })
 
-router.put('/', async (req, res) => {
-  await Login.updateMany({
-    login: req.body.login,
-    password: bcrypt.hashSync(req.body.password, 8),
-    role: req.body.role
-  })
-  res.json({ state: 'updated' })
-})
+// router.put('/', async (req, res) => {
+//   await Login.updateMany({
+//     login: req.body.login,
+//     password: bcrypt.hashSync(req.body.password, 8),
+//     role: req.body.role
+//   })
+//   res.json({ state: 'updated' })
+// })
 
 router.delete('/delete/:id', async (req, res) => {
   await Login.findByIdAndRemove(req.params.id)
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
   logindata.forEach(function (item, i, logindata) {
     passwordIsValid = bcrypt.compareSync(req.body.password, item.password)
     if (passwordIsValid) {
-      return res.json({ state: passwordIsValid })
+      return res.json({ state: passwordIsValid, role: item.role })
     }
   })
   res.json({ state: passwordIsValid })

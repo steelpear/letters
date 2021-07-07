@@ -43,6 +43,15 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <!-- <v-btn
+        icon
+        large
+        @click="logOut"
+      >
+        <v-icon large>
+          mdi-exit-run
+        </v-icon>
+      </v-btn> -->
     </v-navigation-drawer>
     <v-main>
       <v-container
@@ -54,3 +63,14 @@
     </v-main>
   </v-app>
 </template>
+
+<script>
+export default {
+  methods: {
+    logOut () {
+      this.$store.dispatch('logout')
+      this.$router.push('/admin')
+    }
+  }
+}
+</script>

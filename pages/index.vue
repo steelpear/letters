@@ -94,6 +94,36 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row align="center" justify="center" class="py-10">
+        <v-btn
+          v-if="visibleMoreBtn"
+          dark
+          x-large
+          outlined
+          @click="fetchData"
+        >
+          <v-icon large class="mr-2">
+            mdi-eye-plus-outline
+          </v-icon>
+          Читать ещё
+        </v-btn>
+      </v-row>
+      <v-snackbar
+        v-model="copied"
+        timeout="2500"
+        top
+        dark
+      >
+        Ссылка скопирована в буфер обмена
+        <v-btn
+          dark
+          icon
+          @click="copied = false"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        </v-spacer>
+      </v-snackbar>
     </v-container>
     <v-dialog v-model="openQr" max-width="310">
       <v-card tile class="text-center">
@@ -103,23 +133,6 @@
         <qr-code :value="url + '/letters/' + currentId" />
       </v-card>
     </v-dialog>
-    <v-snackbar
-      v-model="copied"
-      multi-line
-      timeout="2500"
-      bottom
-      dark
-    >
-      Ссылка скопирована в буфер обмена
-      <v-btn
-        dark
-        icon
-        @click="copied = false"
-      >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-      </v-spacer>
-    </v-snackbar>
   </div>
 </template>
 
@@ -136,14 +149,14 @@ export default {
   data () {
     return {
       letters: [],
-      timeOut: 0,
       copied: false,
       openQr: false,
       currentId: '',
       currentTitle: '',
       selectedCategory: 'Все',
+      countedLetters: 0,
       routeProps: {
-        limit: 50,
+        limit: 20,
         skip: 0
       }
     }
@@ -156,7 +169,10 @@ export default {
         if (cat === 'Все') { return true } else { return elem.letterCategory.includes(cat) }
       })
     },
-    url () { return process.env.VUE_APP_URL }
+    url () { return process.env.VUE_APP_URL },
+    visibleMoreBtn () {
+      if (this.countedLetters > this.letters.length) { return true } else { return false }
+    }
   },
   mounted () {
     this.routeProps.skip = 0
@@ -171,7 +187,7 @@ export default {
           if (array.length > 0) {
             this.letters = this.letters.concat(array)
             this.routeProps.skip = this.routeProps.skip + this.routeProps.limit
-            this.timeOut = 1000
+            this.countLetters()
           }
         })
         .catch((error) => {
@@ -192,6 +208,12 @@ export default {
       this.currentId = letter.letterId
       this.currentTitle = letter.letterTitle
       this.openQr = true
+    },
+    countLetters () {
+      this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/countpublic')
+        .then((response) => {
+          this.countedLetters = response.data
+        })
     }
   }
 }

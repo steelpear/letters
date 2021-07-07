@@ -30,7 +30,7 @@
           <v-btn
             icon
             large
-            :disabled="selected == ''"
+            :disabled="selected == '' || currentRole == 'Гость'"
             :color="selected ? 'red' : ''"
             @click="deleteMany"
           >
@@ -101,6 +101,7 @@
           <v-btn
             color="red darken-1"
             text
+            :disabled="currentRole == 'Гость'"
             @click="deleteLetterConfirm"
           >
             Удалить
@@ -109,6 +110,7 @@
             v-if="!letter.letterPublic"
             color="indigo darken-1"
             text
+            :disabled="currentRole == 'Гость'"
             @click="publicLetter(true)"
           >
             Опубликовать
@@ -117,6 +119,7 @@
             v-else
             color="indigo darken-1"
             text
+            :disabled="currentRole == 'Гость'"
             @click="publicLetter(false)"
           >
             Снять с публикации
@@ -169,8 +172,9 @@ export default {
       selected: [],
       letters: [],
       letter: {},
+      currentRole: '',
       routeProps: {
-        limit: 50,
+        limit: 30,
         skip: 0
       },
       headers: [
@@ -189,6 +193,7 @@ export default {
   },
   fetch () {
     this.getLetters()
+    this.currentRole = this.$store.getters.get_role
   },
   methods: {
     getLetters () {

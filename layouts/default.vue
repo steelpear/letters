@@ -7,6 +7,7 @@
         elevation="0"
         color="transparent"
         style="position: relative"
+        class="pr-16"
       >
         <v-img
           v-if="$route.path !='/'"
@@ -61,9 +62,9 @@
           Пожертвовать
         </v-btn>
       </v-app-bar>
-      <v-main>
+      <section>
         <nuxt />
-      </v-main>
+      </section>
       <v-footer
         app
         dark

@@ -1,5 +1,6 @@
 export const state = () => ({
   token: null,
+  role: '',
   categories: [
     'Поздравления',
     'Благодарности',
@@ -14,15 +15,18 @@ export const state = () => ({
 
 export const getters = {
   hasToken: state => !!state.token,
-  get_categories: state => state.categories
+  get_categories: state => state.categories,
+  get_role: state => state.role
 }
 
 export const mutations = {
   setToken (state, token) { state.token = token },
-  clearToken (state) { state.token = null }
+  clearToken (state) { state.token = null },
+  set_role (state, role) { state.role = role }
 }
 
 export const actions = {
   login ({ commit }) { commit('setToken', 'truetoken') },
-  logout ({ commit }) { commit('clearToken') }
+  logout ({ commit }) { commit('clearToken') },
+  set_role: ({ commit }, role) => { commit('set_role', role) }
 }
