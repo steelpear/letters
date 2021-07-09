@@ -7,7 +7,7 @@
         elevation="0"
         color="transparent"
         style="position: relative"
-        class="pr-16"
+        class="px-16 py-3"
       >
         <v-img
           v-if="$route.path !='/'"
@@ -16,6 +16,44 @@
           :src="mimeTypeUrl()"
           class="mt-10 ml-12"
         />
+        <v-col
+          cols="12"
+          md="3"
+        >
+          <v-text-field
+            v-if="$route.path =='/'"
+            outlined
+            rounded
+            single-line
+            label="Номер письма"
+            hide-details
+          >
+            <template #append>
+              <v-progress-circular
+                v-if="loading"
+                size="40"
+                color="#EFC84A"
+                class="mt-n2"
+                indeterminate
+              />
+              <v-btn
+                v-else
+                fab
+                icon
+                x-small
+                @click="findLetter"
+              >
+                <img
+                  width="40"
+                  height="40"
+                  src="magnifier.svg"
+                  class="mt-n2"
+                  style="cursor:pointer"
+                >
+              </v-btn>
+            </template>
+          </v-text-field>
+        </v-col>
         <v-spacer />
         <v-btn
           to="/"
@@ -154,7 +192,8 @@ export default {
   data () {
     return {
       cookiePolicy: true,
-      offsetTop: 0
+      offsetTop: 0,
+      loading: false
     }
   },
   beforeMount () {
@@ -184,8 +223,9 @@ export default {
         maxAge: 60 * 60 * 24 * 7
       })
     },
-    mimeTypeUrl () {
-      return require('~/static/letters-white.svg')
+    mimeTypeUrl () { return require('~/static/letters-white.svg') },
+    findLetter () {
+      alert('dddd')
     }
   }
 }

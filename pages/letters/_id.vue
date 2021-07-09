@@ -73,7 +73,7 @@ export default {
   },
   async asyncData ({ $axios, params, error }) {
     try {
-      const letter = await $axios.$get(process.env.VUE_APP_SERVER + '/api/records/find/' + params.id)
+      const letter = await $axios.$get(process.env.VUE_APP_SERVER + '/api/records/findpublic/' + params.id)
       if (letter.length !== 0) { return { letter } } else { return error }
     } catch (e) {
       error({ statusCode: 404, message: 'Letter not found' })

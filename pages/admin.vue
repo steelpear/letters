@@ -8,6 +8,7 @@
       :headers="headers"
       :items="letters"
       :search="search"
+      no-data-text="Писем пока нет"
       :footer-props="{
         itemsPerPageOptions: [15,25,50,-1],
         itemsPerPageText: 'Строк на страницу',

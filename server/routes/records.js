@@ -32,6 +32,10 @@ router.get('/find/:letterid', async (req, res) => {
   res.json(await Record.findOne({ letterId: req.params.letterid }))
 })
 
+router.get('/findpublic/:letterid', async (req, res) => {
+  res.json(await Record.findOne({ letterId: req.params.letterid, letterPublic: true }))
+})
+
 router.get('/random/:num', async (req, res) => {
   res.json(await Record.aggregate([{ $sample: { size: +req.params.num } }]))
 })
@@ -71,9 +75,9 @@ router.post('/mailer', (req, res) => {
     })
     const mailOptions = {
       from: 'Letters mailer <steelpear@yandex.ru>',
-      to: req.body.email,
+      to: mailConfig.to,
       subject: 'Letters notice',
-      text: 'Новое письмо № ' + req.body.qrId
+      text: 'Новое письмо № ' + req.body.number
     }
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {

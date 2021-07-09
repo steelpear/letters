@@ -243,14 +243,14 @@
     <v-dialog
       v-model="sendedDialog"
       transition="dialog-top-transition"
-      max-width="490"
+      max-width="550"
     >
       <v-card class="pa-6" img="background.jpg">
-        <div class="display-1 text-center mb-2 red--text" style="font-family: 'Neucha' !important;">
+        <div class="text-h3 text-center mb-2 red--text" style="font-family: 'Neucha' !important;">
           Спасибо за письмо!
         </div>
-        <div class="body-1 text-center teal--text text--darken-4">
-          После модерации оно будет опубликовано по адресу:
+        <div class="title text-center text--secondary">
+          После проверки нашим модератором оно будет опубликовано по адресу:
         </div>
         <div class="text-center my-3">
           <a :href="url + '/letters/' + id" target="_blank">{{ url + '/letters/' + id }}</a>
@@ -259,7 +259,7 @@
           <v-icon class="mr-2">
             mdi-email-multiple-outline
           </v-icon>
-          Уведомление о публикации либо от отказе в публикации придёт на электронную почту, если Вы её указывали.
+          Уведомление о публикации либо об отказе в публикации придёт на электронную почту, если Вы её указывали.
         </div>
         <nuxt-link to="/rules">
           <div class="caption text-center">
@@ -403,6 +403,7 @@ export default {
                 this.clearForm()
                 this.recaptcha = false
                 this.$refs.recaptcha.reset()
+                this.mailer()
                 setTimeout(() => {
                   this.sendedDialog = true
                 }, 2500)
@@ -426,6 +427,19 @@ export default {
       this.category = 'Для всех'
       this.text = ''
       this.avatar = ''
+    },
+    mailer () {
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
+        number: this.id
+      })
+        .then((response) => {
+          // eslint-disable-next-line no-console
+          console.log(response.data)
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        })
     }
   }
 }
