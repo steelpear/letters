@@ -15,75 +15,77 @@
         </v-btn>
       </v-card-title>
       <v-card-text>
-        <v-expansion-panels v-model="openedPanel" focusable tile>
-          <v-expansion-panel
-            v-for="(account, i) in accounts"
-            :key="i"
-          >
-            <v-expansion-panel-header ripple>
-              <v-row>
-                <v-col cols="12" md="1">
-                  {{ i + 1 }}
-                </v-col>
-                <v-col>{{ account.login }}</v-col>
-                <v-col>{{ account.role }}</v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-row
-                align="center"
-                justify="space-between"
-                class="py-3"
-              >
-                <v-col>
-                  <v-text-field
-                    v-model="newpassword"
-                    label="Новый пароль"
-                    hide-details
-                    outlined
-                    dense
-                    :disabled="currentRole !== 'Администратор'"
-                  />
-                </v-col>
-                <v-col>
-                  <v-select
-                    v-model="newrole"
-                    :items="roles"
-                    menu-props="auto"
-                    label="Новые права"
-                    hide-details
-                    outlined
-                    single-line
-                    dense
-                    :disabled="currentRole !== 'Администратор'"
-                  />
-                </v-col>
-                <v-col>
-                  <v-btn
-                    color="indigo"
-                    tile
-                    outlined
-                    :disabled="!newpassword && !newrole"
-                    @click="updateAccount(account._id)"
-                  >
-                    Сохранить изменения
-                  </v-btn>
-                </v-col>
-                <v-col>
-                  <v-btn
-                    color="red"
-                    tile
-                    outlined
-                    :disabled="currentRole !== 'Администратор'"
-                    @click="deleteAccount(account._id)"
-                  >
-                    Удалить аккаунт
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
+        <client-only>
+          <v-expansion-panels v-model="openedPanel" focusable tile>
+            <v-expansion-panel
+              v-for="(account, i) in accounts"
+              :key="i"
+            >
+              <v-expansion-panel-header ripple>
+                <v-row>
+                  <v-col cols="12" md="1">
+                    {{ i + 1 }}
+                  </v-col>
+                  <v-col>{{ account.login }}</v-col>
+                  <v-col>{{ account.role }}</v-col>
+                </v-row>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-row
+                  align="center"
+                  justify="space-between"
+                  class="py-3"
+                >
+                  <v-col>
+                    <v-text-field
+                      v-model="newpassword"
+                      label="Новый пароль"
+                      hide-details
+                      outlined
+                      dense
+                      :disabled="currentRole !== 'Администратор'"
+                    />
+                  </v-col>
+                  <v-col>
+                    <v-select
+                      v-model="newrole"
+                      :items="roles"
+                      menu-props="auto"
+                      label="Новые права"
+                      hide-details
+                      outlined
+                      single-line
+                      dense
+                      :disabled="currentRole !== 'Администратор'"
+                    />
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      color="indigo"
+                      tile
+                      outlined
+                      :disabled="!newpassword && !newrole"
+                      @click="updateAccount(account._id)"
+                    >
+                      Сохранить изменения
+                    </v-btn>
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      color="red"
+                      tile
+                      outlined
+                      :disabled="currentRole !== 'Администратор'"
+                      @click="deleteAccount(account._id)"
+                    >
+                      Удалить аккаунт
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </client-only>
       </v-card-text>
     </v-card>
     <v-dialog

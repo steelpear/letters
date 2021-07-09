@@ -1,62 +1,64 @@
 <template>
   <v-container>
-    <v-data-table
-      v-model="selected"
-      item-key="letterId"
-      dense
-      show-select
-      :headers="headers"
-      :items="letters"
-      :search="search"
-      no-data-text="Писем пока нет"
-      :footer-props="{
-        itemsPerPageOptions: [15,25,50,-1],
-        itemsPerPageText: 'Строк на страницу',
-        itemsPerPageAllText: 'Все'
-      }"
-      @click:row="rowClick"
-    >
-      <template #top>
-        <v-row
-          align="center"
-          class="px-5"
-        >
-          <v-switch
-            v-model="publicSelect"
-            :label="publicSelect ? 'Опубликованные' : 'Не опубликованные'"
-            class="pa-3"
-            @change="getLetters"
-          />
-          <v-spacer />
-          <v-btn
-            icon
-            large
-            :disabled="selected == '' || currentRole == 'Гость'"
-            :color="selected ? 'red' : ''"
-            @click="deleteMany"
-          >
-            <v-icon>mdi-trash-can-outline</v-icon>
-          </v-btn>
-          <v-spacer />
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Поиск"
-            single-line
-            hide-details
-          />
-        </v-row>
-      </template>
-      <template
-        #item.letterDate="{ item }"
+    <client-only>
+      <v-data-table
+        v-model="selected"
+        item-key="letterId"
+        dense
+        show-select
+        :headers="headers"
+        :items="letters"
+        :search="search"
+        no-data-text="Писем пока нет"
+        :footer-props="{
+          itemsPerPageOptions: [15,25,50,-1],
+          itemsPerPageText: 'Строк на страницу',
+          itemsPerPageAllText: 'Все'
+        }"
+        @click:row="rowClick"
       >
-        {{ new Date(item.letterDate).toLocaleString("ru", {
-          year: 'numeric',
-          month: 'numeric',
-          day: 'numeric'
-        }) }}
-      </template>
-    </v-data-table>
+        <template #top>
+          <v-row
+            align="center"
+            class="px-5"
+          >
+            <v-switch
+              v-model="publicSelect"
+              :label="publicSelect ? 'Опубликованные' : 'Не опубликованные'"
+              class="pa-3"
+              @change="getLetters"
+            />
+            <v-spacer />
+            <v-btn
+              icon
+              large
+              :disabled="selected == '' || currentRole == 'Гость'"
+              :color="selected ? 'red' : ''"
+              @click="deleteMany"
+            >
+              <v-icon>mdi-trash-can-outline</v-icon>
+            </v-btn>
+            <v-spacer />
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Поиск"
+              single-line
+              hide-details
+            />
+          </v-row>
+        </template>
+        <template
+          #item.letterDate="{ item }"
+        >
+          {{ new Date(item.letterDate).toLocaleString("ru", {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+          }) }}
+        </template>
+      </v-data-table>
+    </client-only>
     <v-dialog
       v-model="letterDialog"
       max-width="700"

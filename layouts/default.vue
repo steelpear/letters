@@ -22,11 +22,13 @@
         >
           <v-text-field
             v-if="$route.path =='/'"
+            v-model="search"
             outlined
             rounded
             single-line
             label="Номер письма"
             hide-details
+            class="search"
           >
             <template #append>
               <v-progress-circular
@@ -193,7 +195,8 @@ export default {
     return {
       cookiePolicy: true,
       offsetTop: 0,
-      loading: false
+      loading: false,
+      search: ''
     }
   },
   beforeMount () {
@@ -225,7 +228,12 @@ export default {
     },
     mimeTypeUrl () { return require('~/static/letters-white.svg') },
     findLetter () {
-      alert('dddd')
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
+      this.$router.push('/letters/' + this.search)
+      this.search = ''
     }
   }
 }
@@ -245,6 +253,10 @@ export default {
     a {
       color: inherit;
       text-decoration: inherit;
+    }
+    .search {
+      .v-label { font-family:'Neucha'; font-size: 22px;}
+      .v-input__slot { font-family: 'Roboto'; font-size: 24px; }
     }
   }
 </style>
