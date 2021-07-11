@@ -75,9 +75,9 @@ router.post('/mailer', (req, res) => {
     })
     const mailOptions = {
       from: 'Letters mailer <steelpear@yandex.ru>',
-      to: mailConfig.to,
+      to: req.body.email,
       subject: 'Letters notice',
-      text: 'Новое письмо № ' + req.body.number
+      text: req.body.text
     }
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {

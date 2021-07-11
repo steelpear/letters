@@ -259,7 +259,7 @@
           <v-icon class="mr-2">
             mdi-email-multiple-outline
           </v-icon>
-          Уведомление о публикации либо об отказе в публикации придёт на электронную почту, если Вы её указывали.
+          Уведомление о публикации придёт на электронную почту, если Вы её указывали.
         </div>
         <nuxt-link to="/rules">
           <div class="caption text-center">
@@ -430,7 +430,8 @@ export default {
     },
     mailer () {
       this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
-        number: this.id
+        email: 'steelpear@gmail.com',
+        text: 'Новое письмо №' + this.id
       })
         .then((response) => {
           // eslint-disable-next-line no-console

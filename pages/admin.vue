@@ -11,7 +11,7 @@
         :search="search"
         no-data-text="Писем пока нет"
         :footer-props="{
-          itemsPerPageOptions: [15,25,50,-1],
+          itemsPerPageOptions: [25,50,100,-1],
           itemsPerPageText: 'Строк на страницу',
           itemsPerPageAllText: 'Все'
         }"
@@ -81,7 +81,14 @@
         </v-card-title>
         <v-card-text>
           <div v-if="letter.letterEmail" class="text-right text--primary">
-            {{ letter.letterEmail }}
+            <v-row align="center" justify="end">
+              <v-switch
+                v-model="notice"
+                label="Уведомить"
+                class="mr-3"
+              />
+              {{ letter.letterEmail }}
+            </v-row>
           </div>
           <div v-else class="text-right text--primary">
             Почта не указана
@@ -169,6 +176,7 @@ export default {
   data () {
     return {
       search: '',
+      notice: true,
       publicSelect: false,
       letterDialog: false,
       deleteDialog: false,
@@ -216,6 +224,8 @@ export default {
         this.letterDialog = false
         this.selected = []
         this.getLetters()
+        if (this.letter.letterEmail !== '' && this.notice) { this.mailer(val) }
+        this.notice = true
       })
     },
     deleteLetterConfirm () {
@@ -240,6 +250,21 @@ export default {
         this.selected = []
         this.getLetters()
       })
+    },
+    mailer (val) {
+      const text = val ? 'Ваше письмо №' + this.letter.letterId + ' опубликовано' : 'Ваше письмо №' + this.letter.letterId + ' снято с публикации'
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
+        email: this.letter.letterEmail,
+        text
+      })
+        .then((response) => {
+          // eslint-disable-next-line no-console
+          console.log(response.data)
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        })
     }
   }
 }

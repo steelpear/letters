@@ -56,7 +56,7 @@
                       outlined
                       single-line
                       dense
-                      :disabled="currentRole !== 'Администратор'"
+                      :disabled="currentRole !== 'Администратор' || account.role == 'Администратор'"
                     />
                   </v-col>
                   <v-col>
@@ -75,7 +75,7 @@
                       color="red"
                       tile
                       outlined
-                      :disabled="currentRole !== 'Администратор'"
+                      :disabled="currentRole !== 'Администратор' || account.role == 'Администратор'"
                       @click="deleteAccount(account._id)"
                     >
                       Удалить аккаунт

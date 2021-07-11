@@ -9,53 +9,57 @@
         style="position: relative"
         class="px-16 py-3"
       >
-        <v-img
-          v-if="$route.path !='/'"
-          max-height="100"
-          max-width="220"
-          :src="mimeTypeUrl()"
-          class="mt-10 ml-12"
-        />
-        <v-col
-          cols="12"
-          md="3"
-        >
-          <v-text-field
-            v-if="$route.path =='/'"
-            v-model="search"
-            outlined
-            rounded
-            single-line
-            label="Номер письма"
-            hide-details
-            class="search"
+        <v-fade-transition>
+          <v-col v-if="$route.path !='/'">
+            <v-img
+              max-height="100"
+              max-width="220"
+              :src="mimeTypeUrl()"
+              class="mt-10 ml-12"
+            />
+          </v-col>
+          <v-col
+            v-else
+            cols="12"
+            md="3"
           >
-            <template #append>
-              <v-progress-circular
-                v-if="loading"
-                size="40"
-                color="#EFC84A"
-                class="mt-n2"
-                indeterminate
-              />
-              <v-btn
-                v-else
-                fab
-                icon
-                x-small
-                @click="findLetter"
-              >
-                <img
-                  width="40"
-                  height="40"
-                  src="magnifier.svg"
+            <v-text-field
+              v-model="search"
+              outlined
+              rounded
+              single-line
+              label="Номер письма"
+              hide-details
+              class="search"
+              @keyup.enter="findLetter"
+            >
+              <template #append>
+                <v-progress-circular
+                  v-if="loading"
+                  size="40"
+                  color="#EFC84A"
                   class="mt-n2"
-                  style="cursor:pointer"
+                  indeterminate
+                />
+                <v-btn
+                  v-else
+                  fab
+                  icon
+                  x-small
+                  @click="findLetter"
                 >
-              </v-btn>
-            </template>
-          </v-text-field>
-        </v-col>
+                  <img
+                    width="40"
+                    height="40"
+                    src="magnifier.svg"
+                    class="mt-n2"
+                    style="cursor:pointer"
+                  >
+                </v-btn>
+              </template>
+            </v-text-field>
+          </v-col>
+        </v-fade-transition>
         <v-spacer />
         <v-btn
           to="/"
@@ -77,7 +81,7 @@
           class="top_btn px-2"
           x-large
         >
-          О проекте
+          О нас
         </v-btn>
         <v-btn
           to="/letter"
@@ -99,7 +103,7 @@
           class="top_btn px-2"
           x-large
         >
-          Пожертвовать
+          Помочь сайту
         </v-btn>
       </v-app-bar>
       <section>
@@ -193,7 +197,7 @@ export default {
   },
   data () {
     return {
-      cookiePolicy: true,
+      cookiePolicy: false,
       offsetTop: 0,
       loading: false,
       search: ''
@@ -216,7 +220,7 @@ export default {
   mounted () {
     if (this.$cookies.get('cookie_assent')) {
       this.cookiePolicy = false
-    }
+    } else { this.cookiePolicy = true }
   },
   methods: {
     cookieOk () {
@@ -231,9 +235,9 @@ export default {
       this.loading = true
       setTimeout(() => {
         this.loading = false
+        this.$router.push('/letters/' + this.search)
+        this.search = ''
       }, 2000)
-      this.$router.push('/letters/' + this.search)
-      this.search = ''
     }
   }
 }

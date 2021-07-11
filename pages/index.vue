@@ -30,7 +30,7 @@
         horizontal-order="true"
         transition-duration="0.3s"
         item-selector=".letter"
-        class="mt-16"
+        class="letters-wrap mt-16"
       >
         <v-col
           v-for="(letter, index) in filteredLetters"
@@ -219,11 +219,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .small-title {
   position: absolute;
   right: 0;
   left: 0;
   bottom: 10px;
 }
+.letter { transition: opacity .6s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
+.letters-wrap:hover .letter:not(:hover) { opacity: .6; }
 </style>

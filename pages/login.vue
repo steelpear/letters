@@ -23,6 +23,7 @@
           :type="showPass ? 'text' : 'password'"
           @click:append="showPass = !showPass"
           @blur="$v.password.$touch()"
+          @keyup.enter="submit"
         />
         <v-card-actions>
           <v-btn text color="indigo" @click="clear">
