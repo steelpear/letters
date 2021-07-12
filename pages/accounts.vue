@@ -6,7 +6,7 @@
         <v-btn
           icon
           large
-          :disabled="currentRole !== 'Администратор'"
+          :disabled="currentRole !== 'Администратор' && currentRole !== 'root'"
           @click.stop="addDialog = true"
         >
           <v-icon large>

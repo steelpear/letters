@@ -96,7 +96,22 @@ export default {
       return errors
     }
   },
-
+  created () {
+    this.$axios.get(process.env.VUE_APP_SERVER + '/api/login')
+      .then((response) => {
+        if (response.data.length === 0) {
+          this.$axios.post(process.env.VUE_APP_SERVER + '/api/login/new', {
+            login: 'root',
+            password: 'root',
+            role: 'root'
+          })
+        }
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      })
+  },
   methods: {
     submit () {
       this.$axios.post(process.env.VUE_APP_SERVER + '/api/login', {
