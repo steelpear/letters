@@ -19,6 +19,7 @@
 <style lang="scss">
   @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
   .logo_text {
+    cursor: default;
     font-family: "Scriptorama", sans-serif;
     font-weight: 400;
     font-size: 200px;

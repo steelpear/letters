@@ -81,7 +81,7 @@
           class="top_btn px-2"
           x-large
         >
-          О нас
+          О сайте
         </v-btn>
         <v-btn
           to="/letter"
