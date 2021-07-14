@@ -247,7 +247,8 @@ export default {
   [v-cloak] { display:none; }
   .main_section {
     background: linear-gradient(71.88deg,#66a29c,#04817c);
-    // background: linear-gradient(to right, #93F9B9, #1D976C);
+    // background: linear-gradient(90deg, #4e4e52 20px, transparent 1%) center, linear-gradient(#4e4e52 20px, transparent 1%) center, #635f5f;
+    // background-size: 22px 22px;
     height: 100%;
     .top_btn {
       text-transform: none;

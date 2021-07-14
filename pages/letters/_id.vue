@@ -42,12 +42,13 @@
     </v-dialog>
     <v-snackbar
       v-model="copied"
-      multi-line
-      timeout="2000"
-      bottom
+      timeout="2500"
+      top
       dark
+      rounded
+      color="orange darken-1"
     >
-      Ссылка скопирована в буфер обмена
+      <span class="body-1">Ссылка скопирована в буфер обмена</span>
       <v-btn
         dark
         icon
