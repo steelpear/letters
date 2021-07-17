@@ -106,15 +106,15 @@
           Помочь сайту
         </v-btn>
       </v-app-bar>
-      <section>
+      <v-main>
         <nuxt />
-      </section>
+      </v-main>
       <v-footer
         app
         dark
+        absolute
         color="#2c3b42"
         class="py-10 px-16"
-        style="position: relative"
       >
         <v-row justify="center">
           <v-col>

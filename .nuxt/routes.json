@@ -3,56 +3,66 @@
     "name": "about",
     "path": "/about",
     "component": "D:\\\\letters\\\\pages\\\\about.vue",
-    "chunkName": "pages/about",
-    "_name": "_a045c17c"
+    "chunkName": "pages/about"
   },
   {
     "name": "accounts",
     "path": "/accounts",
     "component": "D:\\\\letters\\\\pages\\\\accounts.vue",
-    "chunkName": "pages/accounts",
-    "_name": "_8a379a7e"
+    "chunkName": "pages/accounts"
   },
   {
     "name": "admin",
     "path": "/admin",
     "component": "D:\\\\letters\\\\pages\\\\admin.vue",
-    "chunkName": "pages/admin",
-    "_name": "_01044e04"
+    "chunkName": "pages/admin"
+  },
+  {
+    "name": "donate",
+    "path": "/donate",
+    "component": "D:\\\\letters\\\\pages\\\\donate.vue",
+    "chunkName": "pages/donate"
   },
   {
     "name": "letter",
     "path": "/letter",
     "component": "D:\\\\letters\\\\pages\\\\letter.vue",
-    "chunkName": "pages/letter",
-    "_name": "_44406fc1"
+    "chunkName": "pages/letter"
   },
   {
     "name": "letters",
     "path": "/letters",
     "component": "D:\\\\letters\\\\pages\\\\letters\\\\index.vue",
-    "chunkName": "pages/letters/index",
-    "_name": "_3d7c5680"
+    "chunkName": "pages/letters/index"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "D:\\\\letters\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_cd86c5c4"
+    "chunkName": "pages/login"
+  },
+  {
+    "name": "policy",
+    "path": "/policy",
+    "component": "D:\\\\letters\\\\pages\\\\policy.vue",
+    "chunkName": "pages/policy"
+  },
+  {
+    "name": "rules",
+    "path": "/rules",
+    "component": "D:\\\\letters\\\\pages\\\\rules.vue",
+    "chunkName": "pages/rules"
   },
   {
     "name": "letters-id",
     "path": "/letters/:id",
     "component": "D:\\\\letters\\\\pages\\\\letters\\\\_id.vue",
-    "chunkName": "pages/letters/_id",
-    "_name": "_2e83f1b0"
+    "chunkName": "pages/letters/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\letters\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_60d60bf2"
+    "chunkName": "pages/index"
   }
 ]

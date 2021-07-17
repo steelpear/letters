@@ -1,5 +1,5 @@
 <template>
-  <v-container class="letter_wrap py-12 px-16 my-12 elevation-12">
+  <v-container class="letter_wrap rounded-xl py-12 px-16 my-12 elevation-12">
     <v-row align="center" justify="center">
       <v-col class="text-center">
         <img src="letter.png" width="200" class="animate__animated animate__fadeInLeft">
@@ -209,37 +209,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- <v-dialog
-      v-model="sendedDialog"
-      transition="dialog-top-transition"
-      max-width="490"
-    >
-      <v-card class="pa-4">
-        <div class="headline text-center">
-          Письмо опубликовано
-        </div>
-        <div class="text-center my-6">
-          <a :href="url + '/letters/' + id" target="_blank">{{ url + '/letters/' + id }}</a>
-        </div>
-        <v-card-actions>
-          <v-btn
-            color="indigo"
-            text
-            @click="openLetter(id)"
-          >
-            Посмотреть
-          </v-btn>
-          <v-spacer />
-          <v-btn
-            color="indigo"
-            text
-            @click="newLetter()"
-          >
-            Новое письмо
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog> -->
     <v-dialog
       v-model="sendedDialog"
       transition="dialog-top-transition"
@@ -449,7 +418,6 @@ export default {
 <style lang="scss">
   .letter_wrap {
     background: white;
-    border-radius: 22px;
     .letter_title {
       font-family: 'Neucha';
       font-size: 3rem;
