@@ -1,5 +1,5 @@
 <template>
-  <v-container class="letter_wrap rounded-xl py-12 px-16 my-12 elevation-12">
+  <v-container class="letter_wrap rounded-xl py-12 px-16 my-12 elevation-12 body-1 text--primary">
     <v-row align="start" justify="space-around">
       <v-col cols="12" xs="12" md="8">
         <p>

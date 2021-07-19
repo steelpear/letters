@@ -137,16 +137,23 @@
               </v-row>
             </p>
             <p>
+              <a href="https://qr-board.ru/" target="_blank">QR-Board - Доска объявлений</a>
+            </p>
+            <p>
+              <a href="https://qr-generator.ru/" target="_blank">QR-Generator - Генератор QR-кодов</a>
+            </p>
+            <!-- <p>
               <nuxt-link to="/policy" class="text-decoration-underline">
                 Использование файлов cookie и политика конфиденциальности
               </nuxt-link>
-            </p>
+            </p> -->
           </v-col>
         </v-row>
         <v-bottom-sheet
           v-model="cookiePolicy"
           hide-overlay
           persistent
+          inset
         >
           <v-card class="py-10">
             <v-row align="center" justify="center">
@@ -155,9 +162,7 @@
                   info
                 </v-icon>
                 <v-col :class="$vuetify.breakpoint.smAndDown ? 'text-justify' : 'text-center'" style="max-width: fit-content;">
-                  На этом сайте используются файлы <span class="font-weight-bold">cookie</span>. Продолжая использовать его, Вы соглашаетесь с этим. Чтобы узнать больше <nuxt-link to="/policy" class="indigo--text font-weight-bold">
-                    нажмите здесь
-                  </nuxt-link>.
+                  Для Вашего удобства на этом сайте используются файлы <a href="https://ru.wikipedia.org/wiki/Cookie" targen="_blank">cookie</a>.
                 </v-col>
               </v-row>
               <v-btn outlined color="indigo" class="mr-12" @click="cookieOk">

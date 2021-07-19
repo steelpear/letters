@@ -15,7 +15,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preload', type: 'font/woff2', as: 'font', href: '/fonts/scriptorama.woff2', crossorigin: 'anonymous' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Neucha:400,700' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css ' }

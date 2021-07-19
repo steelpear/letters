@@ -11,7 +11,6 @@ const _2925498a = () => interopDefault(import('..\\pages\\donate.vue' /* webpack
 const _44406fc1 = () => interopDefault(import('..\\pages\\letter.vue' /* webpackChunkName: "pages/letter" */))
 const _3d7c5680 = () => interopDefault(import('..\\pages\\letters\\index.vue' /* webpackChunkName: "pages/letters/index" */))
 const _cd86c5c4 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
-const _581d8acd = () => interopDefault(import('..\\pages\\policy.vue' /* webpackChunkName: "pages/policy" */))
 const _f7df00a8 = () => interopDefault(import('..\\pages\\rules.vue' /* webpackChunkName: "pages/rules" */))
 const _2e83f1b0 = () => interopDefault(import('..\\pages\\letters\\_id.vue' /* webpackChunkName: "pages/letters/_id" */))
 const _60d60bf2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
@@ -55,10 +54,6 @@ export const routerOptions = {
     path: "/login",
     component: _cd86c5c4,
     name: "login"
-  }, {
-    path: "/policy",
-    component: _581d8acd,
-    name: "policy"
   }, {
     path: "/rules",
     component: _f7df00a8,

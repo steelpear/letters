@@ -70,7 +70,7 @@
                   </span>
                 </v-hover>
               </p>
-              <div class="text--primary">
+              <div class="text--primary body-1">
                 {{ letter.letterText }}
               </div>
             </v-card-text>
