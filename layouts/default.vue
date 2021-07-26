@@ -33,6 +33,42 @@
               class="search"
               @keyup.enter="findLetter"
             >
+              <template #prepend-inner>
+                <v-progress-circular
+                  v-if="loading"
+                  size="40"
+                  color="#EFC84A"
+                  class="mt-n2"
+                  indeterminate
+                />
+                <v-tooltip
+                  v-if="!loading"
+                  bottom
+                  color="#F8BF0E"
+                  content-class="toolt"
+                >
+                  <template #activator="{ on, attrs }">
+                    <v-btn
+                      fab
+                      icon
+                      x-small
+                      class="mr-4"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="random"
+                    >
+                      <img
+                        width="40"
+                        height="40"
+                        src="letter.svg"
+                        class="mt-n2"
+                        style="cursor:pointer"
+                      >
+                    </v-btn>
+                  </template>
+                  <span>Случайное письмо</span>
+                </v-tooltip>
+              </template>
               <template #append>
                 <v-progress-circular
                   v-if="loading"
@@ -41,21 +77,32 @@
                   class="mt-n2"
                   indeterminate
                 />
-                <v-btn
-                  v-else
-                  fab
-                  icon
-                  x-small
-                  @click="findLetter"
+                <v-tooltip
+                  v-if="!loading"
+                  bottom
+                  color="#F8BF0E"
+                  content-class="toolt"
                 >
-                  <img
-                    width="40"
-                    height="40"
-                    src="magnifier.svg"
-                    class="mt-n2"
-                    style="cursor:pointer"
-                  >
-                </v-btn>
+                  <template #activator="{ on, attrs }">
+                    <v-btn
+                      fab
+                      icon
+                      x-small
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="findLetter"
+                    >
+                      <img
+                        width="40"
+                        height="40"
+                        src="magnifier.svg"
+                        class="mt-n2"
+                        style="cursor:pointer"
+                      >
+                    </v-btn>
+                  </template>
+                  <span>Поиск письма</span>
+                </v-tooltip>
               </template>
             </v-text-field>
           </v-col>
@@ -118,7 +165,7 @@
       >
         <v-row justify="center">
           <v-col>
-            <p>&copy; {{ new Date().getFullYear() }} письма.ру</p>
+            <p>&copy; {{ new Date().getFullYear() }} ваши-письма.рф</p>
             <p>
               <nuxt-link to="/rules" class="text-decoration-underline">
                 Правила размещения писем
@@ -243,6 +290,17 @@ export default {
         this.$router.push('/letters/' + this.search)
         this.search = ''
       }, 2000)
+    },
+    random () {
+      this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/random', {
+      })
+        .then((response) => {
+          this.$router.push('/letters/' + response.data.letterId)
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        })
     }
   }
 }
@@ -268,5 +326,9 @@ export default {
       .v-label { font-family:'Neucha'; font-size: 22px;}
       .v-input__slot { font-family: 'Roboto'; font-size: 24px; }
     }
+  }
+  .toolt {
+    font-size: 20px;
+    font-family: 'Neucha';
   }
 </style>
