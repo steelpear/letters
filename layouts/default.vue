@@ -35,14 +35,14 @@
             >
               <template #prepend-inner>
                 <v-progress-circular
-                  v-if="loading"
+                  v-if="loadingRandom"
                   size="40"
                   color="#EFC84A"
-                  class="mt-n2"
+                  class="mt-n2 mr-4"
                   indeterminate
                 />
                 <v-tooltip
-                  v-if="!loading"
+                  v-if="!loadingRandom"
                   bottom
                   color="#F8BF0E"
                   content-class="toolt"
@@ -252,6 +252,7 @@ export default {
       cookiePolicy: false,
       offsetTop: 0,
       loading: false,
+      loadingRandom: false,
       search: ''
     }
   },
@@ -284,12 +285,14 @@ export default {
     },
     mimeTypeUrl () { return require('~/static/letters-white.svg') },
     findLetter () {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.$router.push('/letters/' + this.search)
-        this.search = ''
-      }, 2000)
+      if (this.search !== '') {
+        this.loading = true
+        setTimeout(() => {
+          this.loading = false
+          this.$router.push('/letters/' + this.search)
+          this.search = ''
+        }, 2000)
+      }
     },
     random () {
       this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/random', {
