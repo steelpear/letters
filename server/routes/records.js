@@ -36,7 +36,7 @@ router.get('/findpublic/:letterid', async (req, res) => {
   res.json(await Record.findOne({ letterId: req.params.letterid, letterPublic: true }))
 })
 
-router.get('/random', async (req, res) => {
+router.post('/random', async (req, res) => {
   res.json(await Record.aggregate([
     { $sample: { size: 1 } },
     { $match: { letterPublic: true } }

@@ -295,15 +295,19 @@ export default {
       }
     },
     random () {
-      this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/random', {
-      })
-        .then((response) => {
-          this.$router.push('/letters/' + response.data.letterId)
+      this.loadingRandom = true
+      setTimeout(() => {
+        this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/random', {
         })
-        .catch((error) => {
+          .then((response) => {
+            this.loadingRandom = false
+            this.$router.push('/letters/' + response.data[0].letterId)
+          })
+          .catch((error) => {
           // eslint-disable-next-line no-console
-          console.log(error)
-        })
+            console.log(error)
+          })
+      }, 2000)
     }
   }
 }
