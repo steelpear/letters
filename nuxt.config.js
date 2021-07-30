@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - letters',
+    titleTemplate: '%s - Напишите письмо, благодарность, поздравление.',
     title: 'Письма',
     htmlAttrs: {
       lang: 'ru'

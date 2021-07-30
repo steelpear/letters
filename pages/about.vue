@@ -4,6 +4,15 @@
       Об этом сайте
     </div>
     about
+    <div class="text-right">
+      С уважением, автор идеи — steelpear
+      <v-avatar>
+        <img
+          src="steelpear.jpg"
+          alt="steelpear"
+        >
+      </v-avatar>
+    </div>
   </v-container>
 </template>
 
