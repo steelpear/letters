@@ -54,22 +54,22 @@
         rounded
       >
         <v-btn
-          color="#2C3B42"
+          color="orange"
           dark
           x-large
           nuxt
           to="/letter"
         >
-          Написать письмо
+          <span class="pl-3">Написать письмо</span>
         </v-btn>
         <v-btn
-          color="#2C3B42"
+          color="orange"
           dark
           x-large
           nuxt
           to="/"
         >
-          На главную
+          <span class="pr-3">На главную</span>
         </v-btn>
       </v-btn-toggle>
     </div>
