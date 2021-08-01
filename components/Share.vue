@@ -22,12 +22,12 @@ export default {
   data () {
     return {
       sharing: {
-        url: 'https://news.vuejs.org/issues/180',
-        title: 'Say hi to Vite! A brand new, extremely fast development setup for Vue.',
-        description: 'This week, I’d like to introduce you to "Vite", which means "Fast". It’s a brand new development setup created by Evan You.',
-        quote: 'The hot reload is so fast it\'s near instant. - Evan You',
-        hashtags: 'vuejs,vite,javascript',
-        twitterUser: 'youyuxi'
+        url: process.env.VUE_APP_URL,
+        title: 'Напишите письмо, благодарность, поздравление.',
+        description: 'Сайт "Ваши письма" — это место, где стеснительный юноша может признаться в любви, коллектив поздравить своего коллегу с юбилеем, где можно поблагодарить врача, делавшего тебе операцию, где можно попросить о помощи, найти друга и, в конце-концов, просто поделиться своими мыслями со всеми.',
+        quote: 'Пишите письма - это ничего не стоит и это бесценно.',
+        hashtags: 'письмо, поздравление, благодарность',
+        twitterUser: ''
       },
       networks: [
         { network: 'twitter', icon: 'mdi-twitter' },
