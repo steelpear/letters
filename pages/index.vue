@@ -78,21 +78,22 @@
               </div>
             </v-card-text>
             <v-card-actions class="pb-4">
-              <share />
+              <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" />
               <v-btn
                 v-clipboard:copy="url + '/letters/' + letter.letterId"
                 v-clipboard:success="onCopy"
                 icon
+                class="d-none d-sm-flex"
               >
                 <v-icon>mdi-content-copy</v-icon>
               </v-btn>
               <v-btn
                 icon
+                class="d-none d-sm-flex"
                 @click="qrCode(letter)"
               >
                 <v-icon>mdi-qrcode-scan</v-icon>
               </v-btn>
-              <v-spacer />
             </v-card-actions>
           </v-card>
         </v-col>

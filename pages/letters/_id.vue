@@ -1,7 +1,12 @@
 <template>
   <div>
-    <v-container class="py-16">
-      <v-card elevation="4" max-width="800" class="mx-auto pa-8 animate__animated animate__fadeIn">
+    <v-container>
+      <v-card
+        elevation="4"
+        max-width="800"
+        class="mx-auto animate__animated animate__fadeIn"
+        :class="$vuetify.breakpoint.xsOnly ? 'py-8' : 'pa-8'"
+      >
         <v-card-text>
           <v-row align="center" justify="center" class="pa-4">
             <v-avatar v-if="letter.letterAvatar" left class="mr-4">
@@ -21,16 +26,18 @@
           </div>
         </v-card-text>
         <v-card-actions>
-          <share />
+          <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" />
           <v-btn
             v-clipboard:copy="url + $route.path"
             v-clipboard:success="onCopy"
             icon
+            class="d-none d-sm-flex"
           >
             <v-icon>mdi-content-copy</v-icon>
           </v-btn>
           <v-btn
             icon
+            class="d-none d-sm-flex"
             @click="openQr = true"
           >
             <v-icon>mdi-qrcode-scan</v-icon>
