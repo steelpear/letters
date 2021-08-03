@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Banner />
+    <Banner v-if="!$vuetify.breakpoint.mobile" />
     <v-container>
       <v-row align="center" justify="center">
         <v-chip
-          class="mx-2"
+          class="mx-2 my-1"
           link
           :outlined="selectedCategory != 'Все'"
           color="white"
@@ -15,7 +15,7 @@
         <v-chip
           v-for="(category, index) in categories"
           :key="index"
-          class="mx-2"
+          class="mx-2 my-1"
           link
           :outlined="selectedCategory != category"
           color="white"
@@ -38,7 +38,7 @@
           v-masonry-tile
           class="letter"
           xs="12"
-          sm="6"
+          sm="12"
           md="6"
           lg="6"
         >

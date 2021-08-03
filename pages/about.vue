@@ -1,5 +1,8 @@
 <template>
-  <v-container class="letter_wrap rounded-xl py-12 px-16 my-12 elevation-12 body-1 text--primary">
+  <v-container
+    class="letter_wrap rounded-xl py-12 my-12 elevation-12 body-1 text--primary"
+    :class="$vuetify.breakpoint.smAndDown ? 'px-5' : 'px-16'"
+  >
     <div class="text-h4 text-center mb-5">
       Об этом сайте
     </div>

@@ -1,158 +1,171 @@
 <template>
   <v-app>
-    <section v-cloak class="main_section">
-      <v-app-bar
-        app
-        dark
-        elevation="0"
-        color="transparent"
-        style="position: relative"
-        class="px-16 py-3"
-      >
-        <v-fade-transition>
-          <v-col v-if="$route.path !='/'">
-            <v-img
-              max-height="100"
-              max-width="220"
-              :src="mimeTypeUrl()"
-              class="mt-10 ml-12"
-            />
-          </v-col>
-          <v-col
-            v-else
-            cols="12"
-            md="3"
+    <v-container v-cloak fluid class="main_section">
+      <v-row align="center" :class="$vuetify.breakpoint.smAndDown ? 'pa-2' : 'px-16 py-3'" class="mb-1" no-gutters>
+        <v-col
+          v-if="$route.path !='/'"
+          cols="12"
+          md="3"
+          sm="4"
+          xs="12"
+        >
+          <v-img
+            max-height="100"
+            max-width="220"
+            :src="mimeTypeUrl()"
+            class="mx-auto"
+          />
+        </v-col>
+        <v-col
+          v-else
+          cols="12"
+          md="3"
+          sm="4"
+          xs="12"
+          :order="$vuetify.breakpoint.xsOnly ? 'last' : 'first'"
+        >
+          <v-text-field
+            v-model="search"
+            dark
+            outlined
+            rounded
+            single-line
+            label="Номер письма"
+            hide-details
+            class="search"
+            @keyup.enter="findLetter"
           >
-            <v-text-field
-              v-model="search"
-              outlined
-              rounded
-              single-line
-              label="Номер письма"
-              hide-details
-              class="search"
-              @keyup.enter="findLetter"
-            >
-              <template #prepend-inner>
-                <v-progress-circular
-                  v-if="loadingRandom"
-                  size="40"
-                  color="#EFC84A"
-                  class="mt-n2 mr-4"
-                  indeterminate
-                />
-                <v-tooltip
-                  v-if="!loadingRandom"
-                  bottom
-                  color="#F8BF0E"
-                  content-class="toolt"
-                >
-                  <template #activator="{ on, attrs }">
-                    <v-btn
-                      fab
-                      icon
-                      x-small
-                      class="mr-4"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="random"
+            <template #prepend-inner>
+              <v-progress-circular
+                v-if="loadingRandom"
+                size="40"
+                color="#EFC84A"
+                class="mt-n2 mr-4"
+                indeterminate
+              />
+              <v-tooltip
+                v-if="!loadingRandom"
+                bottom
+                color="#F8BF0E"
+                content-class="toolt"
+              >
+                <template #activator="{ on, attrs }">
+                  <v-btn
+                    fab
+                    icon
+                    x-small
+                    class="mr-4"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="random"
+                  >
+                    <img
+                      width="40"
+                      height="40"
+                      src="letter.svg"
+                      class="mt-n2"
+                      style="cursor:pointer"
                     >
-                      <img
-                        width="40"
-                        height="40"
-                        src="letter.svg"
-                        class="mt-n2"
-                        style="cursor:pointer"
-                      >
-                    </v-btn>
-                  </template>
-                  <span>Случайное письмо</span>
-                </v-tooltip>
-              </template>
-              <template #append>
-                <v-progress-circular
-                  v-if="loading"
-                  size="40"
-                  color="#EFC84A"
-                  class="mt-n2"
-                  indeterminate
-                />
-                <v-tooltip
-                  v-if="!loading"
-                  bottom
-                  color="#F8BF0E"
-                  content-class="toolt"
-                >
-                  <template #activator="{ on, attrs }">
-                    <v-btn
-                      fab
-                      icon
-                      x-small
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="findLetter"
+                  </v-btn>
+                </template>
+                <span>Случайное письмо</span>
+              </v-tooltip>
+            </template>
+            <template #append>
+              <v-progress-circular
+                v-if="loading"
+                size="40"
+                color="#EFC84A"
+                class="mt-n2"
+                indeterminate
+              />
+              <v-tooltip
+                v-if="!loading"
+                bottom
+                color="#F8BF0E"
+                content-class="toolt"
+              >
+                <template #activator="{ on, attrs }">
+                  <v-btn
+                    fab
+                    icon
+                    x-small
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="findLetter"
+                  >
+                    <img
+                      width="40"
+                      height="40"
+                      src="magnifier.svg"
+                      class="mt-n2"
+                      style="cursor:pointer"
                     >
-                      <img
-                        width="40"
-                        height="40"
-                        src="magnifier.svg"
-                        class="mt-n2"
-                        style="cursor:pointer"
-                      >
-                    </v-btn>
-                  </template>
-                  <span>Поиск письма</span>
-                </v-tooltip>
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-fade-transition>
-        <v-spacer />
-        <v-btn
-          to="/"
-          text
-          nuxt
-          :ripple="false"
-          plain
-          class="top_btn px-2"
-          x-large
+                  </v-btn>
+                </template>
+                <span>Поиск письма</span>
+              </v-tooltip>
+            </template>
+          </v-text-field>
+        </v-col>
+        <v-col
+          cols="12"
+          md="9"
+          sm="8"
+          xs="12"
+          class="mb-2"
+          :class="$vuetify.breakpoint.xsOnly ? 'text-center' : 'text-right'"
         >
-          Главная страница
-        </v-btn>
-        <v-btn
-          to="/about"
-          text
-          nuxt
-          :ripple="false"
-          plain
-          class="top_btn px-2"
-          x-large
-        >
-          О сайте
-        </v-btn>
-        <v-btn
-          to="/letter"
-          text
-          nuxt
-          :ripple="false"
-          plain
-          class="top_btn px-2"
-          x-large
-        >
-          Написать письмо
-        </v-btn>
-        <v-btn
-          to="/donate"
-          text
-          nuxt
-          :ripple="false"
-          plain
-          class="top_btn px-2"
-          x-large
-        >
-          Помочь сайту
-        </v-btn>
-      </v-app-bar>
+          <v-btn
+            to="/"
+            dark
+            text
+            nuxt
+            :ripple="false"
+            plain
+            class="top_btn px-1"
+            x-large
+          >
+            Главная<span v-if="!$vuetify.breakpoint.mobile">&nbsp;страница</span>
+          </v-btn>
+          <v-btn
+            to="/about"
+            dark
+            text
+            nuxt
+            :ripple="false"
+            plain
+            class="top_btn px-1"
+            x-large
+          >
+            О сайте
+          </v-btn>
+          <v-btn
+            to="/letter"
+            dark
+            text
+            nuxt
+            :ripple="false"
+            plain
+            class="top_btn px-1"
+            x-large
+          >
+            Написать<span v-if="!$vuetify.breakpoint.mobile">&nbsp;письмо</span>
+          </v-btn>
+          <v-btn
+            to="/donate"
+            dark
+            text
+            nuxt
+            :ripple="false"
+            plain
+            class="top_btn px-1"
+            x-large
+          >
+            Помочь<span v-if="!$vuetify.breakpoint.mobile">&nbsp;сайту</span>
+          </v-btn>
+        </v-col>
+      </v-row>
       <v-main>
         <nuxt />
       </v-main>
@@ -161,10 +174,10 @@
         dark
         absolute
         color="#2c3b42"
-        class="py-10 px-16"
+        :class="$vuetify.breakpoint.mobile ? 'pa-8' : 'py-10 px-16'"
       >
-        <v-row justify="center">
-          <v-col>
+        <v-row justify="center" :class="{'text-center':$vuetify.breakpoint.xsOnly}">
+          <v-col cols="12" md="5" sm="5" xs="12">
             <p>&copy; {{ new Date().getFullYear() }} ваши-письма.рф</p>
             <p>
               <nuxt-link to="/rules" class="text-decoration-underline">
@@ -174,10 +187,10 @@
             <p>Вопросы и предложения: <a href="mailto:steelpear@gmail.com">steelpear@gmail.com</a></p>
           </v-col>
           <v-spacer />
-          <v-col>
+          <v-col cols="12" md="5" sm="5" xs="12">
             <p class="mb-7 ml-3">
-              <v-row align="center">
-                <div class="mr-2">
+              <v-row align="center" :justify="$vuetify.breakpoint.xsOnly ? 'center' : 'start'">
+                <div v-if="!$vuetify.breakpoint.mobile" class="mr-2">
                   Поделиться
                 </div>
                 <share />
@@ -189,11 +202,6 @@
             <p>
               <a href="https://qr-generator.ru/" target="_blank">QR-Generator - Генератор QR-кодов</a>
             </p>
-            <!-- <p>
-              <nuxt-link to="/policy" class="text-decoration-underline">
-                Использование файлов cookie и политика конфиденциальности
-              </nuxt-link>
-            </p> -->
           </v-col>
         </v-row>
         <v-bottom-sheet
@@ -221,6 +229,7 @@
       </v-footer>
       <v-fab-transition>
         <v-btn
+          v-if="!$vuetify.breakpoint.mobile"
           v-show="offsetTop > 25"
           color="white"
           fab
@@ -237,7 +246,7 @@
           </v-icon>
         </v-btn>
       </v-fab-transition>
-    </section>
+    </v-container>
   </v-app>
 </template>
 
@@ -313,17 +322,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
   [v-cloak] { display:none; }
   .main_section {
     background: linear-gradient(71.88deg,#66a29c,#04817c);
     // background: linear-gradient(90deg, #4e4e52 20px, transparent 1%) center, linear-gradient(#4e4e52 20px, transparent 1%) center, #635f5f;
     // background-size: 22px 22px;
-    height: 100%;
+    // height: 100%;
     .top_btn {
       text-transform: none;
       font-size: 23px;
       font-family: 'Neucha';
+      height: 35px !important;
     }
     a {
       color: inherit;
