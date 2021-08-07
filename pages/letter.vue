@@ -1,19 +1,22 @@
 <template>
-  <v-container class="letter_wrap rounded-xl py-12 px-16 my-12 elevation-12">
+  <v-container
+    class="letter_wrap rounded-xl py-12 my-12 elevation-12 body-1 text--primary"
+    :class="$vuetify.breakpoint.smAndDown ? 'px-5' : 'px-16'"
+  >
     <v-row align="center" justify="center">
-      <v-col class="text-center">
+      <v-col v-if="$vuetify.breakpoint.mdAndUp" class="text-center">
         <img src="letter.png" width="200" class="animate__animated animate__fadeInLeft">
       </v-col>
       <v-col class="text-center letter_title animate__animated animate__fadeIn">
         Напишите письмо
       </v-col>
-      <v-col class="text-center">
+      <v-col v-if="$vuetify.breakpoint.mdAndUp" class="text-center">
         <img src="letter.png" width="200" class="animate__animated animate__fadeInRight" style="transform: scale(-1, 1);">
       </v-col>
     </v-row>
     <form>
-      <v-row>
-        <v-col>
+      <v-row align="start">
+        <v-col cols="12" md="6" sm="12" xs="12">
           <div class="title font-weight-regular mb-1">
             Ваше имя
           </div>
@@ -49,9 +52,9 @@
             </template>
           </v-text-field>
         </v-col>
-        <v-col>
+        <v-col cols="12" md="6" sm="12" xs="12">
           <div class="title font-weight-regular mb-1">
-            Ваш E-mail <span class="caption">(Для уведомления о публикации. По желанию)</span>
+            Ваш E-mail <span class="caption">(по желанию)</span>
           </div>
           <v-text-field
             v-model="email"
@@ -64,7 +67,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
+        <v-col cols="12" md="6" sm="12" xs="12">
           <div class="title font-weight-regular mb-1">
             Заголовок письма
           </div>
@@ -79,7 +82,7 @@
             @blur="$v.title.$touch()"
           />
         </v-col>
-        <v-col>
+        <v-col cols="12" md="6" sm="12" xs="12">
           <div class="title font-weight-regular mb-1">
             Рубрика
           </div>
@@ -115,25 +118,26 @@
           ref="recaptcha"
           sitekey="6LeM07oUAAAAAE7iDSN3QcTC-knepiStbZ7-GN90"
           :load-recaptcha-script="true"
-          size="normal"
+          :class="{'recap' : $vuetify.breakpoint.smAndDown}"
           @verify="recaptchaOk"
         />
       </v-col>
-      <v-col class="text-center">
+      <v-col v-if="$vuetify.breakpoint.lgAndUp" class="text-center">
         <img
           :class="sendImgClass"
           src="letter.png"
           width="200"
         >
       </v-col>
-      <v-col class="text-right">
+      <v-col :class="{'text-right' : $vuetify.breakpoint.smAndUp}">
         <client-only>
           <v-btn
+            block
             :dark="!$v.$invalid"
             color="teal darken-3"
             elevation="2"
             x-large
-            class="send_letter_btn pa-8"
+            class="send_letter_btn py-9 px-6"
             :disabled="$v.$invalid"
             @click="sendLetter"
           >
@@ -141,7 +145,7 @@
             <v-icon
               right
               large
-              class="ml-6"
+              class="ml-6 d-none d-sm-flex"
             >
               mdi-email-multiple-outline
             </v-icon>
@@ -415,12 +419,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
   .letter_wrap {
     background: white;
     .letter_title {
       font-family: 'Neucha';
       font-size: 3rem;
+      line-height: 3rem;
     }
     .send_letter_btn {
       font-family: 'Neucha';
@@ -428,5 +433,9 @@ export default {
     }
     .send_img_50 { transition: opacity .2s; opacity: .5; }
     .send_img_100 { transition: opacity .2s; opacity: 1; }
+    .recap div {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 </style>

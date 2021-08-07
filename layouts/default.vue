@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container v-cloak fluid class="main_section">
-      <v-row align="center" :class="$vuetify.breakpoint.smAndDown ? 'pa-2' : 'px-16 py-3'" class="mb-1" no-gutters>
+      <v-row align="center" :class="$vuetify.breakpoint.smAndDown ? 'pa-2' : 'px-16 py-3'" class="mb-3" no-gutters>
         <v-col
           v-if="$route.path !='/'"
           cols="12"

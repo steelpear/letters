@@ -78,6 +78,7 @@
     </div>
     <v-row v-else align="center" :justify="$vuetify.breakpoint.xsOnly ? 'center' : 'space-between'" class="mt-5">
       <v-btn
+        color="indigo"
         text
         nuxt
         to="/letter"
@@ -85,6 +86,7 @@
         Написать письмо
       </v-btn>
       <v-btn
+        color="indigo"
         text
         nuxt
         to="/"
