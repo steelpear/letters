@@ -5,7 +5,7 @@
         elevation="4"
         max-width="800"
         class="mx-auto animate__animated animate__fadeIn"
-        :class="$vuetify.breakpoint.xsOnly ? 'py-8' : 'pa-8'"
+        :class="$vuetify.breakpoint.xsOnly ? 'py-8' : 'pa-8 mb-8'"
       >
         <v-card-text>
           <v-row align="center" justify="center" class="pa-4">
