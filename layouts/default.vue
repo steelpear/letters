@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container v-cloak fluid class="main_section">
-      <v-row align="center" :class="$vuetify.breakpoint.smAndDown ? 'pa-2' : 'px-16 py-3'" class="mb-3" no-gutters>
+      <v-row align="center" :class="$vuetify.breakpoint.smAndDown ? 'pa-2' : 'px-16 py-3 h-124'" class="mb-3" no-gutters>
         <v-col
           v-if="$route.path !='/'"
           cols="12"
@@ -13,7 +13,7 @@
             max-height="100"
             max-width="220"
             :src="mimeTypeUrl()"
-            class="mx-auto"
+            :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}"
           />
         </v-col>
         <v-col
@@ -126,7 +126,7 @@
             class="top_btn px-1"
             x-large
           >
-            Главная<span v-if="!$vuetify.breakpoint.mobile">&nbsp;страница</span>
+            Главная
           </v-btn>
           <v-btn
             to="/about"
@@ -150,7 +150,7 @@
             class="top_btn px-1"
             x-large
           >
-            Написать<span v-if="!$vuetify.breakpoint.mobile">&nbsp;письмо</span>
+            Написать
           </v-btn>
           <v-btn
             to="/donate"
@@ -160,9 +160,10 @@
             :ripple="false"
             plain
             class="top_btn px-1"
+            :class="{'mr-4' : $vuetify.breakpoint.mdAndUp}"
             x-large
           >
-            Помочь<span v-if="!$vuetify.breakpoint.mobile">&nbsp;сайту</span>
+            Помочь
           </v-btn>
         </v-col>
       </v-row>
@@ -343,6 +344,7 @@ export default {
       .v-label { font-family:'Neucha'; font-size: 22px;}
       .v-input__slot { font-family: 'Roboto'; font-size: 24px; }
     }
+    .h-124 {height: 124px;}
   }
   .toolt {
     font-size: 20px;
