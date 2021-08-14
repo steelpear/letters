@@ -3,6 +3,9 @@
     class="letter_wrap rounded-xl py-12 my-12 elevation-12 body-1 text--primary"
     :class="$vuetify.breakpoint.smAndDown ? 'px-5' : 'px-16'"
   >
+    <div class="text-h4 text-center mb-5">
+      Помощь сайту
+    </div>
     <v-row align="start" justify="space-around">
       <v-col cols="12" xs="12" md="8">
         <p>

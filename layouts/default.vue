@@ -178,7 +178,7 @@
         :class="$vuetify.breakpoint.mobile ? 'pa-8' : 'py-10 px-16'"
       >
         <v-row justify="center" :class="{'text-center':$vuetify.breakpoint.xsOnly}">
-          <v-col cols="12" md="5" sm="5" xs="12">
+          <v-col cols="12" md="4" sm="5" xs="12" :class="{'pl-8' : $vuetify.breakpoint.mdAndUp}">
             <p>&copy; {{ new Date().getFullYear() }} ваши-письма.рф</p>
             <p>
               <nuxt-link to="/rules" class="text-decoration-underline">
@@ -188,7 +188,7 @@
             <p>Вопросы и предложения: <a href="mailto:steelpear@gmail.com">steelpear@gmail.com</a></p>
           </v-col>
           <v-spacer />
-          <v-col cols="12" md="5" sm="5" xs="12">
+          <v-col cols="12" md="4" sm="5" xs="12" :class="{'pl-12' : $vuetify.breakpoint.mdAndUp}">
             <p class="mb-7 ml-3">
               <v-row align="center" :justify="$vuetify.breakpoint.xsOnly ? 'center' : 'start'">
                 <div v-if="!$vuetify.breakpoint.mobile" class="mr-2">
