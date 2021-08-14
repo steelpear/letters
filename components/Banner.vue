@@ -17,7 +17,6 @@
 </template>
 
 <style lang="scss">
-  @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
   .logo_text {
     cursor: default;
     font-family: "Scriptorama", sans-serif;
@@ -25,18 +24,13 @@
     font-size: 200px;
     height: 300px;
     line-height: 100px;
-    /* Clip Background Image */
     background: url('/logo-bkg.jpg') repeat-y;
-    -webkit-background-clip: text;
     background-clip: text;
-    /* Animate Background Image */
     -webkit-text-fill-color: transparent;
     animation: aitf 8s linear forwards;
-    /* Activate hardware acceleration for smoother animations */
     transform: translate3d(0,0,0);
     backface-visibility: hidden;
   }
-/* Animate Background Image */
 @keyframes aitf {
   0% { background-position: 30% 50%; }
   100% { background-position: 100% 50%; }
