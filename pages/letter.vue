@@ -7,8 +7,15 @@
       <v-col v-if="$vuetify.breakpoint.mdAndUp" class="text-center">
         <img src="letter.png" width="200" class="animate__animated animate__fadeInLeft">
       </v-col>
-      <v-col class="text-center letter_title animate__animated animate__fadeIn">
-        Напишите письмо
+      <v-col class="text-center animate__animated animate__fadeIn">
+        <div class="letter_title">
+          Напишите письмо
+        </div>
+        <div class="caption mt-n1 text--secondary">
+          <nuxt-link to="/rules">
+            * Правила размещения писем
+          </nuxt-link>
+        </div>
       </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" class="text-center">
         <img src="letter.png" width="200" class="animate__animated animate__fadeInRight" style="transform: scale(-1, 1);">

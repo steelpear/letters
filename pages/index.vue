@@ -51,7 +51,7 @@
                 <v-avatar v-else color="teal" left class="mr-4">
                   <span class="white--text title">{{ letter.letterName[0] }}</span>
                 </v-avatar>
-                <span>{{ letter.letterName }}</span>
+                <span class="text--primary body-1">{{ letter.letterName }}</span>
                 <v-spacer />
                 <v-chip
                   color="teal"
