@@ -234,6 +234,13 @@
         </div>
         <div class="text-center my-3">
           <a :href="url + '/letters/' + id" target="_blank">{{ url + '/letters/' + id }}</a>
+          <v-btn
+            v-clipboard:copy="url + '/letters/' + id"
+            v-clipboard:success="onCopy"
+            icon
+          >
+            <v-icon>mdi-content-copy</v-icon>
+          </v-btn>
         </div>
         <div class="subtitle-2 text--secondary">
           <v-icon class="mr-2">
@@ -266,6 +273,24 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      v-model="copied"
+      timeout="2500"
+      top
+      dark
+      rounded
+      color="orange darken-1"
+    >
+      <span class="body-1">Ссылка скопирована в буфер обмена</span>
+      <v-btn
+        dark
+        icon
+        @click="copied = false"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      </v-spacer>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -295,6 +320,7 @@ export default {
       recaptcha: false,
       errorDialog: false,
       sended: false,
+      copied: false,
       avatarDialog: false,
       sendedDialog: false,
       id: ''
@@ -421,6 +447,9 @@ export default {
           // eslint-disable-next-line no-console
           console.log(error)
         })
+    },
+    onCopy () {
+      this.copied = true
     }
   }
 }

@@ -98,12 +98,13 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row align="center" justify="center" class="py-10">
+      <v-row align="center" justify="center" class="py-10 px-3">
         <v-btn
           v-if="visibleMoreBtn"
           dark
           x-large
           outlined
+          :block="$vuetify.breakpoint.xsOnly"
           @click="fetchData"
         >
           <v-icon large class="mr-2">
@@ -162,7 +163,7 @@ export default {
       selectedCategory: 'Все',
       countedLetters: 0,
       routeProps: {
-        limit: 20,
+        limit: 10,
         skip: 0
       }
     }

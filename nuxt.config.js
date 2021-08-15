@@ -53,9 +53,13 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'vue-social-sharing/nuxt',
-    'nuxt-clipboard',
+    ['nuxt-clipboard', { autoSetContainer: true }],
     ['cookie-universal-nuxt', { parseJSON: false }]
   ],
+
+  clipboard: {
+    autoSetContainer: true
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
