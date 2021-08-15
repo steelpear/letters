@@ -4,8 +4,8 @@
       v-for="network in networks"
       :key="network.network"
       :network="network.network"
-      :url="sharing.url"
-      :title="sharing.title"
+      :url="url"
+      :title="title"
       :description="sharing.description"
       :quote="sharing.quote"
       :hashtags="sharing.hashtags"
@@ -19,11 +19,17 @@
 
 <script>
 export default {
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    url: String,
+    // eslint-disable-next-line vue/require-default-prop
+    title: String
+  },
   data () {
     return {
       sharing: {
-        url: process.env.VUE_APP_URL,
-        title: 'Напишите письмо, благодарность, поздравление.',
+        // url: process.env.VUE_APP_URL,
+        // title: 'Напишите письмо, благодарность, поздравление.',
         description: 'Сайт "Ваши письма" — это место, где можно признаться в любви, поздравить своего коллегу с юбилеем, поблагодарить врача, делавшего тебе операцию, попросить о помощи, найти друга и просто поделиться своими мыслями со всеми.',
         quote: 'Пишите письма - это ничего не стоит и это бесценно.',
         hashtags: 'письмо, поздравление, благодарность',

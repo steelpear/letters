@@ -194,7 +194,7 @@
                 <div v-if="!$vuetify.breakpoint.mobile" class="mr-2">
                   Поделиться
                 </div>
-                <share />
+                <share :url="url" title="Напишите письмо, благодарность, поздравление." />
               </v-row>
             </p>
             <p>
@@ -265,6 +265,9 @@ export default {
       loadingRandom: false,
       search: ''
     }
+  },
+  computed: {
+    url () { return process.env.VUE_APP_URL }
   },
   beforeMount () {
     window.addEventListener('scroll', (e) => {

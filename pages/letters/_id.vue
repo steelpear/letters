@@ -26,7 +26,7 @@
           </div>
         </v-card-text>
         <v-card-actions>
-          <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" />
+          <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" :url="url + '/letters/' + letter.letterId" :title="letter.letterTitle" />
           <v-btn
             v-clipboard:copy="url + $route.path"
             v-clipboard:success="onCopy"
