@@ -3,60 +3,70 @@
     "name": "about",
     "path": "/about",
     "component": "D:\\\\letters\\\\pages\\\\about.vue",
-    "chunkName": "pages/about"
+    "chunkName": "pages/about",
+    "_name": "_a045c17c"
   },
   {
     "name": "accounts",
     "path": "/accounts",
     "component": "D:\\\\letters\\\\pages\\\\accounts.vue",
-    "chunkName": "pages/accounts"
+    "chunkName": "pages/accounts",
+    "_name": "_8a379a7e"
   },
   {
     "name": "admin",
     "path": "/admin",
     "component": "D:\\\\letters\\\\pages\\\\admin.vue",
-    "chunkName": "pages/admin"
+    "chunkName": "pages/admin",
+    "_name": "_01044e04"
   },
   {
     "name": "donate",
     "path": "/donate",
     "component": "D:\\\\letters\\\\pages\\\\donate.vue",
-    "chunkName": "pages/donate"
+    "chunkName": "pages/donate",
+    "_name": "_2925498a"
   },
   {
     "name": "letter",
     "path": "/letter",
     "component": "D:\\\\letters\\\\pages\\\\letter.vue",
-    "chunkName": "pages/letter"
+    "chunkName": "pages/letter",
+    "_name": "_44406fc1"
   },
   {
     "name": "letters",
     "path": "/letters",
     "component": "D:\\\\letters\\\\pages\\\\letters\\\\index.vue",
-    "chunkName": "pages/letters/index"
+    "chunkName": "pages/letters/index",
+    "_name": "_3d7c5680"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "D:\\\\letters\\\\pages\\\\login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_cd86c5c4"
   },
   {
     "name": "rules",
     "path": "/rules",
     "component": "D:\\\\letters\\\\pages\\\\rules.vue",
-    "chunkName": "pages/rules"
+    "chunkName": "pages/rules",
+    "_name": "_f7df00a8"
   },
   {
     "name": "letters-id",
     "path": "/letters/:id",
     "component": "D:\\\\letters\\\\pages\\\\letters\\\\_id.vue",
-    "chunkName": "pages/letters/_id"
+    "chunkName": "pages/letters/_id",
+    "_name": "_2e83f1b0"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\letters\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_60d60bf2"
   }
 ]
