@@ -37,7 +37,7 @@
           </v-btn>
           <v-btn
             icon
-            class="d-none d-sm-flex"
+            class="d-none d-sm-flex ml-0"
             @click="openQr = true"
           >
             <v-icon>mdi-qrcode-scan</v-icon>

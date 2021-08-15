@@ -89,7 +89,7 @@
               </v-btn>
               <v-btn
                 icon
-                class="d-none d-sm-flex"
+                class="d-none d-sm-flex ml-0"
                 @click="qrCode(letter)"
               >
                 <v-icon>mdi-qrcode-scan</v-icon>
