@@ -179,7 +179,7 @@
       >
         <v-row justify="center" :class="{'text-center':$vuetify.breakpoint.xsOnly}">
           <v-col cols="12" md="4" sm="5" xs="12" :class="{'pl-8' : $vuetify.breakpoint.mdAndUp}">
-            <p>&copy; {{ new Date().getFullYear() }} ваши-письма.рф</p>
+            <p>&copy; {{ new Date().getFullYear() }} all-letters.ru</p>
             <p>
               <nuxt-link to="/rules" class="text-decoration-underline">
                 Правила размещения писем

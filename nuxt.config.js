@@ -32,8 +32,8 @@ export default {
   ],
 
   env: {
-    VUE_APP_URL: process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://letters.ru',
-    VUE_APP_SERVER: process.env.NODE_ENV !== 'production' ? 'http://localhost:3001' : 'https://letters.ru:3001'
+    VUE_APP_URL: process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://all-letters.ru',
+    VUE_APP_SERVER: process.env.NODE_ENV !== 'production' ? 'http://localhost:3001' : 'https://all-letters.ru:3001'
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
