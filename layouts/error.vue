@@ -5,17 +5,17 @@
         <img :src="mimeTypeUrl()" width="250">
       </v-col>
       <v-col cols="12" md="12" xs="12" class="text-center">
-        <h1 class="text-xs-center display-4 font-weight-bold">
+        <h1 class="text-xs-center text-h1 font-weight-bold">
           404
         </h1>
       </v-col>
       <v-col cols="12" md="12" xs="12" class="text-center">
-        <h1 class="text-xs-center display-2">
+        <h1 class="text-xs-center text-h4">
           Страница не найдена
         </h1>
       </v-col>
       <v-col cols="12" md="12" xs="12" class="text-center">
-        <p class="text-xs-center title mt-4">
+        <p class="text-xs-center text-h5 mt-4">
           Сожалеем, но такой страницы не существует.
         </p>
       </v-col>

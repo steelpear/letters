@@ -11,13 +11,14 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Письма' }
+      { hid: 'description', name: 'description', content: 'На этом сайте можно написать письмо, поздравить коллег или родных, поблагодарить врача или учителя, попросить о помощи, оставить отзыв, заявить о поиске давнего друга, просто поделиться мыслями и многое другое. Это сайт о людях и для людей. Пишите письма - это ничего не стоит и это бесценно.' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons' },
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Neucha:400,700' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css ' }
     ]

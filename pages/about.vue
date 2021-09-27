@@ -1,13 +1,14 @@
 <template>
   <v-container
-    class="letter_wrap rounded-xl py-12 my-12 elevation-12 body-1 text--primary"
+    class="letter_wrap rounded-xl py-12 my-12 elevation-12 text-h6 font-weight-light text--primary"
     :class="$vuetify.breakpoint.smAndDown ? 'px-5' : 'px-16'"
+    style="line-height: 1.8rem;"
   >
     <div class="text-h4 text-center mb-5">
       Об этом сайте
     </div>
     <p>
-      Казалось бы — какие ещё письма в наше время? Для деловой переписки есть электронная почта,
+      <span class="first-letter">К</span>азалось бы — какие ещё письма в наше время? Для деловой переписки есть электронная почта,
       для стремительного общения — социальные сети, для пространных мыслей, захватывающих путешествий и вдумчивой аналитики — блоги.
     </p>
     <p>
@@ -36,6 +37,6 @@
 <style lang="scss" scoped>
   .sign {
     font-family: 'Neucha';
-    font-size: 22px;
+    font-size: 26px;
   }
 </style>

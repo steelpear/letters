@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <ShareNetwork
       v-for="network in networks"
       :key="network.network"
@@ -14,7 +14,7 @@
     >
       <v-icon>{{ network.icon }}</v-icon>
     </ShareNetwork>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -34,13 +34,13 @@ export default {
         twitterUser: ''
       },
       networks: [
-        { network: 'twitter', icon: 'mdi-twitter' },
-        { network: 'telegram', icon: 'mdi-telegram' },
-        { network: 'facebook', icon: 'mdi-facebook' },
-        { network: 'vk', icon: 'mdi-vk' },
-        { network: 'odnoklassniki', icon: 'mdi-odnoklassniki' },
-        { network: 'whatsapp', icon: 'mdi-whatsapp' },
-        { network: 'pinterest', icon: 'mdi-pinterest' }
+        { network: 'twitter', icon: 'fab fah fa-lg fa-twitter' },
+        { network: 'telegram', icon: 'fab fah fa-lg fa-telegram-plane' },
+        { network: 'facebook', icon: 'fab fa-facebook-f' },
+        { network: 'vk', icon: 'fab fah fa-lg fa-vk' },
+        { network: 'odnoklassniki', icon: 'fab fah fa-lg fa-odnoklassniki' },
+        { network: 'whatsapp', icon: 'fab fah fa-lg fa-whatsapp' },
+        { network: 'pinterest', icon: 'fab fah fa-lg fa-pinterest' }
       ]
     }
   }

@@ -49,9 +49,9 @@
                   <v-img :src="letter.letterAvatar" />
                 </v-avatar>
                 <v-avatar v-else color="teal" left class="mr-4">
-                  <span class="white--text title">{{ letter.letterName[0] }}</span>
+                  <span class="white--text text-h5">{{ letter.letterName[0] }}</span>
                 </v-avatar>
-                <span class="text--primary body-1">{{ letter.letterName }}</span>
+                <span class="text--primary text-subtitle-1">{{ letter.letterName }}</span>
                 <v-spacer />
                 <v-chip
                   color="teal"
@@ -60,7 +60,7 @@
                   {{ letter.letterCategory }}
                 </v-chip>
               </v-row>
-              <p class="headline font-weight-bold blue-grey--text text--darken-3 mt-2">
+              <p class="text-h5 font-weight-medium blue-grey--text text--darken-3 mt-2">
                 <v-hover
                   v-slot="{ hover }"
                 >
@@ -73,7 +73,7 @@
                   </span>
                 </v-hover>
               </p>
-              <div class="text--primary body-1">
+              <div class="text--primary text-body-1">
                 {{ letter.letterText }}
               </div>
             </v-card-text>
@@ -121,7 +121,7 @@
         rounded
         color="orange darken-1"
       >
-        <span class="body-1">Ссылка скопирована в буфер обмена</span>
+        <span class="text-body-1">Ссылка скопирована в буфер обмена</span>
         <v-btn
           dark
           icon
@@ -134,7 +134,7 @@
     </v-container>
     <v-dialog v-model="openQr" max-width="310">
       <v-card tile class="text-center">
-        <div class="small-title caption text--primary">
+        <div class="small-title text-caption text--primary">
           {{ currentTitle }}
         </div>
         <qr-code :value="url + '/letters/' + currentId" />

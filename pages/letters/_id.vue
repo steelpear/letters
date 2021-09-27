@@ -13,15 +13,15 @@
               <v-img :src="letter.letterAvatar" />
             </v-avatar>
             <v-avatar v-else color="teal" left class="mr-4">
-              <span class="white--text title">{{ letter.letterName[0] }}</span>
+              <span class="white--text text-h5">{{ letter.letterName[0] }}</span>
             </v-avatar>
-            <span class="text--primary body-1">{{ letter.letterName }}</span>
+            <span class="text--primary text-body-1">{{ letter.letterName }}</span>
             <v-spacer />
           </v-row>
-          <p class="headline font-weight-bold blue-grey--text text--darken-3 mt-2 mb-4 text-center">
+          <p class="text-h5 font-weight-medium blue-grey--text text--darken-3 mt-2 mb-4 text-center">
             {{ letter.letterTitle }}
           </p>
-          <div class="text--primary body-1">
+          <div class="text--primary text-body-1">
             {{ letter.letterText }}
           </div>
         </v-card-text>
@@ -58,7 +58,7 @@
       rounded
       color="orange darken-1"
     >
-      <span class="body-1">Ссылка скопирована в буфер обмена</span>
+      <span class="text-body-1">Ссылка скопирована в буфер обмена</span>
       <v-btn
         dark
         icon

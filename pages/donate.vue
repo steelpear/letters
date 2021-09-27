@@ -1,7 +1,8 @@
 <template>
   <v-container
-    class="letter_wrap rounded-xl py-12 my-12 elevation-12 body-1 text--primary"
+    class="letter_wrap rounded-xl py-12 my-12 elevation-12 text-h6 font-weight-light text--primary"
     :class="$vuetify.breakpoint.smAndDown ? 'px-5' : 'px-16'"
+    style="line-height: 1.8rem;"
   >
     <div class="text-h4 text-center mb-5">
       Помощь сайту
@@ -9,7 +10,7 @@
     <v-row align="start" justify="space-around">
       <v-col cols="12" xs="12" md="8">
         <p>
-          Уважаемые посетители!
+          <span class="first-letter">У</span>важаемые посетители!
           Мы затевали этот проект не для того, чтобы заработать на нём деньги.
           Монетизация человеческой искренности, чувств и эмоций - не наша специализация.
         </p>

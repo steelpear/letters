@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="letter_wrap rounded-xl py-12 my-12 elevation-12 body-1 text--primary"
+    class="letter_wrap rounded-xl py-12 my-12 elevation-12 text-body-1 text--primary"
     :class="$vuetify.breakpoint.smAndDown ? 'px-5' : 'px-16'"
   >
     <v-row align="center" justify="center">
@@ -11,7 +11,7 @@
         <div class="letter_title">
           Напишите письмо
         </div>
-        <div class="caption mt-n1 text--secondary">
+        <div class="text-caption mt-n1 text--secondary">
           <nuxt-link to="/rules">
             * Правила размещения писем
           </nuxt-link>
@@ -24,7 +24,7 @@
     <form>
       <v-row align="start">
         <v-col cols="12" md="6" sm="12" xs="12">
-          <div class="title font-weight-regular mb-1">
+          <div class="text-h6 font-weight-regular mb-1">
             Ваше имя
           </div>
           <v-text-field
@@ -60,7 +60,7 @@
           </v-text-field>
         </v-col>
         <v-col cols="12" md="6" sm="12" xs="12">
-          <div class="title font-weight-regular mb-1">
+          <div class="text-h6 font-weight-regular mb-1">
             Ваш E-mail <span class="caption">(по желанию)</span>
           </div>
           <v-text-field
@@ -75,7 +75,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" md="6" sm="12" xs="12">
-          <div class="title font-weight-regular mb-1">
+          <div class="text-h6 font-weight-regular mb-1">
             Заголовок письма
           </div>
           <v-text-field
@@ -90,7 +90,7 @@
           />
         </v-col>
         <v-col cols="12" md="6" sm="12" xs="12">
-          <div class="title font-weight-regular mb-1">
+          <div class="text-h6 font-weight-regular mb-1">
             Рубрика
           </div>
           <v-select
@@ -103,7 +103,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <div class="title font-weight-regular mb-1">
+          <div class="text-h6 font-weight-regular mb-1">
             Текст письма
           </div>
           <v-textarea
@@ -168,7 +168,7 @@
     >
       <v-card class="pt-4">
         <v-img src="robot.jpg" />
-        <p class="text-center title pt-2 mb-0">
+        <p class="text-center text-h6 pt-2 mb-0">
           Пройдите проверку на робота, пожалуйста.
         </p>
 
@@ -229,7 +229,7 @@
         <div class="text-h3 text-center mb-2 red--text" style="font-family: 'Neucha' !important;">
           Спасибо за письмо!
         </div>
-        <div class="title text-center text--secondary">
+        <div class="text-h6 text-center text--secondary">
           После проверки нашим модератором оно будет опубликовано по адресу:
         </div>
         <div class="text-center my-3">
@@ -242,14 +242,14 @@
             <v-icon>mdi-content-copy</v-icon>
           </v-btn>
         </div>
-        <div class="subtitle-2 text--secondary">
+        <div class="text-subtitle-2 text--secondary">
           <v-icon class="mr-2">
             mdi-email-multiple-outline
           </v-icon>
           Уведомление о публикации придёт на электронную почту, если Вы её указывали.
         </div>
         <nuxt-link to="/rules">
-          <div class="caption text-center">
+          <div class="text-caption text-center">
             Правила размещения писем
           </div>
         </nuxt-link>
@@ -281,7 +281,7 @@
       rounded
       color="orange darken-1"
     >
-      <span class="body-1">Ссылка скопирована в буфер обмена</span>
+      <span class="text-body-1">Ссылка скопирована в буфер обмена</span>
       <v-btn
         dark
         icon
