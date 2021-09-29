@@ -106,7 +106,7 @@
           <div class="text-h6 font-weight-regular mb-1">
             Текст письма
           </div>
-          <v-textarea
+          <!-- <v-textarea
             v-model="text"
             :error-messages="textErrors"
             :counter="1000"
@@ -115,7 +115,14 @@
             label="Текст"
             @input="$v.text.$touch()"
             @blur="$v.text.$touch()"
-          />
+          /> -->
+          <client-only>
+            <tiptap-vuetify
+              v-model="text"
+              :extensions="extensions"
+              placeholder="Напишите что-нибудь..."
+            />
+          </client-only>
         </v-col>
       </v-row>
     </form>
@@ -298,14 +305,34 @@
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 import VueRecaptcha from 'vue-recaptcha'
+import {
+  TiptapVuetify,
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Code,
+  Image,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History
+} from 'tiptap-vuetify'
 export default {
   components: {
-    VueRecaptcha
+    VueRecaptcha,
+    TiptapVuetify
   },
   mixins: [validationMixin],
   validations: {
     name: { required, maxLength: maxLength(40) },
-    text: { required, maxLength: maxLength(1000) },
+    text: { required },
     email: { email },
     title: { required, maxLength: maxLength(40) }
   },
@@ -323,7 +350,32 @@ export default {
       copied: false,
       avatarDialog: false,
       sendedDialog: false,
-      id: ''
+      id: '',
+      extensions: [
+        History,
+        Blockquote,
+        Link,
+        Underline,
+        Strike,
+        Italic,
+        ListItem,
+        BulletList,
+        OrderedList,
+        [
+          Heading,
+          {
+            options: {
+              levels: [1, 2, 3]
+            }
+          }
+        ],
+        Bold,
+        Code,
+        Image,
+        HorizontalRule,
+        Paragraph,
+        HardBreak
+      ]
     }
   },
   computed: {
@@ -336,13 +388,12 @@ export default {
       !this.$v.name.required && errors.push('Обязательное поле')
       return errors
     },
-    textErrors () {
-      const errors = []
-      if (!this.$v.text.$dirty) { return errors }
-      !this.$v.text.maxLength && errors.push('Не более 1000 символов')
-      !this.$v.text.required && errors.push('Обязательное поле')
-      return errors
-    },
+    // textErrors () {
+    //   const errors = []
+    //   if (!this.$v.text.$dirty) { return errors }
+    //   !this.$v.text.required && errors.push('Обязательное поле')
+    //   return errors
+    // },
     emailErrors () {
       const errors = []
       if (!this.$v.email.$dirty) { return errors }

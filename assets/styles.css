@@ -30,3 +30,7 @@
   font-family: serif;
   color: #004D40;
 }
+.letter-text img {
+  max-width: -webkit-fill-available;
+  margin: auto;
+}

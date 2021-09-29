@@ -333,7 +333,7 @@ export default {
     height: 100%;
     .top_btn {
       text-transform: none;
-      font-size: 23px;
+      font-size: 23px !important;
       font-family: 'Neucha';
       height: 35px !important;
     }
@@ -348,7 +348,7 @@ export default {
     .h-124 {height: 124px;}
   }
   .toolt {
-    font-size: 20px;
+    font-size: 20px !important;
     font-family: 'Neucha';
   }
 </style>

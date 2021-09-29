@@ -6,7 +6,7 @@ import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
-import '..\\assets\\main.css'
+import '..\\assets\\styles.css'
 
 import '..\\node_modules\\vuetify\\dist\\vuetify.css'
 

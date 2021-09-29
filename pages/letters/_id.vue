@@ -21,9 +21,8 @@
           <p class="text-h5 font-weight-medium blue-grey--text text--darken-3 mt-2 mb-4 text-center">
             {{ letter.letterTitle }}
           </p>
-          <div class="text--primary text-body-1">
-            {{ letter.letterText }}
-          </div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div class="text--primary text-body-1 letter-text" v-html="letter.letterText" />
         </v-card-text>
         <v-card-actions>
           <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" :url="url + '/letters/' + letter.letterId" :title="letter.letterTitle" />

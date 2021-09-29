@@ -73,9 +73,8 @@
                   </span>
                 </v-hover>
               </p>
-              <div class="text--primary text-body-1">
-                {{ letter.letterText }}
-              </div>
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <div class="text--primary text-body-1 letter-text" v-html="letter.letterText" />
             </v-card-text>
             <v-card-actions class="pb-4">
               <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" :url="url + '/letters/' + letter.letterId" :title="letter.letterTitle" />
@@ -235,4 +234,5 @@ export default {
 }
 .letter { transition: opacity .6s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
 .letters-wrap:hover .letter:not(:hover) { opacity: .8; }
+.letter-text p img { display: block; }
 </style>
