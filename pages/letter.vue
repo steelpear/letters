@@ -103,19 +103,18 @@
       </v-row>
       <v-row>
         <v-col>
-          <div class="text-h6 font-weight-regular mb-1">
-            Текст письма
-          </div>
-          <!-- <v-textarea
-            v-model="text"
-            :error-messages="textErrors"
-            :counter="1000"
-            outlined
-            clearable
-            label="Текст"
-            @input="$v.text.$touch()"
-            @blur="$v.text.$touch()"
-          /> -->
+          <v-row align="center" class="ma-1">
+            <div class="text-h6 font-weight-regular">
+              Текст письма
+            </div>
+            <v-spacer />
+            <v-btn
+              icon
+              @click="clearText"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-row>
           <client-only>
             <tiptap-vuetify
               v-model="text"
@@ -123,6 +122,9 @@
               placeholder="Напишите что-нибудь..."
             />
           </client-only>
+          <div class="text-caption mt-1 font-weight-regular">
+            * Не прикрепляйте слишком большие изображения - письмо с таким изображением автоматически не будет опубликовано. Оптимальный размер изображения - до 100 kb.
+          </div>
         </v-col>
       </v-row>
     </form>
@@ -296,7 +298,23 @@
       >
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      </v-spacer>
+    </v-snackbar>
+    <v-snackbar
+      v-model="tooLarge"
+      timeout="5000"
+      top
+      dark
+      rounded
+      color="red darken-1"
+    >
+      <span class="text-body-1">Ошибка! Возможно прикреплённое изображение слишком большое.</span>
+      <v-btn
+        dark
+        icon
+        @click="tooLarge = false"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
     </v-snackbar>
   </v-container>
 </template>
@@ -351,6 +369,7 @@ export default {
       avatarDialog: false,
       sendedDialog: false,
       id: '',
+      tooLarge: false,
       extensions: [
         History,
         Blockquote,
@@ -423,6 +442,10 @@ export default {
     recaptchaOk () {
       this.recaptcha = true
     },
+    clearText () {
+      this.text = ''
+      this.tooLarge = false
+    },
     openLetter (id) {
       this.$router.push('/letters/' + id)
     },
@@ -468,6 +491,7 @@ export default {
               .catch((error) => {
                 // eslint-disable-next-line no-console
                 console.log(error)
+                this.tooLarge = true
               })
           })
           .catch((error) => {

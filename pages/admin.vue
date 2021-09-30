@@ -97,7 +97,7 @@
             {{ letter.letterTitle }}
           </div>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <div class="text--primary body-1" v-html="letter.letterText" />
+          <div class="text--primary body-1 letter-text" v-html="letter.letterText" />
         </v-card-text>
         <v-card-actions>
           <v-btn
