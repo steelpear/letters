@@ -116,11 +116,6 @@
             </v-btn>
           </v-row>
           <client-only>
-            <!-- <tiptap-vuetify
-              v-model="text"
-              :extensions="extensions"
-              placeholder="Напишите что-нибудь..."
-            /> -->
             <VueEditor
               v-model="text"
               placeholder="Напишите что-нибудь..."
@@ -328,29 +323,9 @@
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 import VueRecaptcha from 'vue-recaptcha'
-// import {
-//   TiptapVuetify,
-//   Heading,
-//   Bold,
-//   Italic,
-//   Strike,
-//   Underline,
-//   Code,
-//   Image,
-//   Paragraph,
-//   BulletList,
-//   OrderedList,
-//   ListItem,
-//   Link,
-//   Blockquote,
-//   HardBreak,
-//   HorizontalRule,
-//   History
-// } from 'tiptap-vuetify'
 export default {
   components: {
     VueRecaptcha
-    // TiptapVuetify
   },
   mixins: [validationMixin],
   validations: {
@@ -383,31 +358,6 @@ export default {
         [{ color: [] }, { background: [] }],
         ['link', 'image']
       ]
-      // extensions: [
-      //   History,
-      //   Blockquote,
-      //   Link,
-      //   Underline,
-      //   Strike,
-      //   Italic,
-      //   ListItem,
-      //   BulletList,
-      //   OrderedList,
-      //   [
-      //     Heading,
-      //     {
-      //       options: {
-      //         levels: [1, 2, 3]
-      //       }
-      //     }
-      //   ],
-      //   Bold,
-      //   Code,
-      //   Image,
-      //   HorizontalRule,
-      //   Paragraph,
-      //   HardBreak
-      // ]
     }
   },
   computed: {

@@ -27,8 +27,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuelidate.js', ssr: true },
-    { src: '~/plugins/vue-masonry.js', ssr: false },
-    { src: '~/plugins/TiptapVuetify', ssr: false }
+    { src: '~/plugins/vue-masonry.js', ssr: false }
   ],
 
   env: {
@@ -70,6 +69,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['vuetify/lib', 'tiptap-vuetify']
+    //
   }
 }
