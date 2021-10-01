@@ -49,7 +49,8 @@ export default {
     '@nuxtjs/axios',
     'vue-social-sharing/nuxt',
     ['nuxt-clipboard', { autoSetContainer: true }],
-    ['cookie-universal-nuxt', { parseJSON: false }]
+    ['cookie-universal-nuxt', { parseJSON: false }],
+    ['vue2-editor/nuxt']
   ],
 
   clipboard: {

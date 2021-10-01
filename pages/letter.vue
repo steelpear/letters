@@ -116,14 +116,19 @@
             </v-btn>
           </v-row>
           <client-only>
-            <tiptap-vuetify
+            <!-- <tiptap-vuetify
               v-model="text"
               :extensions="extensions"
               placeholder="Напишите что-нибудь..."
+            /> -->
+            <VueEditor
+              v-model="text"
+              placeholder="Напишите что-нибудь..."
+              :editor-toolbar="customToolbar"
             />
           </client-only>
           <div class="text-caption mt-1 font-weight-regular">
-            * Не прикрепляйте слишком большие изображения - письмо с таким изображением автоматически не будет опубликовано. Оптимальный размер изображения - до 100 kb.
+            * Не прикрепляйте слишком большие изображения - письмо с таким изображением автоматически не будет опубликовано. Оптимальный размер изображения - до 70 kb.
           </div>
         </v-col>
       </v-row>
@@ -323,29 +328,29 @@
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 import VueRecaptcha from 'vue-recaptcha'
-import {
-  TiptapVuetify,
-  Heading,
-  Bold,
-  Italic,
-  Strike,
-  Underline,
-  Code,
-  Image,
-  Paragraph,
-  BulletList,
-  OrderedList,
-  ListItem,
-  Link,
-  Blockquote,
-  HardBreak,
-  HorizontalRule,
-  History
-} from 'tiptap-vuetify'
+// import {
+//   TiptapVuetify,
+//   Heading,
+//   Bold,
+//   Italic,
+//   Strike,
+//   Underline,
+//   Code,
+//   Image,
+//   Paragraph,
+//   BulletList,
+//   OrderedList,
+//   ListItem,
+//   Link,
+//   Blockquote,
+//   HardBreak,
+//   HorizontalRule,
+//   History
+// } from 'tiptap-vuetify'
 export default {
   components: {
-    VueRecaptcha,
-    TiptapVuetify
+    VueRecaptcha
+    // TiptapVuetify
   },
   mixins: [validationMixin],
   validations: {
@@ -370,31 +375,39 @@ export default {
       sendedDialog: false,
       id: '',
       tooLarge: false,
-      extensions: [
-        History,
-        Blockquote,
-        Link,
-        Underline,
-        Strike,
-        Italic,
-        ListItem,
-        BulletList,
-        OrderedList,
-        [
-          Heading,
-          {
-            options: {
-              levels: [1, 2, 3]
-            }
-          }
-        ],
-        Bold,
-        Code,
-        Image,
-        HorizontalRule,
-        Paragraph,
-        HardBreak
+      customToolbar: [
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ align: [] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        ['link', 'image']
       ]
+      // extensions: [
+      //   History,
+      //   Blockquote,
+      //   Link,
+      //   Underline,
+      //   Strike,
+      //   Italic,
+      //   ListItem,
+      //   BulletList,
+      //   OrderedList,
+      //   [
+      //     Heading,
+      //     {
+      //       options: {
+      //         levels: [1, 2, 3]
+      //       }
+      //     }
+      //   ],
+      //   Bold,
+      //   Code,
+      //   Image,
+      //   HorizontalRule,
+      //   Paragraph,
+      //   HardBreak
+      // ]
     }
   },
   computed: {

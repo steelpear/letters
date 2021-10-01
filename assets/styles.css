@@ -34,3 +34,7 @@
   max-width: -webkit-fill-available;
   margin: auto;
 }
+.ql-align-center { text-align: center; }
+.ql-align-justify { text-align: justify; }
+.ql-align-right { text-align: right; }
+.quillWrapper .ql-snow.ql-toolbar { background: #F0F0F0; }
