@@ -9,6 +9,8 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'yandex-verification', content: '5c8fdce64423a114' },
+      { name: 'google-site-verification', content: '35dYYpGQEhuQ949PZE4zFGB8WAMrQjTjcEz1JP2L49g' },
       { hid: 'description', name: 'description', content: 'На этом сайте можно написать письмо, поздравить коллег или родных, поблагодарить врача или учителя, попросить о помощи, оставить отзыв, заявить о поиске давнего друга, просто поделиться мыслями и многое другое. Это сайт о людях и для людей. Пишите письма - это ничего не стоит и это бесценно.' }
     ],
     link: [
@@ -49,8 +51,18 @@ export default {
     'vue-social-sharing/nuxt',
     ['nuxt-clipboard', { autoSetContainer: true }],
     ['cookie-universal-nuxt', { parseJSON: false }],
-    ['vue2-editor/nuxt']
+    'vue2-editor/nuxt',
+    '@nuxtjs/yandex-metrika'
   ],
+
+  yandexMetrika: {
+    id: '85812509',
+    webvisor: true,
+    clickmap: true,
+    useCDN: false,
+    trackLinks: true,
+    accurateTrackBounce: true
+  },
 
   clipboard: {
     autoSetContainer: true
