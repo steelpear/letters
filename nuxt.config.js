@@ -51,17 +51,23 @@ export default {
     'vue-social-sharing/nuxt',
     ['nuxt-clipboard', { autoSetContainer: true }],
     ['cookie-universal-nuxt', { parseJSON: false }],
+    ['@nuxtjs/robots', {
+      UserAgent: '*',
+      Host: 'https://all-letters.ru',
+      Disallow: '/admin'
+    }],
+    '@nuxtjs/sitemap',
     'vue2-editor/nuxt',
     '@nuxtjs/yandex-metrika'
   ],
 
   yandexMetrika: {
     id: '85812509',
-    webvisor: true,
-    clickmap: true,
+    webvisor: false,
+    clickmap: false,
     useCDN: false,
-    trackLinks: true,
-    accurateTrackBounce: true
+    trackLinks: false,
+    accurateTrackBounce: false
   },
 
   clipboard: {
