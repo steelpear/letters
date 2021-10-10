@@ -2,7 +2,7 @@
   <div>
     <v-row align="center" justify="center" class="px-16">
       <v-col>
-        <img src="message.png" width="250">
+        <img src="message.png" width="220">
       </v-col>
       <v-col>
         <div class="logo_text px-3">
@@ -10,7 +10,7 @@
         </div>
       </v-col>
       <v-col>
-        <img src="message.png" width="250" style="transform: scale(-1, 1);">
+        <img src="message.png" width="220" style="transform: scale(-1, 1);">
       </v-col>
     </v-row>
   </div>
@@ -21,7 +21,7 @@
     cursor: default;
     font-family: "Scriptorama", sans-serif;
     font-weight: 400;
-    font-size: 200px;
+    font-size: 190px;
     height: 300px;
     line-height: 100px;
     background: url('/logo-bkg.jpg') repeat-y;

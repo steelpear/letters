@@ -2,7 +2,9 @@
   <v-row align="center" justify="center" class="white--text">
     <v-col cols="12" md="12" xs="12" class="text-center">
       <v-col cols="12" md="12" xs="12" class="text-center">
-        <img :src="mimeTypeUrl()" width="250">
+        <div class="logo_small text-center">
+          Письма
+        </div>
       </v-col>
       <v-col cols="12" md="12" xs="12" class="text-center">
         <h1 class="text-xs-center text-h1 font-weight-bold">
@@ -48,9 +50,6 @@ export default {
     return {
       title
     }
-  },
-  methods: {
-    mimeTypeUrl () { return require('~/static/letters-white.svg') }
   }
 }
 </script>

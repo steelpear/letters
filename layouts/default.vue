@@ -10,12 +10,9 @@
             sm="4"
             xs="12"
           >
-            <v-img
-              max-height="100"
-              max-width="220"
-              :src="mimeTypeUrl()"
-              :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}"
-            />
+            <div class="logo_small pa-3" :class="$vuetify.breakpoint.xsOnly ? 'text-center mb-4' : 'mt-n10'">
+              Письма
+            </div>
           </v-col>
         </v-fade-transition>
         <v-fade-transition leave-absolute>
@@ -294,7 +291,6 @@ export default {
         maxAge: 60 * 60 * 24 * 7
       })
     },
-    mimeTypeUrl () { return require('~/static/letters-white.svg') },
     findLetter () {
       if (this.search !== '') {
         this.loading = true

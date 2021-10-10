@@ -4,7 +4,7 @@
   font-style: normal;
   font-display: auto;
   unicode-range: U+000-5FF;
-  src: local("Scriptorama"), url("/fonts/scriptorama.woff2") format("woff2");
+  src: local("Scriptorama"), url("~/assets/fonts/scriptorama.woff2") format("woff2");
 }
 
 .page-enter-active,
@@ -38,3 +38,10 @@
 .ql-align-justify { text-align: justify; }
 .ql-align-right { text-align: right; }
 .quillWrapper .ql-snow.ql-toolbar { background: #F0F0F0; }
+
+.logo_small {
+  cursor: default;
+  font-family: "Scriptorama", sans-serif;
+  color: white;
+  font-size: 60px;
+}
