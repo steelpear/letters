@@ -63,11 +63,11 @@ export default {
 
   yandexMetrika: {
     id: '85812509',
-    webvisor: false,
-    clickmap: false,
-    useCDN: false,
-    trackLinks: false,
-    accurateTrackBounce: false
+    webvisor: true
+    // clickmap: false,
+    // useCDN: false,
+    // trackLinks: false,
+    // accurateTrackBounce: false
   },
 
   clipboard: {

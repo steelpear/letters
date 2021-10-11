@@ -15,7 +15,6 @@ import { createStore } from './store.js'
 
 import nuxt_plugin_plugin_90042af0 from 'nuxt_plugin_plugin_90042af0' // Source: .\\components\\plugin.js (mode: 'all')
 import nuxt_plugin_plugin_4da5c328 from 'nuxt_plugin_plugin_4da5c328' // Source: .\\vuetify\\plugin.js (mode: 'all')
-import nuxt_plugin_yandexmetrikaplugin9bb4cf10_45fd3756 from 'nuxt_plugin_yandexmetrikaplugin9bb4cf10_45fd3756' // Source: .\\yandex-metrika.plugin.9bb4cf10.js (mode: 'client')
 import nuxt_plugin_vue2editor_2f8cb9b3 from 'nuxt_plugin_vue2editor_2f8cb9b3' // Source: .\\vue2-editor.js (mode: 'client')
 import nuxt_plugin_cookieuniversalnuxt_e510575a from 'nuxt_plugin_cookieuniversalnuxt_e510575a' // Source: .\\cookie-universal-nuxt.js (mode: 'all')
 import nuxt_plugin_clipboard_5396feea from 'nuxt_plugin_clipboard_5396feea' // Source: .\\clipboard.js (mode: 'client')
@@ -90,7 +89,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"titleTemplate":"%s - Напишите письмо, благодарность, поздравление.","title":"Письма","htmlAttrs":{"lang":"ru"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"yandex-verification","content":"5c8fdce64423a114"},{"name":"google-site-verification","content":"35dYYpGQEhuQ949PZE4zFGB8WAMrQjTjcEz1JP2L49g"},{"hid":"description","name":"description","content":"На этом сайте можно написать письмо, поздравить коллег или родных, поблагодарить врача или учителя, попросить о помощи, оставить отзыв, заявить о поиске давнего друга, просто поделиться мыслями и многое другое. Это сайт о людях и для людей. Пишите письма - это ничего не стоит и это бесценно."}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"preconnect","href":"https:\u002F\u002Ffonts.googleapis.com"},{"rel":"preconnect","href":"https:\u002F\u002Ffonts.gstatic.com","crossorigin":true},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Material+Icons"},{"rel":"stylesheet","href":"https:\u002F\u002Fuse.fontawesome.com\u002Freleases\u002Fv5.0.13\u002Fcss\u002Fall.css"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Neucha:400,700"},{"rel":"stylesheet","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fanimate.css\u002F4.1.1\u002Fanimate.min.css "},{"href":"https:\u002F\u002Fmc.yandex.ru\u002Fmetrika\u002Ftag.js","rel":"preload","as":"script"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
+    head: {"titleTemplate":"%s - Напишите письмо, благодарность, поздравление.","title":"Письма","htmlAttrs":{"lang":"ru"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"yandex-verification","content":"5c8fdce64423a114"},{"name":"google-site-verification","content":"35dYYpGQEhuQ949PZE4zFGB8WAMrQjTjcEz1JP2L49g"},{"hid":"description","name":"description","content":"На этом сайте можно написать письмо, поздравить коллег или родных, поблагодарить врача или учителя, попросить о помощи, оставить отзыв, заявить о поиске давнего друга, просто поделиться мыслями и многое другое. Это сайт о людях и для людей. Пишите письма - это ничего не стоит и это бесценно."}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"preconnect","href":"https:\u002F\u002Ffonts.googleapis.com"},{"rel":"preconnect","href":"https:\u002F\u002Ffonts.gstatic.com","crossorigin":true},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Material+Icons"},{"rel":"stylesheet","href":"https:\u002F\u002Fuse.fontawesome.com\u002Freleases\u002Fv5.0.13\u002Fcss\u002Fall.css"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Neucha:400,700"},{"rel":"stylesheet","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fanimate.css\u002F4.1.1\u002Fanimate.min.css "},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
 
     store,
     router,
@@ -225,10 +224,6 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_plugin_4da5c328 === 'function') {
     await nuxt_plugin_plugin_4da5c328(app.context, inject)
-  }
-
-  if (process.client && typeof nuxt_plugin_yandexmetrikaplugin9bb4cf10_45fd3756 === 'function') {
-    await nuxt_plugin_yandexmetrikaplugin9bb4cf10_45fd3756(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vue2editor_2f8cb9b3 === 'function') {
