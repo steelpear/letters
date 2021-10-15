@@ -167,6 +167,11 @@ export default {
       }
     }
   },
+  head () {
+    return {
+      title: 'Главная'
+    }
+  },
   computed: {
     categories () { return this.$store.getters.get_categories },
     filteredLetters () {

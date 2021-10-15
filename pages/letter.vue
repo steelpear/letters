@@ -360,6 +360,11 @@ export default {
       ]
     }
   },
+  head () {
+    return {
+      title: 'Напишите письмо'
+    }
+  },
   computed: {
     categories () { return this.$store.getters.get_categories },
     url () { return process.env.VUE_APP_URL },

@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <img src="letters-white.svg" class="d-block mx-auto" width="250">
+    <div class="logo_small abs text-center">
+      Письма
+    </div>
     <v-card class="pa-6 mx-auto" width="400">
       <form>
         <v-text-field
@@ -81,7 +83,11 @@ export default {
     errorAlert: false,
     showPass: false
   }),
-
+  head () {
+    return {
+      title: 'Введите логин и пароль'
+    }
+  },
   computed: {
     loginErrors () {
       const errors = []
@@ -140,3 +146,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .abs {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+  }
+</style>

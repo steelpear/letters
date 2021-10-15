@@ -37,9 +37,9 @@
 
 <script>
 export default {
-  data () {
+  head () {
     return {
-      //
+      title: 'Помощь сайту'
     }
   }
 }

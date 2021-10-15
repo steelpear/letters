@@ -167,6 +167,11 @@ export default {
     this.getAccounts()
     this.currentRole = this.$store.getters.get_role
   },
+  head () {
+    return {
+      title: 'Аккаунты пользователей'
+    }
+  },
   methods: {
     getAccounts () {
       this.$axios.get(process.env.VUE_APP_SERVER + '/api/login', {

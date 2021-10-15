@@ -4,15 +4,11 @@
       app
       dark
     >
-      <nuxt-link to="/">
-        <v-img
-          max-height="100"
-          max-width="220"
-          src="letters-white.svg"
-          class="mt-5"
-        />
+      <nuxt-link to="/" target="_blank">
+        <div class="logo_small text-center mb-6" style="cursor: pointer;">
+          Письма
+        </div>
       </nuxt-link>
-      <v-divider />
       <v-list>
         <v-list-item
           nuxt
@@ -43,15 +39,22 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <!-- <v-btn
-        icon
-        large
-        @click="logOut"
-      >
-        <v-icon large>
-          mdi-exit-run
-        </v-icon>
-      </v-btn> -->
+      <div class="go-home">
+        <v-divider />
+        <v-btn
+          plain
+          large
+          nuxt
+          to="/"
+          target="_blank"
+          class="mt-3"
+        >
+          <v-icon large class="mr-3">
+            mdi-home
+          </v-icon>
+          На главную
+        </v-btn>
+      </div>
     </v-navigation-drawer>
     <v-main>
       <v-container
@@ -74,3 +77,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.nuxt-link-active {
+  text-decoration: none;
+}
+.go-home {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+</style>

@@ -95,6 +95,11 @@ export default {
       openQr: false
     }
   },
+  head () {
+    return {
+      title: this.letter.letterTitle
+    }
+  },
   computed: {
     url () { return process.env.VUE_APP_URL }
   },

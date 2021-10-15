@@ -108,11 +108,16 @@
             Отмена
           </v-btn>
           <v-spacer />
-          <v-btn
+          <!-- <v-btn
             color="red darken-1"
             text
             :disabled="currentRole == 'Гость'"
             @click="deleteLetterConfirm"
+          > -->
+          <v-btn
+            color="red darken-1"
+            text
+            disabled
           >
             Удалить
           </v-btn>
@@ -205,6 +210,11 @@ export default {
   fetch () {
     this.getLetters()
     this.currentRole = this.$store.getters.get_role
+  },
+  head () {
+    return {
+      title: 'Панель администратора'
+    }
   },
   methods: {
     getLetters () {

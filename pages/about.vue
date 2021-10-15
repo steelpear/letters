@@ -34,6 +34,16 @@
   </v-container>
 </template>
 
+<script>
+export default {
+  head () {
+    return {
+      title: 'Об этом сайте'
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   .sign {
     font-family: 'Neucha';

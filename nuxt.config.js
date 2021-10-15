@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Напишите письмо, благодарность, поздравление.',
+    titleTemplate: '%s - Письма, благодарности, поздравления',
     title: 'Письма',
     htmlAttrs: {
       lang: 'ru'
@@ -29,7 +29,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuelidate.js', ssr: true },
-    { src: '~/plugins/vue-masonry.js', ssr: false }
+    { src: '~/plugins/vue-masonry.js', ssr: false },
+    '~/plugins/axios'
   ],
 
   env: {

@@ -97,3 +97,13 @@
     </v-row>
   </v-container>
 </template>
+
+<script>
+export default {
+  head () {
+    return {
+      title: 'Правила размещения писем'
+    }
+  }
+}
+</script>
