@@ -61,7 +61,7 @@
     </client-only>
     <v-dialog
       v-model="letterDialog"
-      max-width="700"
+      max-width="750"
     >
       <v-card>
         <v-card-title>
@@ -108,16 +108,11 @@
             Отмена
           </v-btn>
           <v-spacer />
-          <!-- <v-btn
-            color="red darken-1"
+          <v-btn
+            color="grey"
             text
             :disabled="currentRole == 'Гость'"
             @click="deleteLetterConfirm"
-          > -->
-          <v-btn
-            color="red darken-1"
-            text
-            disabled
           >
             Удалить
           </v-btn>
@@ -132,12 +127,20 @@
           </v-btn>
           <v-btn
             v-else
-            color="indigo darken-1"
+            color="red darken-1"
             text
             :disabled="currentRole == 'Гость'"
             @click="publicLetter(false)"
           >
             Снять с публикации
+          </v-btn>
+          <v-btn
+            color="teal darken-1"
+            text
+            :disabled="currentRole == 'Гость'"
+            @click="editLetter"
+          >
+            Редактировать
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -171,6 +174,143 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-dialog
+      v-model="editDialog"
+      max-width="900"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+        >
+          <v-btn
+            icon
+            dark
+            @click="editDialog = false"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>Редактирование письма № {{ letter.letterId }}</v-toolbar-title>
+          <v-spacer />
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="saveEditedLetter"
+            >
+              Сохранить
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider />
+        <v-card-text>
+          <form class="mt-5">
+            <v-row align="start">
+              <v-col cols="12" md="6" sm="12" xs="12">
+                <v-text-field
+                  v-model="letter.letterName"
+                  label="От кого письмо"
+                  outlined
+                  hide-details
+                >
+                  <template #append-outer>
+                    <div v-if="!letter.letterAvatar">
+                      <v-tooltip
+                        bottom
+                      >
+                        <template #activator="{ on }">
+                          <v-icon x-large style="margin-top: -8px;cursor: pointer;" v-on="on" @click="avatarDialog = true">
+                            mdi-account-circle
+                          </v-icon>
+                        </template>
+                        Ссылка на аватар
+                      </v-tooltip>
+                    </div>
+                    <div v-else>
+                      <v-avatar style="margin-top: -14px; cursor: pointer;" @click="avatarDialog = true">
+                        <v-img :src="letter.letterAvatar" />
+                      </v-avatar>
+                    </div>
+                  </template>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" md="6" sm="12" xs="12">
+                <v-text-field
+                  v-model="letter.letterEmail"
+                  label="E-mail"
+                  outlined
+                  hide-details
+                />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" md="6" sm="12" xs="12">
+                <v-text-field
+                  v-model="letter.letterTitle"
+                  label="Заголовок"
+                  outlined
+                  hide-details
+                />
+              </v-col>
+              <v-col cols="12" md="6" sm="12" xs="12">
+                <v-select
+                  v-model="letter.letterCategory"
+                  :items="categories"
+                  label="Выберите рубрику"
+                  outlined
+                  hide-details
+                />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <client-only>
+                  <VueEditor
+                    v-model="letter.letterText"
+                    placeholder="Напишите что-нибудь..."
+                    :editor-toolbar="customToolbar"
+                  />
+                </client-only>
+              </v-col>
+            </v-row>
+          </form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="avatarDialog"
+      transition="dialog-top-transition"
+      max-width="490"
+    >
+      <v-card class="pa-4">
+        <v-text-field
+          v-model="letter.letterAvatar"
+          label="Ссылка на аватар"
+          hint="Например: https://cdn.vuetifyjs.com/images/john.png"
+          persistent-hint
+          outlined
+          clearable
+          prepend-inner-icon="mdi-link-variant"
+        />
+        <v-card-actions>
+          <v-btn
+            color="red"
+            text
+            @click="clearAvatar"
+          >
+            Отмена
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="indigo"
+            text
+            @click="avatarDialog = false"
+          >
+            Применить
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -184,7 +324,9 @@ export default {
       notice: true,
       publicSelect: false,
       letterDialog: false,
+      editDialog: false,
       deleteDialog: false,
+      avatarDialog: false,
       selected: [],
       letters: [],
       letter: {},
@@ -204,6 +346,14 @@ export default {
         { text: 'Заголовок', value: 'letterTitle' },
         { text: 'Категория', value: 'letterCategory' },
         { text: 'Дата', value: 'letterDate' }
+      ],
+      customToolbar: [
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ align: [] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        ['link', 'image']
       ]
     }
   },
@@ -216,6 +366,9 @@ export default {
       title: 'Панель администратора'
     }
   },
+  computed: {
+    categories () { return this.$store.getters.get_categories }
+  },
   methods: {
     getLetters () {
       this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip + '/' + this.publicSelect, {
@@ -223,10 +376,39 @@ export default {
         this.letters = response.data
       })
     },
+    clearAvatar () {
+      this.avatarDialog = false
+      this.avatar = ''
+    },
     rowClick (item, row) {
       this.letter = item
       row.select(true)
       this.letterDialog = true
+    },
+    editLetter () {
+      this.letterDialog = false
+      this.editDialog = true
+    },
+    saveEditedLetter () {
+      const id = this.letter._id
+      const data = {
+        letterName: this.letter.letterName,
+        letterEmail: this.letter.letterEmail,
+        letterTitle: this.letter.letterTitle,
+        letterCategory: this.letter.letterCategory,
+        letterText: this.letter.letterText,
+        letterAvatar: this.letter.letterAvatar
+      }
+      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/update', {
+        id,
+        data
+      }).then((response) => {
+        this.editDialog = false
+        this.letterDialog = true
+      }).catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      })
     },
     publicLetter (val) {
       this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/public/' + this.letter._id + '/' + val, {

@@ -54,6 +54,11 @@ router.post('/public/:id/:value', async (req, res) => {
   res.json({ state: 'updated' })
 })
 
+router.post('/update', async (req, res) => {
+  await Record.findByIdAndUpdate(req.body.id, req.body.data)
+  res.json({ state: 'updated' })
+})
+
 router.post('/delmany', async (req, res) => {
   await Record.deleteMany({ _id: req.body.ids })
   res.json({ state: 'Записи удалены' })

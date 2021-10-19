@@ -239,5 +239,4 @@ export default {
 }
 .letter { transition: opacity .6s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
 .letters-wrap:hover .letter:not(:hover) { opacity: .8; }
-.letter-text p img { display: block; }
 </style>

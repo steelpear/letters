@@ -34,6 +34,8 @@
   max-width: -webkit-fill-available;
   margin: auto;
 }
+.letter-text p { margin-bottom: 2px !important; }
+.letter-text p img { display: block; }
 .ql-align-center { text-align: center; }
 .ql-align-justify { text-align: justify; }
 .ql-align-right { text-align: right; }

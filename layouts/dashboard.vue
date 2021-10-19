@@ -52,7 +52,7 @@
           <v-icon large class="mr-3">
             mdi-home
           </v-icon>
-          На главную
+          Перейти на сайт
         </v-btn>
       </div>
     </v-navigation-drawer>
