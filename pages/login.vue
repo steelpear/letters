@@ -113,30 +113,24 @@ export default {
           })
         }
       })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error)
-      })
   },
   methods: {
-    submit () {
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/login', {
+    async submit () {
+      const response = await this.$axios.post(process.env.VUE_APP_SERVER + '/api/login', {
         login: this.login,
         password: this.password
       })
-        .then((response) => {
-          if (!response.data.state) {
-            this.errorAlert = true
-            this.clear()
-          } else {
-            this.$v.$touch()
-            this.$store.dispatch('login')
-            this.$store.dispatch('set_role', response.data.role)
-            setTimeout(() => {
-              this.$router.push('/admin')
-            }, 1000)
-          }
-        })
+      if (!response.data.state) {
+        this.errorAlert = true
+        this.clear()
+      } else {
+        this.$v.$touch()
+        this.$store.dispatch('login')
+        this.$store.dispatch('set_role', response.data.role)
+        setTimeout(() => {
+          this.$router.push('/admin')
+        }, 1000)
+      }
     },
     clear () {
       this.$v.$reset()

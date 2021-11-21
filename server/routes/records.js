@@ -72,7 +72,7 @@ router.delete('/delete/:id', async (req, res) => {
 router.post('/mailer', (req, res) => {
   fs.readFile('configmail.config', 'utf8', (err, data) => {
     // eslint-disable-next-line no-console
-    if (err) { console.log(err) }
+    if (err) { console.error(err) }
     const mailConfig = JSON.parse(data)
     const transporter = nodemailer.createTransport({
       service: mailConfig.service,

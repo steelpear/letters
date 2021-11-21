@@ -425,47 +425,36 @@ export default {
       this.avatarDialog = false
       this.avatar = ''
     },
-    sendLetter () {
+    async sendLetter () {
       if (!this.recaptcha) {
         this.errorDialog = true
       } else {
         this.sended = true
+        setTimeout(() => { this.sended = false }, 1500)
+      }
+      try {
+        const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
+        this.id = response.data + 200
+        await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records', {
+          letterId: this.id,
+          letterName: this.name,
+          letterEmail: this.email,
+          letterTitle: this.title,
+          letterCategory: this.category,
+          letterText: this.text,
+          letterAvatar: this.avatar,
+          letterDate: new Date(),
+          letterPublic: false
+        })
+        this.clearForm()
+        this.recaptcha = false
+        this.$refs.recaptcha.reset()
+        this.mailer()
         setTimeout(() => {
-          this.sended = false
-        }, 1500)
-        this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
-          .then((response) => {
-            this.id = response.data + 200
-            this.$axios.post(process.env.VUE_APP_SERVER + '/api/records', {
-              letterId: this.id,
-              letterName: this.name,
-              letterEmail: this.email,
-              letterTitle: this.title,
-              letterCategory: this.category,
-              letterText: this.text,
-              letterAvatar: this.avatar,
-              letterDate: new Date(),
-              letterPublic: false
-            })
-              .then((response) => {
-                this.clearForm()
-                this.recaptcha = false
-                this.$refs.recaptcha.reset()
-                this.mailer()
-                setTimeout(() => {
-                  this.sendedDialog = true
-                }, 2500)
-              })
-              .catch((error) => {
-                // eslint-disable-next-line no-console
-                console.log(error)
-                this.tooLarge = true
-              })
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.log(error)
-          })
+          this.sendedDialog = true
+        }, 2500)
+      } catch (e) {
+        this.tooLarge = true
       }
     },
     clearForm () {
@@ -477,23 +466,13 @@ export default {
       this.text = ''
       this.avatar = ''
     },
-    mailer () {
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
+    async mailer () {
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
         email: 'steelpear@gmail.com',
         text: 'Новое письмо №' + this.id
       })
-        .then((response) => {
-          // eslint-disable-next-line no-console
-          console.log(response.data)
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.log(error)
-        })
     },
-    onCopy () {
-      this.copied = true
-    }
+    onCopy () { this.copied = true }
   }
 }
 </script>

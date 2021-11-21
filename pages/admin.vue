@@ -370,11 +370,9 @@ export default {
     categories () { return this.$store.getters.get_categories }
   },
   methods: {
-    getLetters () {
-      this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip + '/' + this.publicSelect, {
-      }).then((response) => {
-        this.letters = response.data
-      })
+    async getLetters () {
+      const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip + '/' + this.publicSelect)
+      this.letters = response.data
     },
     clearAvatar () {
       this.avatarDialog = false
@@ -389,7 +387,7 @@ export default {
       this.letterDialog = false
       this.editDialog = true
     },
-    saveEditedLetter () {
+    async saveEditedLetter () {
       const id = this.letter._id
       const data = {
         letterName: this.letter.letterName,
@@ -399,64 +397,42 @@ export default {
         letterText: this.letter.letterText,
         letterAvatar: this.letter.letterAvatar
       }
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/update', {
-        id,
-        data
-      }).then((response) => {
-        this.editDialog = false
-        this.letterDialog = true
-      }).catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error)
-      })
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/update', { id, data })
+      this.editDialog = false
+      this.letterDialog = true
     },
-    publicLetter (val) {
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/public/' + this.letter._id + '/' + val, {
-      }).then((response) => {
-        this.letterDialog = false
-        this.selected = []
-        this.getLetters()
-        if (this.letter.letterEmail !== '' && this.notice) { this.mailer(val) }
-        this.notice = true
-      })
+    async publicLetter (val) {
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/public/' + this.letter._id + '/' + val)
+      this.letterDialog = false
+      this.selected = []
+      this.getLetters()
+      if (this.letter.letterEmail !== '' && this.notice) { this.mailer(val) }
+      this.notice = true
     },
     deleteLetterConfirm () {
       this.letterDialog = false
       this.deleteDialog = true
     },
-    deleteLetter () {
-      this.$axios.delete(process.env.VUE_APP_SERVER + '/api/records/delete/' + this.letter._id, {
-      }).then((response) => {
-        this.deleteDialog = false
-        this.selected = []
-        this.getLetters()
-      })
+    async deleteLetter () {
+      await this.$axios.delete(process.env.VUE_APP_SERVER + '/api/records/delete/' + this.letter._id)
+      this.deleteDialog = false
+      this.selected = []
+      this.getLetters()
     },
-    deleteMany () {
+    async deleteMany () {
       const sel = this.selected
       const ids = []
       sel.forEach(function (item, i, sel) { ids.push(item._id) })
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/delmany', {
-        ids
-      }).then((response) => {
-        this.selected = []
-        this.getLetters()
-      })
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/delmany', { ids })
+      this.selected = []
+      this.getLetters()
     },
-    mailer (val) {
+    async mailer (val) {
       const text = val ? 'Ваше письмо №' + this.letter.letterId + ' опубликовано' : 'Ваше письмо №' + this.letter.letterId + ' снято с публикации'
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/mailer', {
         email: this.letter.letterEmail,
         text
       })
-        .then((response) => {
-          // eslint-disable-next-line no-console
-          console.log(response.data)
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.log(error)
-        })
     }
   }
 }

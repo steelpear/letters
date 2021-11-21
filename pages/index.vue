@@ -191,20 +191,13 @@ export default {
   },
   methods: {
     async fetchData () {
-      await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip + '/' + true, {
-      })
-        .then((response) => {
-          const array = response.data
-          if (array.length > 0) {
-            this.letters = this.letters.concat(array)
-            this.routeProps.skip = this.routeProps.skip + this.routeProps.limit
-            this.countLetters()
-          }
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.log(error)
-        })
+      const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/limit/' + this.routeProps.limit + '/' + this.routeProps.skip + '/' + true)
+      const array = response.data
+      if (array.length > 0) {
+        this.letters = this.letters.concat(array)
+        this.routeProps.skip = this.routeProps.skip + this.routeProps.limit
+        this.countLetters()
+      }
     },
     openLetter (id) {
       this.$router.push('/letters/' + id)
@@ -220,11 +213,9 @@ export default {
       this.currentTitle = letter.letterTitle
       this.openQr = true
     },
-    countLetters () {
-      this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/countpublic')
-        .then((response) => {
-          this.countedLetters = response.data
-        })
+    async countLetters () {
+      const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/countpublic')
+      this.countedLetters = response.data
     }
   }
 }

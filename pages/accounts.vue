@@ -173,31 +173,24 @@ export default {
     }
   },
   methods: {
-    getAccounts () {
-      this.$axios.get(process.env.VUE_APP_SERVER + '/api/login', {
-      })
-        .then((response) => {
-          this.accounts = response.data
-        })
+    async getAccounts () {
+      const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/login')
+      this.accounts = response.data
     },
-    addAccount () {
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/login/new', {
+    async addAccount () {
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/login/new', {
         login: this.login,
         password: this.password,
         role: this.role
       })
-        .then((response) => {
-          this.addDialog = false
-          this.getAccounts()
-        })
+      this.addDialog = false
+      this.getAccounts()
     },
-    deleteAccount (id) {
-      this.$axios.delete(process.env.VUE_APP_SERVER + '/api/login/delete/' + id, {
-      }).then((response) => {
-        this.getAccounts()
-      })
+    async deleteAccount (id) {
+      await this.$axios.delete(process.env.VUE_APP_SERVER + '/api/login/delete/' + id)
+      this.getAccounts()
     },
-    updateAccount (id) {
+    async updateAccount (id) {
       let data = null
       if (this.newpassword && this.newrole) {
         data = { password: this.newpassword, role: this.newrole }
@@ -206,18 +199,11 @@ export default {
       } else if (!this.newpassword && this.newrole) {
         data = { role: this.newrole }
       } else { return false }
-      this.$axios.post(process.env.VUE_APP_SERVER + '/api/login/update', {
-        id,
-        data
-      }).then((response) => {
-        this.newpassword = ''
-        this.newrole = ''
-        this.openedPanel = null
-        this.getAccounts()
-      }).catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error)
-      })
+      await this.$axios.post(process.env.VUE_APP_SERVER + '/api/login/update', { id, data })
+      this.newpassword = ''
+      this.newrole = ''
+      this.openedPanel = null
+      this.getAccounts()
     }
   }
 }

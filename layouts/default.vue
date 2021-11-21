@@ -304,15 +304,10 @@ export default {
     random () {
       this.loadingRandom = true
       setTimeout(() => {
-        this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/random', {
-        })
+        this.$axios.post(process.env.VUE_APP_SERVER + '/api/records/random')
           .then((response) => {
             this.loadingRandom = false
             this.$router.push('/letters/' + response.data[0].letterId)
-          })
-          .catch((error) => {
-          // eslint-disable-next-line no-console
-            console.log(error)
           })
       }, 2000)
     }
