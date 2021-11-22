@@ -432,9 +432,9 @@ export default {
         this.sended = true
         setTimeout(() => { this.sended = false }, 1500)
       }
+      const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
+      this.id = response.data + 200
       try {
-        const response = await this.$axios.get(process.env.VUE_APP_SERVER + '/api/records/count')
-        this.id = response.data + 200
         await this.$axios.post(process.env.VUE_APP_SERVER + '/api/records', {
           letterId: this.id,
           letterName: this.name,
