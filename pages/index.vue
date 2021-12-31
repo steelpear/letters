@@ -60,7 +60,7 @@
                   {{ letter.letterCategory }}
                 </v-chip>
               </v-row>
-              <p class="text-h5 font-weight-medium blue-grey--text text--darken-3 mt-2">
+              <p class="text-h5 font-weight-medium blue-grey--text text--darken-3 mt-2 text-center">
                 <v-hover
                   v-slot="{ hover }"
                 >
@@ -76,7 +76,7 @@
               <!-- eslint-disable-next-line vue/no-v-html -->
               <div class="text--primary text-body-1 letter-text" v-html="letter.letterText" />
             </v-card-text>
-            <v-card-actions class="pb-4">
+            <v-card-actions class="pb-4 pl-3">
               <share :class="{'mx-auto' : $vuetify.breakpoint.xsOnly}" :url="url + '/letters/' + letter.letterId" :title="letter.letterTitle" />
               <v-btn
                 v-clipboard:copy="url + '/letters/' + letter.letterId"
