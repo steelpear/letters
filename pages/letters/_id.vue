@@ -97,14 +97,7 @@ export default {
   },
   head () {
     return {
-      title: this.letter.letterTitle,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.letter.letterText
-        }
-      ]
+      title: this.letter.letterTitle
     }
   },
   computed: {
