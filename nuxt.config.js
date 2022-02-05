@@ -1,6 +1,13 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
+    script: [
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3641381156579262',
+        async: true,
+        crossorigin: 'anonymous'
+      }
+    ],
     titleTemplate: '%s - Письма, благодарности, поздравления',
     title: 'Письма',
     htmlAttrs: {
